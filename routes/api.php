@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\Dashbaoard\Auth\LoginController;
-use App\Http\Controllers\Dashbaoard\Auth\OtpController;
-use App\Http\Controllers\Dashbaoard\Auth\ProfileController;
-use App\Http\Controllers\Dashbaoard\Auth\RegisterController;
-use App\Http\Controllers\Dashbaoard\Auth\ResetPasswordController;
+use App\Http\Controllers\Mobile\Auth\LoginController;
+use App\Http\Controllers\Mobile\Auth\OtpController;
+use App\Http\Controllers\Mobile\Auth\ProfileController;
+use App\Http\Controllers\Mobile\Auth\RegisterController;
+use App\Http\Controllers\Mobile\Auth\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
 
 ////////////////////////////////Auth/////////////////////////////////////////////////
