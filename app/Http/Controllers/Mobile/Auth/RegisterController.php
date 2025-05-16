@@ -7,13 +7,22 @@ use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use App\Notifications\OtpNotification;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 
-class RegisterController extends Controller
+class RegisterController extends Controller implements HasMiddleware
 {
+    public static function middleware()
+    {
+        return [
+            new Middleware('guest:user', only: ['register']),
+        ];
+    }
+
     public function register(RegisterRequest $request)
     {
         $user = $this->create($request);

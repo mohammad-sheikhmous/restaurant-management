@@ -13,7 +13,7 @@ class ResetPasswordController extends Controller implements HasMiddleware
     public static function middleware()
     {
         return [
-            new Middleware('auth:sanctum'),
+            new Middleware('auth:user'),
         ];
     }
 
@@ -29,7 +29,7 @@ class ResetPasswordController extends Controller implements HasMiddleware
                 ->symbols()],
         ]);
 
-        $user = auth()->user();
+        $user = auth('user')->user();
         $user->update(['password' => $request->password]);
 
         if ($request->boolean('logout_oth_dev'))

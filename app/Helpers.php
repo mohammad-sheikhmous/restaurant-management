@@ -8,7 +8,7 @@ if (!function_exists('exceptionJson')) {
     {
         return response()->json([
             'status' => false,
-            'status code' => 500,
+            'status_code' => 500,
             'message' => __('messages.Something Went Wrong...!, Try again Later.')
         ], 500);
     }
@@ -20,7 +20,7 @@ if (!function_exists('messageJson')) {
     {
         return response()->json([
             'status' => $status,
-            'status code' => $code,
+            'status_code' => $code,
             $messageKey => $messageVal,
         ], $code);
     }
@@ -31,7 +31,7 @@ if (!function_exists('dataJson')) {
     {
         return response()->json([
             'status' => $status,
-            'status code' => $code,
+            'status_code' => $code,
             'message' => $message,
             $dataKey => $data,
         ], $code);

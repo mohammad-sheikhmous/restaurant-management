@@ -6,10 +6,20 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Notifications\OtpNotification;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Hash;
 
-class LoginController extends Controller
+class LoginController extends Controller implements HasMiddleware
 {
+    public static function middleware()
+    {
+        return [
+            new Middleware('auth:user', only: ['logout']),
+            new Middleware('guest:user', only: ['login']),
+        ];
+    }
+
     public function login(Request $request)
     {
         $fields = $request->validate([
@@ -17,10 +27,9 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        // تحقق من وجود المستخدم
         $user = User::where('email', $fields['email'])->first();
 
-        // تحقق من المستخدم وكلمة المرور
+        // check from user credentials
         if (!$user || !Hash::check($fields['password'], $user->password)) {
             return messageJson('البريد أو كلمة المرور غير صحيحة', false, 401);
         }
@@ -32,16 +41,15 @@ class LoginController extends Controller
             return messageJson($message, false, 401);
         }
 
+        // generate token after verify from user credentials
+        $token = $user->createToken('user-token')->plainTextToken;
 
-        // توليد التوكن بعد التأكد من صحة البيانات
-        $token = $user->createToken('myapp-token')->plainTextToken;
-
-        return dataJson('token', $token,'logged in');
+        return dataJson('token', $token, 'logged in');
     }
 
     public function logout()
     {
-        auth()->user()->tokens()->delete();
+        auth('user')->user()->tokens()->delete();
         return messageJson('logged out successfully...');
     }
 }
