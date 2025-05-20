@@ -5,6 +5,8 @@ use App\Http\Controllers\Mobile\Auth\OtpController;
 use App\Http\Controllers\Mobile\Auth\ProfileController;
 use App\Http\Controllers\Mobile\Auth\RegisterController;
 use App\Http\Controllers\Mobile\Auth\ResetPasswordController;
+use App\Http\Controllers\Mobile\CategoryController;
+use App\Http\Controllers\Mobile\TagController;
 use Illuminate\Support\Facades\Route;
 
 ///////////////////         Authentication APIs        ///////////////////////
@@ -31,6 +33,9 @@ Route::controller(OtpController::class)->group(function () {
 Route::post('passwords/reset', [ResetPasswordController::class, 'reset']);
 
 ///////////////////        End Authentication APIs        ///////////////////////
+
+Route::get('categories', [CategoryController::class, 'getCategories']);
+Route::get('tags', [TagController::class, 'getTags']);
 
 Route::middleware('auth:user')->group(function () {
 

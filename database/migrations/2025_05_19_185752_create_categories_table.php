@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('image');
             $table->boolean('status')->default(1);
-            $table->unsignedBigInteger('parent');
+            $table->unsignedBigInteger('parent')->nullable();
 
             $table->timestamps();
         });

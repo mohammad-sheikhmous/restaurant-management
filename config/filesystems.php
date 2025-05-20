@@ -35,18 +35,29 @@ return [
             'root' => storage_path('app'),
             'throw' => false,
         ],
-//        'public' => [
-//            'driver' => 'local',
-//            'root' => storage_path('app/public'),
-//            'url' => env('APP_URL').'/storage',
-//            'visibility' => 'public',
-//        ],
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
-
+        ],
+        'products' => [
+            'driver' => 'local',
+            'root' => public_path('uploads/products'),
+            'url' => env('APP_URL') . '/public/uploads/products',
+            'visibility' => 'public',
+        ],
+        'categories' => [
+            'driver' => 'local',
+            'root' => public_path('uploads/categories'),
+            'url' => env('APP_URL') . '/public/uploads/categories',
+            'visibility' => 'public',
+        ],
+        'users' => [
+            'driver' => 'local',
+            'root' => public_path('uploads/users'),
+            'url' => env('APP_URL') . '/public/uploads/users',
+            'visibility' => 'public',
         ],
 
         's3' => [

@@ -4,7 +4,7 @@ return [
     'permissions' =>
         ['en' => [
             'categories' => 'Manage Categories',
-            'products' => 'Manage Products',
+            'products' => 'Manage Product',
             'orders' => 'Manage Orders',
             'users' => 'Manage Users',
             'roles' => 'Manage Roles',

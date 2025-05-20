@@ -5,15 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
-class Category extends Model
+class Product extends Model
 {
     use HasTranslations;
 
     protected $fillable = [
-        'name', 'status', 'image', 'parent',
+        'name'
     ];
 
-    public $translatable = ['name'];
+    public $translatable = ['name', 'description'];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 
     public function scopeActive($query)
     {
@@ -23,10 +28,5 @@ class Category extends Model
     public function scopeInactive($query)
     {
         return $query->whereStatus(0);
-    }
-
-    public function products()
-    {
-        return $this->hasMany(Product::class);
     }
 }
