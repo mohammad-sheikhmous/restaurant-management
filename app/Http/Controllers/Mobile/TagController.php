@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
-    public function getTags()
+    public function index()
     {
         $tags = Tag::active()->get();
 

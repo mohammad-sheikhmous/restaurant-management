@@ -21,9 +21,10 @@ class TagSeeder extends Seeder
         $tags = [
             ['name' => ["en" => "Spicy", "ar" => "حار"]],
             ['name' => ["en" => "Cheesy", "ar" => "بالجبنة"]],
-            ['name' => ["en" => "Popular", "ar" => "شائع"]],
+            ['name' => ["en" => "Popular", "ar" => "شائع"], 'status' => 0],
             ['name' => ["en" => "New", "ar" => "جديد"]],
             ['name' => ["en" => "Vegetarian", "ar" => "نباتي"]],
+            ['name' => ["en" => "Not Vegetarian", "ar" => "غير نباتي"]],
             ['name' => ["en" => "Kids", "ar" => "أطفال"], 'status' => 0],
             ['name' => ["en" => "Saucy", "ar" => "بالصوص"]],
             ['name' => ["en" => "Extra Meat", "ar" => "لحم إضافي"]],

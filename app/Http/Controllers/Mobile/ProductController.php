@@ -1,0 +1,63 @@
+<?php
+
+namespace App\Http\Controllers\Mobile;
+
+use App\Http\Controllers\Controller;
+use App\Http\Resources\Resource\ProductResource;
+use App\Models\Product;
+use Illuminate\Http\Request;
+
+class ProductController extends Controller
+{
+    public function getProductsBySearching()
+    {
+        \request()->validate([
+            'searched_text' => 'min:3'
+        ]);
+        $products = Product::absolutelyActive()
+            ->when(\request()->tag_ids, function ($query1) {
+                foreach (\request()->tag_ids as $tag_id)
+                    $query1->whereHas('tags', function ($query2) use ($tag_id) {
+                        $query2->where('tags.id', $tag_id);
+                    });
+            })
+            ->where(function ($query) {
+                $query->where('name->' . config('app.locale'), 'like', '%' . \request()->searched_text . '%')
+                    ->orWhere('description->' . config('app.locale'), 'like', '%' . \request()->searched_text . '%');
+            })
+            ->latest()->with(['tags'])->get();
+
+        if ($products->isEmpty())
+            return messageJson('no products found', false, 404);
+
+        return dataJson('products', ProductResource::collection($products), 'searched products');
+    }
+
+    public function getProductsForHome()
+    {
+        $query = Product::query()->absolutelyActive();
+
+        $most_ordered_products = $query->clone()
+            ->withCount('orders')
+            ->orderBy('orders_count', 'desc')
+            ->take(4)
+            ->get();
+
+        $latest_products = $query->clone()
+            ->latest()
+            ->take(4)
+            ->get();
+
+        $recommended_products = $query->clone()
+            ->where('is_recommended', 1)
+            ->latest()
+            ->take(4)
+            ->get();
+
+        return dataJson('data', [
+            'most_ordered_products' => ProductResource::collection($most_ordered_products),
+            'latest_products' => ProductResource::collection($latest_products),
+            'recommended_products' => ProductResource::collection($recommended_products)
+        ], 'home products');
+    }
+}

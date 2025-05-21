@@ -6,6 +6,7 @@ use App\Http\Controllers\Mobile\Auth\ProfileController;
 use App\Http\Controllers\Mobile\Auth\RegisterController;
 use App\Http\Controllers\Mobile\Auth\ResetPasswordController;
 use App\Http\Controllers\Mobile\CategoryController;
+use App\Http\Controllers\Mobile\ProductController;
 use App\Http\Controllers\Mobile\TagController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,8 +35,11 @@ Route::post('passwords/reset', [ResetPasswordController::class, 'reset']);
 
 ///////////////////        End Authentication APIs        ///////////////////////
 
-Route::get('categories', [CategoryController::class, 'getCategories']);
-Route::get('tags', [TagController::class, 'getTags']);
+Route::get('tags', [TagController::class, 'index']);
+Route::get('categories', [CategoryController::class, 'index']);
+Route::get('categories/{id}/products', [CategoryController::class, 'getCategoryProducts']);
+Route::get('products/search', [ProductController::class, 'getProductsBySearching']);
+Route::get('products/home', [ProductController::class, 'getProductsForHome']);
 
 Route::middleware('auth:user')->group(function () {
 

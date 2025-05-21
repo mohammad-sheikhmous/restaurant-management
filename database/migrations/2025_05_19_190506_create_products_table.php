@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->boolean('status')->default(1);
             $table->decimal('price')->nullable();
             $table->boolean('is_simple')->default(1);
+            $table->boolean('is_recommended')->default(0);
             $table->string('image');
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
 

@@ -26,7 +26,7 @@ class RegisterRequest extends FormRequest
         return [
             'first_name' => ['required', 'string', 'max:60'],
             'last_name' => ['required', 'string', 'max:60'],
-            'mobile' => ['required', 'string', 'max:20', 'regex:/^09[3,4,5,7,8][0-9]{7}$/'],
+            'mobile' => ['required', 'string', 'max:20', 'regex:/^09[0-9]{8}$/'],
             'email' => ['required', 'email', 'max:70', 'unique:users,email'],
             'image' => ['nullable', 'image', 'mimes:jpeg,gif,svg,png,jpg'],
             'password' => ['required', 'confirmed', Password::min(8)
