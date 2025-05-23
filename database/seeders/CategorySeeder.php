@@ -19,12 +19,12 @@ class CategorySeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
 
         $categories = [
-            ['name' => ['en' => 'pizza', 'ar' => 'بيتزا'], 'image' => 'default.png'],
-            ['name' => ['en' => 'meshawi', 'ar' => 'مشاوي'], 'image' => 'default.png'],
-            ['name' => ['en' => 'seafood', 'ar' => 'بحري'], 'image' => 'default.png'],
-            ['name' => ['en' => 'appetizers', 'ar' => 'مقبلات'], 'image' => 'default.png'],
-            ['name' => ['en' => 'drinks', 'ar' => 'مشروبات'], 'image' => 'default.png'],
-            ['name' => ['en' => 'shawrma', 'ar' => 'شاورما'], 'image' => 'default.png'],
+            ['name' => ['en' => 'pizza', 'ar' => 'بيتزا'], 'image' => 'pizza.jpg'],
+            ['name' => ['en' => 'meshawi', 'ar' => 'مشاوي'], 'image' => 'meshawi.jpg'],
+            ['name' => ['en' => 'seafood', 'ar' => 'بحري'], 'image' => 'seafood.jpg'],
+            ['name' => ['en' => 'appetizers', 'ar' => 'مقبلات'], 'image' => 'appetizers.jpg'],
+            ['name' => ['en' => 'drinks', 'ar' => 'مشروبات'], 'image' => 'drinks.jpg'],
+            ['name' => ['en' => 'shawrma', 'ar' => 'شاورما'], 'image' => 'shawrma.jpg'],
         ];
         foreach ($categories as $category)
             Category::create($category);

@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->foreignId('attribute_option_id')->constrained()->cascadeOnDelete();
             $table->decimal('extra_price')->default(0);
+            $table->boolean('is_default')->default(0);
         });
     }
 

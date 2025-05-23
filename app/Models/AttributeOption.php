@@ -19,6 +19,11 @@ class AttributeOption extends Model
 
     public function attribute()
     {
-        $this->belongsTo(Attribute::class);
+        return $this->belongsTo(Attribute::class);
+    }
+
+    public function productAttributeOptions()
+    {
+        return $this->hasMany(ProductAttributeOption::class);
     }
 }

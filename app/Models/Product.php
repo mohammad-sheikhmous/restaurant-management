@@ -22,7 +22,7 @@ class Product extends Model
 
     public function scopeActive($query)
     {
-        return $query->whereStatus(0);
+        return $query->whereStatus(1);
     }
 
     public function scopeInactive($query)
@@ -44,7 +44,13 @@ class Product extends Model
 
     public function options()
     {
-        return $this->belongsToMany(AttributeOption::class, 'product_attribute_options');
+        return $this->belongsToMany(AttributeOption::class, 'product_attribute_options')
+            ->withPivot('id', 'extra_price', 'is_default');
+    }
+
+    public function productAttributeOptions()
+    {
+        return $this->hasMany(ProductAttributeOption::class);
     }
 
     public function orderItems()
@@ -55,5 +61,15 @@ class Product extends Model
     public function orders()
     {
         return $this->belongsToMany(Order::class, 'order_items');
+    }
+
+    public function wishlistUsers()
+    {
+        return $this->belongsToMany(User::class, 'wishlists');
+    }
+
+    public function wishlists()
+    {
+        return $this->hasMany(Wishlist::class);
     }
 }

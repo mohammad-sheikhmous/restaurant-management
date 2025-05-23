@@ -11,4 +11,14 @@ class ProductAttributeOption extends Model
     ];
 
     public $timestamps = false;
+
+    public function cartItems()
+    {
+        return $this->belongsToMany(CartItem::class, 'cart_item_options');
+    }
+
+    public function attributeOption()
+    {
+        return $this->belongsTo(AttributeOption::class);
+    }
 }

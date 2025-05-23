@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Mobile;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Resource\CategoryResource;
 use App\Http\Resources\Resource\ProductResource;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -54,10 +56,24 @@ class ProductController extends Controller
             ->take(4)
             ->get();
 
+        $categories = Category::active()->withCount(['products' => function ($query) {
+            return $query->active();
+        }])->get();
+
         return dataJson('data', [
+            'categories' => CategoryResource::collection($categories),
             'most_ordered_products' => ProductResource::collection($most_ordered_products),
             'latest_products' => ProductResource::collection($latest_products),
             'recommended_products' => ProductResource::collection($recommended_products)
-        ], 'home products');
+        ], 'home items');
+    }
+
+    public function show($id)
+    {
+        $product = Product::absolutelyActive()->with(['options.attribute', 'category'])->find($id);
+        if (!$product)
+            return messageJson('product not found', false, 404);
+
+        return dataJson('product', ProductResource::make($product), 'show product details');
     }
 }

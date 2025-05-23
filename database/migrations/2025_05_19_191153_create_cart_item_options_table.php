@@ -15,8 +15,6 @@ return new class extends Migration {
 
             $table->foreignId('product_attribute_option_id')->constrained()->cascadeOnDelete();
             $table->foreignId('cart_item_id')->constrained()->cascadeOnDelete();
-
-            $table->timestamps();
         });
     }
 

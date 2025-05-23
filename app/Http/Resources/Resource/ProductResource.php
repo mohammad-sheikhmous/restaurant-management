@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Resource;
 
+use App\Http\Resources\Collection\ProductOptionCollection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -20,10 +21,11 @@ class ProductResource extends JsonResource
             'description' => $this->whenHas('description'),
             'price' => $this->whenHas('price'),
             'image' => $this->whenHas('image'),
+            'is_simple' => boolval($this->is_simple),
             'is_recommended' => boolval($this->is_recommended),
-            'category_id' => $this->whenHas('category_id'),
-            'category' => CategoryResource::collection($this->whenLoaded('category')),
-            'options' => AttributeResource::collection($this->whenLoaded('options')),
+            'category_id' => $this->when(!$this->relationLoaded('category'), $this->category_id),
+            'category' => CategoryResource::make($this->whenLoaded('category')),
+            'attributes' => ProductOptionCollection::make($this->whenLoaded('options')),
             'tags' => TagResource::collection($this->whenLoaded('tags')),
         ];
     }

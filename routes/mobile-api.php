@@ -1,13 +1,16 @@
 <?php
 
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\Mobile\Auth\LoginController;
 use App\Http\Controllers\Mobile\Auth\OtpController;
 use App\Http\Controllers\Mobile\Auth\ProfileController;
 use App\Http\Controllers\Mobile\Auth\RegisterController;
 use App\Http\Controllers\Mobile\Auth\ResetPasswordController;
+use App\Http\Controllers\Mobile\CartController;
 use App\Http\Controllers\Mobile\CategoryController;
 use App\Http\Controllers\Mobile\ProductController;
 use App\Http\Controllers\Mobile\TagController;
+use App\Http\Controllers\Mobile\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 ///////////////////         Authentication APIs        ///////////////////////
@@ -35,11 +38,36 @@ Route::post('passwords/reset', [ResetPasswordController::class, 'reset']);
 
 ///////////////////        End Authentication APIs        ///////////////////////
 
+Route::get('images/{path}', ImageController::class);
+
 Route::get('tags', [TagController::class, 'index']);
-Route::get('categories', [CategoryController::class, 'index']);
-Route::get('categories/{id}/products', [CategoryController::class, 'getCategoryProducts']);
-Route::get('products/search', [ProductController::class, 'getProductsBySearching']);
-Route::get('products/home', [ProductController::class, 'getProductsForHome']);
+
+Route::controller(CategoryController::class)->prefix('categories')->group(function () {
+    Route::get('', 'index');
+    Route::get('{id}/products', 'getCategoryProducts');
+});
+
+Route::controller(ProductController::class)->prefix('products')->group(function () {
+    Route::get('search', 'getProductsBySearching');
+    Route::get('home', 'getProductsForHome');
+    Route::get('{id}', 'show');
+});
+
+Route::controller(WishlistController::class)->prefix('wishlists')->group(function () {
+    Route::get('/', 'show');
+    Route::post('add-product', 'addProduct');
+    Route::post('remove-product', 'removeProduct');
+});
+
+Route::controller(CartController::class)->prefix('carts')->group(function () {
+    Route::get('/', 'show');
+    Route::post('items', 'addItem');
+    Route::get('items/{id}', 'showItem');
+    Route::post('items/{id}', 'updateItem');
+    Route::delete('items/{id}', 'removeItem');
+    Route::patch('items/{id}/increment', 'incrementItem');
+    Route::patch('items/{id}/decrement', 'decrementItem');
+});
 
 Route::middleware('auth:user')->group(function () {
 

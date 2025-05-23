@@ -15,8 +15,9 @@ return new class extends Migration {
 
             $table->foreignId('cart_id')->constrained()->cascadeOnDelete();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
-            $table->decimal('base_price');
-            $table->decimal('total_price');
+            $table->decimal('base_price')->nullable();
+            $table->decimal('extra_price')->nullable();
+            $table->decimal('total_price')->nullable();
             $table->unsignedInteger('quantity');
 
             $table->timestamps();

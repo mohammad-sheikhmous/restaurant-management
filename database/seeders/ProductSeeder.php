@@ -181,81 +181,81 @@ class ProductSeeder extends Seeder
         $product_attribute_options = [
             // Margherita
             ['product_id' => 1, 'attribute_option_id' => 5, 'extra_price' => 800],
-            ['product_id' => 1, 'attribute_option_id' => 6, 'extra_price' => 1000],
+            ['product_id' => 1, 'attribute_option_id' => 6, 'extra_price' => 1000, 'is_default' => true],
             ['product_id' => 1, 'attribute_option_id' => 7, 'extra_price' => 1200],
             ['product_id' => 1, 'attribute_option_id' => 8, 'extra_price' => 100],
-            ['product_id' => 1, 'attribute_option_id' => 9, 'extra_price' => 75],
-            ['product_id' => 1, 'attribute_option_id' => 10, 'extra_price' => 50],
+            ['product_id' => 1, 'attribute_option_id' => 9, 'extra_price' => 75, 'is_default' => true],
+            ['product_id' => 1, 'attribute_option_id' => 10, 'extra_price' => 50, 'is_default' => true],
             ['product_id' => 1, 'attribute_option_id' => 11, 'extra_price' => 50],
             ['product_id' => 1, 'attribute_option_id' => 12, 'extra_price' => 90],
-            ['product_id' => 1, 'attribute_option_id' => 13, 'extra_price' => 102],
+            ['product_id' => 1, 'attribute_option_id' => 13, 'extra_price' => 102, 'is_default' => true],
             ['product_id' => 1, 'attribute_option_id' => 14, 'extra_price' => 75],
 
             // Pepperoni
             ['product_id' => 2, 'attribute_option_id' => 5, 'extra_price' => 1800],
-            ['product_id' => 2, 'attribute_option_id' => 6, 'extra_price' => 2000],
+            ['product_id' => 2, 'attribute_option_id' => 6, 'extra_price' => 2000, 'is_default' => true],
             ['product_id' => 2, 'attribute_option_id' => 7, 'extra_price' => 2350],
             ['product_id' => 2, 'attribute_option_id' => 8, 'extra_price' => 50],
             ['product_id' => 2, 'attribute_option_id' => 9, 'extra_price' => 50],
-            ['product_id' => 2, 'attribute_option_id' => 10, 'extra_price' => 75],
-            ['product_id' => 2, 'attribute_option_id' => 11, 'extra_price' => 90],
+            ['product_id' => 2, 'attribute_option_id' => 10, 'extra_price' => 75, 'is_default' => true],
+            ['product_id' => 2, 'attribute_option_id' => 11, 'extra_price' => 90, 'is_default' => true],
             ['product_id' => 2, 'attribute_option_id' => 12, 'extra_price' => 85],
             ['product_id' => 2, 'attribute_option_id' => 14, 'extra_price' => 80],
 
             // Vegetarian
-            ['product_id' => 3, 'attribute_option_id' => 5, 'extra_price' => 3000],
+            ['product_id' => 3, 'attribute_option_id' => 5, 'extra_price' => 3000, 'is_default' => true],
             ['product_id' => 3, 'attribute_option_id' => 6, 'extra_price' => 3240],
             ['product_id' => 3, 'attribute_option_id' => 7, 'extra_price' => 3450],
             ['product_id' => 3, 'attribute_option_id' => 8, 'extra_price' => 50],
             ['product_id' => 3, 'attribute_option_id' => 9, 'extra_price' => 60],
-            ['product_id' => 3, 'attribute_option_id' => 10, 'extra_price' => 70],
-            ['product_id' => 3, 'attribute_option_id' => 11, 'extra_price' => 55],
+            ['product_id' => 3, 'attribute_option_id' => 10, 'extra_price' => 70, 'is_default' => true],
+            ['product_id' => 3, 'attribute_option_id' => 11, 'extra_price' => 55, 'is_default' => true],
             ['product_id' => 3, 'attribute_option_id' => 12, 'extra_price' => 100],
 
             // Mixed Grill
             ['product_id' => 4, 'attribute_option_id' => 1, 'extra_price' => 500],
             ['product_id' => 4, 'attribute_option_id' => 2, 'extra_price' => 650],
-            ['product_id' => 4, 'attribute_option_id' => 3, 'extra_price' => 700],
+            ['product_id' => 4, 'attribute_option_id' => 3, 'extra_price' => 700, 'is_default' => true],
             ['product_id' => 4, 'attribute_option_id' => 4, 'extra_price' => 800],
             ['product_id' => 4, 'attribute_option_id' => 8, 'extra_price' => 50],
             ['product_id' => 4, 'attribute_option_id' => 9, 'extra_price' => 40],
-            ['product_id' => 4, 'attribute_option_id' => 10, 'extra_price' => 75],
+            ['product_id' => 4, 'attribute_option_id' => 10, 'extra_price' => 75, 'is_default' => true],
 
             // Grilled Chicken
             ['product_id' => 5, 'attribute_option_id' => 2, 'extra_price' => 1350],
-            ['product_id' => 5, 'attribute_option_id' => 3, 'extra_price' => 1500],
+            ['product_id' => 5, 'attribute_option_id' => 3, 'extra_price' => 1500, 'is_default' => true],
             ['product_id' => 5, 'attribute_option_id' => 4, 'extra_price' => 1800],
             ['product_id' => 5, 'attribute_option_id' => 8, 'extra_price' => 90],
             ['product_id' => 5, 'attribute_option_id' => 9, 'extra_price' => 85],
             ['product_id' => 5, 'attribute_option_id' => 10, 'extra_price' => 80],
 
             // Kebab Skewers
-            ['product_id' => 6, 'attribute_option_id' => 1, 'extra_price' => 2200],
+            ['product_id' => 6, 'attribute_option_id' => 1, 'extra_price' => 2200, 'is_default' => true],
             ['product_id' => 6, 'attribute_option_id' => 2, 'extra_price' => 2500],
             ['product_id' => 6, 'attribute_option_id' => 8, 'extra_price' => 50],
             ['product_id' => 6, 'attribute_option_id' => 9, 'extra_price' => 80],
-            ['product_id' => 6, 'attribute_option_id' => 10, 'extra_price' => 90],
+            ['product_id' => 6, 'attribute_option_id' => 10, 'extra_price' => 90, 'is_default' => true],
 
             // Chicken Shawarma
             ['product_id' => 16, 'attribute_option_id' => 5, 'extra_price' => 2000],
             ['product_id' => 16, 'attribute_option_id' => 6, 'extra_price' => 2200],
-            ['product_id' => 16, 'attribute_option_id' => 7, 'extra_price' => 2400],
-            ['product_id' => 16, 'attribute_option_id' => 13, 'extra_price' => 80],
+            ['product_id' => 16, 'attribute_option_id' => 7, 'extra_price' => 2400, 'is_default' => true],
+            ['product_id' => 16, 'attribute_option_id' => 13, 'extra_price' => 80, 'is_default' => true],
             ['product_id' => 16, 'attribute_option_id' => 14, 'extra_price' => 100],
 
             // Beef Shawarma
             ['product_id' => 17, 'attribute_option_id' => 3, 'extra_price' => 2300],
-            ['product_id' => 17, 'attribute_option_id' => 4, 'extra_price' => 2600],
+            ['product_id' => 17, 'attribute_option_id' => 4, 'extra_price' => 2600, 'is_default' => true],
             ['product_id' => 17, 'attribute_option_id' => 13, 'extra_price' => 60],
             ['product_id' => 17, 'attribute_option_id' => 14, 'extra_price' => 90],
 
             // Shawarma Plate
-            ['product_id' => 18, 'attribute_option_id' => 5, 'extra_price' => 2500],
+            ['product_id' => 18, 'attribute_option_id' => 5, 'extra_price' => 2500, 'is_default' => true],
             ['product_id' => 18, 'attribute_option_id' => 7, 'extra_price' => 2800],
             ['product_id' => 18, 'attribute_option_id' => 11, 'extra_price' => 50],
-            ['product_id' => 18, 'attribute_option_id' => 12, 'extra_price' => 40],
+            ['product_id' => 18, 'attribute_option_id' => 12, 'extra_price' => 40, 'is_default' => true],
             ['product_id' => 18, 'attribute_option_id' => 13, 'extra_price' => 70],
-            ['product_id' => 18, 'attribute_option_id' => 14, 'extra_price' => 100],
+            ['product_id' => 18, 'attribute_option_id' => 14, 'extra_price' => 100, 'is_default' => true],
         ];
         $products_tags = [
             ['product_id' => 1, 'tag_id' => 1],
