@@ -19,7 +19,7 @@ class CategoryResource extends JsonResource
             $data = [
                 'id' => $this->id,
                 'name' => $this->name,
-                'image' => $this->whenHas($this->image),
+                'image' => $this->whenHas('image'),
                 'products_count' => $this->whenHas('products_count'),
                 'products' => ProductResource::collection($this->whenLoaded('products')),
             ];
