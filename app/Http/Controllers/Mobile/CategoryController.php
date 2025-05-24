@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Resource\CategoryResource;
 use App\Http\Resources\Resource\ProductResource;
 use App\Models\Category;
+use Illuminate\Database\Eloquent\Builder;
 
 class CategoryController extends Controller
 {
@@ -22,7 +23,7 @@ class CategoryController extends Controller
     {
         $category = Category::active()->find($id);
         if (!$category)
-            return messageJson('category not found', false, '404');
+            return messageJson('category not found', false, 404);
 
         $products = $category->products()->active()
             ->when(\request()->tag_ids, function ($query1) {
@@ -30,7 +31,7 @@ class CategoryController extends Controller
                     $query1->whereHas('tags', function ($query2) use ($tag_id) {
                         $query2->where('tags.id', $tag_id);
                     });
-            })->with(['tags'])->get();
+            })->with(['tags', 'wishlists'])->get();
 
         return dataJson('products', ProductResource::collection($products), 'category products');
     }

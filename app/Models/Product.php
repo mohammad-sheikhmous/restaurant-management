@@ -72,4 +72,19 @@ class Product extends Model
     {
         return $this->hasMany(Wishlist::class);
     }
+
+    public function isFavorite()
+    {
+        if ($this->relationLoaded('wishlists')) {
+            if (auth()->user())
+                return boolval($this->wishlists->first(function ($item) {
+                    return $item->user_id == auth()->user()->id;
+                }));
+            else
+                return boolval($this->wishlists->first(function ($item) {
+                    return $item->guest_token == request()->header('guest_token');
+                }));
+        } else
+            return null;
+    }
 }

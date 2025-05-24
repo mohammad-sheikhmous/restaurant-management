@@ -21,6 +21,7 @@ class ProductResource extends JsonResource
             'description' => $this->whenHas('description'),
             'price' => $this->whenHas('price'),
             'image' => $this->whenHas('image'),
+            'is_favorite' => $this->whenNotNull($this->isFavorite()),
             'is_simple' => boolval($this->is_simple),
             'is_recommended' => boolval($this->is_recommended),
             'category_id' => $this->when(!$this->relationLoaded('category'), $this->category_id),
