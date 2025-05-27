@@ -27,7 +27,7 @@ class ProductController extends Controller
                 $query->where('name->' . config('app.locale'), 'like', '%' . \request()->searched_text . '%')
                     ->orWhere('description->' . config('app.locale'), 'like', '%' . \request()->searched_text . '%');
             })
-            ->latest()->with(['tags'])->get();
+            ->latest()->with(['tags', 'wishlists'])->get();
 
         if ($products->isEmpty())
             return messageJson('no products found', false, 404);

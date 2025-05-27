@@ -16,10 +16,14 @@ class ProductOptionCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
+        $basic = $this->collection->filter(function ($value) {
+            return $value->attribute->type == 'basic';
+        });
+        $additional = $this->collection->filter(function ($value) {
+            return $value->attribute->type == 'additional';
+        });
         return [
-            'basic' => $this->collection->filter(function ($value) {
-                return $value->attribute->type == 'basic';
-            })->map(function ($option) use ($request) {
+            'basic' => $this->when($basic->isNotEmpty(), $basic->map(function ($option) use ($request) {
                 $data = [
                     'id' => $option->pivot->id,
                     'name' => $option->name,
@@ -36,10 +40,8 @@ class ProductOptionCollection extends ResourceCollection
                 return $items->map(function ($item) {
                     return Arr::except($item, ['attribute']);
                 });
-            }),
-            'additional' => $this->collection->filter(function ($value) {
-                return $value->attribute->type == 'additional';
-            })->map(function ($option) use ($request) {
+            }), null),
+            'additional' => $this->when($additional->isNotEmpty(), $additional->map(function ($option) use ($request) {
                 $data = [
                     'id' => $option->pivot->id,
                     'name' => $option->name,
@@ -56,7 +58,7 @@ class ProductOptionCollection extends ResourceCollection
                 return $items->map(function ($item) {
                     return Arr::except($item, ['attribute']);
                 });
-            }),
+            }), null),
         ];
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Mobile;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Collection\CartItemCollection;
+use App\Http\Resources\Resource\CartItemResource;
 use App\Http\Resources\Resource\ProductResource;
 use App\Models\Cart;
 use App\Models\CartItem;
@@ -204,7 +205,7 @@ class CartController extends Controller
         if (!$item)
             return messageJson('item not found', false, 404);
 
-        return dataJson('item', ProductResource::make($item->product), 'show item details');
+        return dataJson('item', CartItemResource::make($item), 'show item details');
     }
 
     public function updateItem(Request $request, $id)
