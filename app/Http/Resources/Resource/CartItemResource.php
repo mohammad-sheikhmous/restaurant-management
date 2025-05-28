@@ -5,7 +5,6 @@ namespace App\Http\Resources\Resource;
 use App\Http\Resources\Collection\ProductOptionCollection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use function Sodium\add;
 
 class CartItemResource extends JsonResource
 {

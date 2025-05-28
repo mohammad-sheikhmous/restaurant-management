@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->time('reservation_time');
 
             $table->unsignedInteger('guests_count');
-            $table->enum('status', ['pending', 'accepted', 'rejected', 'cancelled'])->default('pending');
+            $table->enum('status', ['pending', 'accepted', 'rejected', 'cancelled','finished'])->default('pending');
 
             $table->string('note')->nullable();
 

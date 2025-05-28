@@ -10,7 +10,7 @@ class AttributeOption extends Model
     use HasTranslations;
 
     protected $fillable = [
-        'name', 'category_id'
+        'name', 'attribute_id'
     ];
 
     public $timestamps = false;

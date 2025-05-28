@@ -13,10 +13,19 @@ class Attribute extends Model
         'name', 'type',
     ];
 
+    protected $hidden = ['updated_at'];
+
+    protected $casts = ['created_at' => 'datetime:Y-m-d h:m a'];
+
     public $translatable = ['name'];
 
     public function options()
     {
-        $this->hasMany(AttributeOption::class);
+        return $this->hasMany(AttributeOption::class);
+    }
+
+    public function productsOptions()
+    {
+        return $this->hasManyThrough(ProductAttributeOption::class, AttributeOption::class);
     }
 }

@@ -59,6 +59,12 @@ return [
             'url' => env('APP_URL') . '/public/uploads/users',
             'visibility' => 'public',
         ],
+        'admins' => [
+            'driver' => 'local',
+            'root' => public_path('uploads/admins'),
+            'url' => env('APP_URL') . '/public/uploads/admins',
+            'visibility' => 'public',
+        ],
 
         's3' => [
             'driver' => 's3',

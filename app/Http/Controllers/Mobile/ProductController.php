@@ -13,9 +13,10 @@ class ProductController extends Controller
 {
     public function getProductsBySearching()
     {
-        \request()->validate([
-            'searched_text' => 'min:3'
-        ]);
+        $searched_text = strip_tags(\request()->validate([
+            'searched_text' => 'nullable|min:3'
+        ])['searched_text']);
+
         $products = Product::absolutelyActive()
             ->when(\request()->tag_ids, function ($query1) {
                 foreach (\request()->tag_ids as $tag_id)
@@ -23,9 +24,9 @@ class ProductController extends Controller
                         $query2->where('tags.id', $tag_id);
                     });
             })
-            ->where(function ($query) {
-                $query->where('name->' . config('app.locale'), 'like', '%' . \request()->searched_text . '%')
-                    ->orWhere('description->' . config('app.locale'), 'like', '%' . \request()->searched_text . '%');
+            ->where(function ($query) use ($searched_text) {
+                $query->where('name->' . config('app.locale'), 'like', '%' . $searched_text . '%')
+                    ->orWhere('description->' . config('app.locale'), 'like', '%' . $searched_text . '%');
             })
             ->latest()->with(['tags', 'wishlists'])->get();
 

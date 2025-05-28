@@ -274,7 +274,7 @@ class CartController extends Controller
                 'total_price' => ($base_price + $extra_price) * $request->quantity,
                 'quantity' => $request->quantity,
             ]);
-            // ensure that the basic option before not contained
+            // ensure that the basic option not contained before
             if (!$item->product->is_simple && !$item->itemOptions->contains('id', $basic_option->id)) {
                 // get the old basic option
                 $stored_basic_option = $item->itemOptions->first(function ($option) {

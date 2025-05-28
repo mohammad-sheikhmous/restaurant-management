@@ -23,19 +23,22 @@ class RegisterRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'first_name' => ['required', 'string', 'max:60'],
-            'last_name' => ['required', 'string', 'max:60'],
+        $data = [
+            'first_name' => ['required', 'string', 'max:50'],
+            'last_name' => ['required', 'string', 'max:50'],
             'mobile' => ['required', 'string', 'max:20', 'regex:/^09[0-9]{8}$/'],
             'email' => ['required', 'email', 'max:70', 'unique:users,email'],
             'image' => ['nullable', 'image', 'mimes:jpeg,gif,svg,png,jpg'],
             'password' => ['required', 'confirmed', Password::min(8)
                 ->max(50)
-                ->mixedCase()
                 ->letters()
                 ->numbers()
                 ->symbols()
             ],
         ];
+        if ($this->is('api/dashboard/users'))
+            $data['status'] = ['required', 'in:0,1'];
+
+        return $data;
     }
 }

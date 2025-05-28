@@ -22,6 +22,7 @@ class AdminSeeder extends Seeder
         Admin::create([
             'name' => 'manager admin',
             'email' => 'admin@gmail.com',
+            'image' => 'default.png',
             'password' => 'password',
             'status' => 1,
             'role_id' => Role::first()->id,

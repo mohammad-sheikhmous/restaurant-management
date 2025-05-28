@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
 
             $table->enum('status', ['pending', 'accepted', 'rejected', 'preparing', 'prepared',
-                'delivering', 'delivered'])->default('pending');
+                'delivering', 'delivered', 'picked_up'])->default('pending');
 
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
             $table->json('user_data');

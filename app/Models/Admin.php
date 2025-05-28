@@ -17,7 +17,7 @@ class Admin extends Authenticatable
 
     // The attributes that should be hidden for serialization.
     protected $hidden = [
-        'password',
+        'password','updated_at',
     ];
 
     // Get the attributes that should be cast.
@@ -25,11 +25,27 @@ class Admin extends Authenticatable
     {
         return [
             'password' => 'hashed',
+            'created_at' => 'datetime:Y-m-d h:m a',
         ];
     }
 
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function hasAccess($config_permission)
+    {
+        if (!$this->role)
+            return false;
+
+        if ($this->role->status == 0)
+            return false;
+
+        foreach ($this->role->permissions as $permission) {
+            if ($permission == $config_permission)
+                return true;
+        }
+        return false;
     }
 }
