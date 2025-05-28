@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             TagSeeder::class,
             AttributeSeeder::class,
             ProductSeeder::class,
+            FaqSeeder::class,
         ]);
     }
 }

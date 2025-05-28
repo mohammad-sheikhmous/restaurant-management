@@ -4,6 +4,7 @@ use App\Http\Controllers\Dashboard\AdminController;
 use App\Http\Controllers\Dashboard\AttributeController;
 use App\Http\Controllers\Dashboard\Auth\ResetPasswordController;
 use App\Http\Controllers\Dashboard\Auth\LoginController;
+use App\Http\Controllers\Dashboard\FaqController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\TagController;
 use App\Http\Controllers\Dashboard\UserController;
@@ -74,5 +75,13 @@ Route::middleware('auth:admin')->group(function () {
         Route::post('/', 'store');
         Route::post('/{tag}', 'update');
         Route::delete('/{tag}', 'destroy');
+    });
+
+    Route::controller(FaqController::class)->prefix('faqs')->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{faq}', 'show');
+        Route::post('/', 'store');
+        Route::post('/{faq}', 'update');
+        Route::delete('/{faq}', 'destroy');
     });
 });
