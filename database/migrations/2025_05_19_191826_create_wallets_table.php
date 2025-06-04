@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
 
             $table->decimal('balance')->default(0);
+            $table->date('expire_date');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
 
             $table->timestamps();

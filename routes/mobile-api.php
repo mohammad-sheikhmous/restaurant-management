@@ -8,6 +8,7 @@ use App\Http\Controllers\Mobile\Auth\RegisterController;
 use App\Http\Controllers\Mobile\Auth\ResetPasswordController;
 use App\Http\Controllers\Mobile\CartController;
 use App\Http\Controllers\Mobile\CategoryController;
+use App\Http\Controllers\Mobile\OrderController;
 use App\Http\Controllers\Mobile\ProductController;
 use App\Http\Controllers\Mobile\TagController;
 use App\Http\Controllers\Mobile\WishlistController;
@@ -38,7 +39,7 @@ Route::post('passwords/reset', [ResetPasswordController::class, 'reset']);
 
 ///////////////////        End Authentication APIs        ///////////////////////
 
-Route::get('images/{path}', ImageController::class);
+Route::get('images/{path}', ImageController::class)->where('path','.*');
 
 Route::get('tags', [TagController::class, 'index']);
 
@@ -68,6 +69,8 @@ Route::controller(CartController::class)->prefix('carts')->group(function () {
     Route::patch('items/{id}/increment', 'incrementItem');
     Route::patch('items/{id}/decrement', 'decrementItem');
 });
+
+Route::get('test', [OrderController::class, 'getDetailsForCreatingOrder']);
 
 Route::middleware('auth:user')->group(function () {
 

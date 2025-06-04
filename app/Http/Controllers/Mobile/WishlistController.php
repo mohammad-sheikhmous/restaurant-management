@@ -15,7 +15,7 @@ class WishlistController extends Controller
     {
         $user = Auth::guard('user')->user();
         if ($user) {
-            $products = $user->wishlistProducts()->with('tags.wishlists')->get();
+            $products = $user->wishlistProducts()->with(['tags', 'wishlists'])->latest()->get();
 
             if ($products->isNotEmpty())
                 return dataJson('products', ProductResource::collection($products), 'wishlist products');
@@ -26,8 +26,8 @@ class WishlistController extends Controller
             if (!$guest_token)
                 return messageJson('please add the guest token', false, 400);
 
-            $products = Wishlist::where('guest_token', $guest_token)->with('product.tags', 'product.wishlists')->get()
-                ->map(function ($item) {
+            $products = Wishlist::where('guest_token', $guest_token)->with(['product.tags', 'product.wishlists'])->latest()
+                ->get()->map(function ($item) {
                     return $item->product;
                 });
 

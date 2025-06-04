@@ -31,7 +31,7 @@ class CategoryController extends Controller
                     $query1->whereHas('tags', function ($query2) use ($tag_id) {
                         $query2->where('tags.id', $tag_id);
                     });
-            })->with(['tags', 'wishlists'])->get();
+            })->with(['tags', 'wishlists'])->latest()->get();
 
         return dataJson('products', ProductResource::collection($products), 'category products');
     }

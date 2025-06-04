@@ -128,14 +128,18 @@ class CartController extends Controller
     {
         $user = auth('user')->user();
         if ($user)
-            $cart = Cart::with(['items.product', 'items.itemOptions.attributeOption.attribute'])
+            $cart = Cart::with(['items' => function ($query) {
+                return $query->latest();
+            }, 'items.product', 'items.itemOptions.attributeOption.attribute'])
                 ->firstOrCreate(['user_id' => $user->id]);
         else {
             $guest_token = \request()->header('guest_token');
             if (!$guest_token)
                 return messageJson('please add the guest token', false, 400);
 
-            $cart = Cart::with(['items.product', 'items.itemOptions.attributeOption.attribute'])
+            $cart = Cart::with(['items' => function ($query) {
+                return $query->latest();
+            }, 'items.product', 'items.itemOptions.attributeOption.attribute'])
                 ->firstOrCreate(['guest_token' => $guest_token]);
         }
         if ($cart->items->isEmpty())
