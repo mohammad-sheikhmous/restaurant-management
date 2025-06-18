@@ -13,6 +13,9 @@ class ProductController extends Controller
 {
     public function getProductsBySearching()
     {
+        if (!request()->searched_text)
+            return messageJson('Enter searched text', false, 400);
+
         $searched_text = strip_tags(\request()->validate([
             'searched_text' => 'nullable|min:3'
         ])['searched_text']);
@@ -71,7 +74,7 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = Product::absolutelyActive()->with(['options.attribute', 'category'])->find($id);
+        $product = Product::absolutelyActive()->with(['options.attribute'])->find($id);
         if (!$product)
             return messageJson('product not found', false, 404);
 

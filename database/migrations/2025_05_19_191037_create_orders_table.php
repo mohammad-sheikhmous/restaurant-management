@@ -13,24 +13,30 @@ return new class extends Migration {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
 
-            $table->enum('status', ['pending', 'accepted', 'rejected', 'preparing', 'prepared',
+            $table->string('order_number', 20)->unique()->nullable();
+
+            $table->enum('status', ['pending', 'cancelled', 'accepted', 'rejected', 'preparing', 'prepared',
                 'delivering', 'delivered', 'picked_up'])->default('pending');
 
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('user_address_id')->nullable()->constrained()->nullOnDelete();
             $table->json('user_data');
 
             $table->foreignId('delivery_driver_id')->nullable()->constrained('admins')->nullOnDelete();
-            $table->json('delivery_driver_data');
+            $table->json('delivery_driver_data')->nullable();
 
             $table->enum('receiving_method', ['delivery', 'pick_up', 'on_table'])->default('delivery');
             $table->enum('payment_method', ['cash', 'wallet'])->default('cash');
 
-            $table->decimal('price');
-            $table->decimal('delivery_price')->default(0);
-            $table->decimal('discount_price')->default(0);
             $table->decimal('total_price');
+            $table->decimal('delivery_fee')->default(0);
+            $table->decimal('discount')->default(0);
+            $table->decimal('final_price')->storedAs("total_price + delivery_fee - discount");
 
-            $table->string('note')->nullable();
+            $table->time('estimated_receiving_time')->nullable();
+            $table->time('receiving_time')->nullable();
+
+            $table->json('notes')->nullable();
 
             $table->timestamps();
         });

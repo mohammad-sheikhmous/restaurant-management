@@ -11,6 +11,7 @@ use App\Http\Controllers\Mobile\CategoryController;
 use App\Http\Controllers\Mobile\OrderController;
 use App\Http\Controllers\Mobile\ProductController;
 use App\Http\Controllers\Mobile\TagController;
+use App\Http\Controllers\Mobile\UserAddressController;
 use App\Http\Controllers\Mobile\WishlistController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,7 +40,7 @@ Route::post('passwords/reset', [ResetPasswordController::class, 'reset']);
 
 ///////////////////        End Authentication APIs        ///////////////////////
 
-Route::get('images/{path}', ImageController::class)->where('path','.*');
+Route::get('images/{path}', ImageController::class)->where('path', '.*');
 
 Route::get('tags', [TagController::class, 'index']);
 
@@ -70,10 +71,25 @@ Route::controller(CartController::class)->prefix('carts')->group(function () {
     Route::patch('items/{id}/decrement', 'decrementItem');
 });
 
-Route::get('test', [OrderController::class, 'getDetailsForCreatingOrder']);
 
 Route::middleware('auth:user')->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'show']);
     Route::post('/update_profile', [ProfileController::class, 'update']);
+
+    Route::controller(OrderController::class)->prefix('orders')->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'show');
+        Route::get('creating-details', 'getDetailsForCreatingOrder');
+        Route::post('/', 'store');
+        Route::patch('/{id}', 'cancel');
+        Route::delete('/{id}', 'destroy');
+    });
+
+    Route::controller(UserAddressController::class)->prefix('addresses')->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'show');
+        Route::post('/', 'store');
+        Route::delete('/{id}', 'destroy');
+    });
 });

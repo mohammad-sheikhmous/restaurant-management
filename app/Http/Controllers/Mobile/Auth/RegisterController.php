@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Mobile\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Models\Cart;
 use App\Models\User;
 use App\Notifications\OtpNotification;
 use Illuminate\Http\Request;
@@ -29,6 +30,10 @@ class RegisterController extends Controller implements HasMiddleware
 
         // to send Confirmation OTP to user email
         $user->notify(new OtpNotification());
+
+        $guest_token = $request->header('guest_token');
+        if ($guest_token && $cart = Cart::where('guest_token', $guest_token)->first())
+            $cart->update(['user_id' => $user->id]);
 
         $message = 'the user created successfully,check verification code sent you to confirm the email';
         return dataJson('user', $user, $message, 201);

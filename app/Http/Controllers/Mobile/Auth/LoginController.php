@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Mobile\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\User;
 use App\Notifications\OtpNotification;
 use Illuminate\Http\Request;
@@ -40,6 +41,10 @@ class LoginController extends Controller implements HasMiddleware
             $message = 'The user has not confirmed his email yet. A verification code has been sent to confirm the email.';
             return messageJson($message, false, 401);
         }
+
+        $guest_token = $request->header('guest_token');
+        if ($guest_token && $cart = Cart::where('guest_token', $guest_token)->first())
+            $cart->update(['user_id' => $user->id]);
 
         // generate token after verify from user credentials
         $token = $user->createToken('user-token')->plainTextToken;

@@ -9,7 +9,7 @@ if (!function_exists('exceptionJson')) {
         return response()->json([
             'status' => false,
             'status_code' => 500,
-            'message' => __('messages.Something Went Wrong...!, Try again Later.')
+            'message' => __('Something went wrong')
         ], 500);
     }
 }

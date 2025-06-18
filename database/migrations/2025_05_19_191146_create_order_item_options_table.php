@@ -15,8 +15,9 @@ return new class extends Migration {
 
             $table->foreignId('product_attribute_option_id')->nullable()->constrained()->nullOnDelete();
             $table->string('option_attribute_name');
+            $table->string('option_attribute_type');
             $table->string('option_name');
-            $table->decimal('option_extra_price');
+            $table->decimal('option_price');
 
             $table->foreignId('order_item_id')->constrained()->cascadeOnDelete();
 

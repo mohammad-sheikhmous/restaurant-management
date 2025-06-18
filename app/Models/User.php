@@ -33,6 +33,16 @@ class User extends Authenticatable
         ];
     }
 
+    public function wallet()
+    {
+        return $this->hasOne(Wallet::class);
+    }
+
+    public function cart()
+    {
+        return $this->hasOne(Cart::class);
+    }
+
     public function wishlistProducts()
     {
         return $this->hasMany(Wishlist::class);
@@ -48,17 +58,12 @@ class User extends Authenticatable
         return $this->hasMany(Reservation::class);
     }
 
-    public function wallet()
-    {
-        return $this->hasOne(Wallet::class);
-    }
-
     public function scopeWithCurrentOrdersCount(Builder $query)
     {
         return $query->withCount([
-        'orders as current_orders_count' => function ($query) {
-            return $query->whereIn('status', ['pending', 'accepted', 'preparing', 'prepared', 'delivering']);
-        }]);
+            'orders as current_orders_count' => function ($query) {
+                return $query->whereIn('status', ['pending', 'accepted', 'preparing', 'prepared', 'delivering']);
+            }]);
     }
 
     public function scopeWithCurrentReservationsCount(Builder $query)
@@ -99,5 +104,10 @@ class User extends Authenticatable
             'reservations as finished_reservations_count' => function ($query) {
                 return $query->where('status', 'finished');
             }]);
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany(UserAddress::class);
     }
 }

@@ -204,7 +204,7 @@ class CartController extends Controller
 
     public function showItem($id)
     {
-        $item = CartItem::with(['product.options.attribute', 'product.category', 'product.options.productAttributeOptions'])
+        $item = CartItem::with(['product.options.attribute', 'product.options.productAttributeOptions'])
             ->find($id);
         if (!$item)
             return messageJson('item not found', false, 404);
