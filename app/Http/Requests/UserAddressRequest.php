@@ -23,7 +23,7 @@ class UserAddressRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:30',
-            'label' => 'required|string|max:30',
+            'label' => 'nullable|string|max:30',
             'city' => 'required|string|max:20',
             'area' => 'required|string|max:30',
             'street' => 'required|string|max:40',

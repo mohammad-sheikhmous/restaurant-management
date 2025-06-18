@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->decimal('latitude', 9, 7);
             $table->decimal('longitude', 10, 7);
-            $table->string('label', 30);
+            $table->string('label', 30)->nullable();
             $table->string('name', 30);
             $table->string('city', 20);
             $table->string('area', 30);
