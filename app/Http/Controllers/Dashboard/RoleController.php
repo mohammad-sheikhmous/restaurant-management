@@ -25,64 +25,64 @@ class RoleController extends Controller implements HasMiddleware
             return $role->mergeCasts(['name' => Translated::class])->permissions = $role->translatedPermissions->values();
         });
 
-        return dataJson('roles', $roles, 'all roles');
+        return dataJson('roles', $roles, 'All roles');
     }
 
     public function show($id)
     {
         $role = Role::find($id);
         if (!$role)
-            return messageJson('role not found', false, 404);
+            return messageJson('Role not found', false, 404);
 
         $role->permissions = $role->translatedPermissions;
 
-        return dataJson('role', $role, 'role returned successfully');
+        return dataJson('role', $role, 'The role returned successfully');
     }
 
     public function getAllPermissions()
     {
         $permissions = config('roles.permissions.' . config('app.locale'));
 
-        return dataJson('permissions', $permissions, 'all permissions in the system');
+        return dataJson('permissions', $permissions, 'All permissions in the system');
     }
 
     public function store(RoleRequest $request)
     {
         Role::create($request->only('name', 'permissions', 'status'));
 
-        return messageJson('new role created', true, 201);
+        return messageJson('New role created', true, 201);
     }
 
     public function update(RoleRequest $request, $id)
     {
         $role = Role::find($id);
         if (!$role)
-            return messageJson('role not found', false, 404);
+            return messageJson('Role not found', false, 404);
 
         $role->update($request->only('name', 'permissions', 'status'));
 
-        return messageJson('role updated');
+        return messageJson('The role updated');
     }
 
     public function destroy($id)
     {
         $role = Role::find($id);
         if (!$role)
-            return messageJson('role not found', false, 404);
+            return messageJson('Role not found', false, 404);
 
         $role->delete();
 
-        return messageJson('role deleted');
+        return messageJson('The role deleted');
     }
 
     public function changeStatus($id)
     {
         $role = Role::find($id);
         if (!$role)
-            return messageJson('role not found', false, 404);
+            return messageJson('Role not found', false, 404);
 
         $role->update(['status' => !$role->status]);
 
-        return messageJson('role status changed');
+        return messageJson('The role status changed');
     }
 }

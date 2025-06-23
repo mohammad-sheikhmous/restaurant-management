@@ -9,17 +9,9 @@ class Tag extends Model
 {
     use HasTranslations;
 
-    protected $fillable = ['name', 'status'];
+    protected $fillable = ['name', 'icon'];
 
     public $translatable = ['name'];
 
-    public function scopeActive($query)
-    {
-        return $query->whereStatus(1);
-    }
-
-    public function scopeInactive($query)
-    {
-        return $query->whereStatus(0);
-    }
+    public $timestamps = false;
 }

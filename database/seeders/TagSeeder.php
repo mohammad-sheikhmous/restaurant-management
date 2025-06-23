@@ -19,15 +19,15 @@ class TagSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
 
         $tags = [
-            ['name' => ["en" => "Spicy", "ar" => "حار"]],
-            ['name' => ["en" => "Cheesy", "ar" => "بالجبنة"]],
-            ['name' => ["en" => "Popular", "ar" => "شائع"], 'status' => 0],
-            ['name' => ["en" => "New", "ar" => "جديد"]],
-            ['name' => ["en" => "Vegetarian", "ar" => "نباتي"]],
-            ['name' => ["en" => "Not Vegetarian", "ar" => "غير نباتي"]],
-            ['name' => ["en" => "Kids", "ar" => "أطفال"], 'status' => 0],
-            ['name' => ["en" => "Saucy", "ar" => "بالصوص"]],
-            ['name' => ["en" => "Extra Meat", "ar" => "لحم إضافي"]],
+            ['name' => ["en" => "Spicy", "ar" => "حار"], 'icon' => '🌶'],
+            ['name' => ["en" => "Cheesy", "ar" => "بالجبنة"], 'icon' => '🧀'],
+            ['name' => ["en" => "Popular", "ar" => "شائع"], 'icon' => '📈'],
+            ['name' => ["en" => "New", "ar" => "جديد"], 'icon' => '🆕'],
+            ['name' => ["en" => "Vegetarian", "ar" => "نباتي"], 'icon' => '🥬'],
+            ['name' => ["en" => "Not Vegetarian", "ar" => "غير نباتي"], 'icon' => '🍗'],
+            ['name' => ["en" => "Kids", "ar" => "أطفال"], 'icon' => '🚼'],
+            ['name' => ["en" => "Saucy", "ar" => "بالصوص"], 'icon' => '🍛'],
+            ['name' => ["en" => "Extra Meat", "ar" => "لحم إضافي"], 'icon' => '🥩'],
         ];
         foreach ($tags as $tag)
             Tag::create($tag);

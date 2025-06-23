@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\PermissionRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RoleRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +22,12 @@ class RoleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name.en' => 'required|string|max:30|unique_translation:roles,name,' . $this->role,
-            'name.ar' => 'required|string|max:30|unique_translation:roles,name,' . $this->role,
-            'permissions' => 'required|array|min:1',
-            'permissions.*' => ['required', new PermissionRule()],
+            'name' => 'required|array',
+            'name.en' => 'required|string|max:30|unique_translation:categories,name,' . $this->category,
+            'name.ar' => 'required|string|max:30|unique_translation:categories,name,' . $this->category,
+            'image' => request()->is('*/categories') ? 'required' : 'nullable' . '|image|mimes:jpeg,svg,png,jpg,gif,ico',
             'status' => 'in:0,1',
+//            'parent' => 'nullable|exists:categories,id'
         ];
     }
 }

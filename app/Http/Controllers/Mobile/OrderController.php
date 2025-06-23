@@ -5,13 +5,17 @@ namespace App\Http\Controllers\Mobile;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderRequest;
 use App\Http\Resources\Resource\OrderResource;
+use App\Http\Resources\Resource\UserAddressResource;
+use App\Models\DeliveryZone;
 use App\Models\Order;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use function Laravel\Prompts\select;
+use function Sodium\add;
 
 class OrderController extends Controller
 {
@@ -24,25 +28,34 @@ class OrderController extends Controller
             if (!$user->cart || $user->cart->items->isEmpty())
                 return messageJson('Cart is empty, add items to cart for ordering', false, 422);
 
-            if ($receiving_method == 'delivery') {
-                $user->load(['addresses' => function ($query) {
-                    return $query->select('id', 'user_id', 'name', 'city', 'area', 'street', 'longitude', 'latitude')->latest();
-                }]);
-                if ($user->addresses->isEmpty())
-                    return messageJson('To create your order, add your address first', false, 422);
-            }
-            $details = [
+            $order_details = [
                 'total_price' => $user->cart->items->sum('total_price'),
                 'items_count' => $user->cart->items->sum('quantity'),
                 'delivery_fee' => 0,
                 'discount' => 0,
             ];
             if ($receiving_method == 'delivery') {
-                $setting = Setting::first();
+                $user->load(['addresses' => function ($query) {
+                    return $query->latest();
+                },'addresses.deliveryZone']);
+                if ($user->addresses->isEmpty())
+                    return messageJson('To create your order, add your address first', false, 422);
 
                 // to get address
                 if (!\request()->address_id) {
-                    $details['addresses'] = $user->addresses->makeHidden(['user_id', 'longitude', 'latitude']);
+                    $order_details['addresses'] = array_map(function ($item) {
+                        return Arr::only($item, ['id', 'name', 'city', 'area', 'street', 'is_deliverable']);
+                    }, UserAddressResource::collection($user->addresses)->resolve());
+
+                    // Use usort to sort the array by 'is_deliverable' descending
+                    usort($order_details['addresses'], function ($a, $b) {
+                        return $b['is_deliverable'] <=> $a['is_deliverable'];
+                    });
+                    // Check that all user addresses are in area supported or no for delivery
+                    if (!$order_details['addresses'][0]['is_deliverable']) {
+                        $message = 'All your added addresses are now in areas not supported for delivery, Add new Addresses.';
+                        return messageJson($message, false, 422);
+                    }
 
                     $address = $user->addresses->first();
                 } else {
@@ -51,9 +64,16 @@ class OrderController extends Controller
                     });
                     if (!$address)
                         return messageJson('Address not found', false, 404);
+
+                    // Check that selected address is in area supported or no for delivery
+                    if (!$address->delivery_zone_id || $address->deliveryZone->status == 0)
+                        return messageJson('Sorry, The selected address is in unsupported delivery area', false, 404);
                 }
+
                 // to store distance array from calculateDistance function in cache for 10 minutes to reduce map api requests
                 if (!Cache::has("delivery_fee:u{$user->id},a{$address->id}")) {
+                    $setting = Setting::first();
+
                     $distance = $this->calculateDistance(
                         $setting->latitude, $setting->longitude,
                         $address->latitude, $address->longitude
@@ -64,14 +84,15 @@ class OrderController extends Controller
                 } else
                     $distance = Cache::get("delivery_fee:u{$user->id},a{$address->id}");
 
-                $details['delivery_fee'] = $distance['distance'] * 100;
-                $details['estimated_delivery_driver_time'] = $distance['duration'];
+                $order_details['delivery_fee'] = $distance['distance'] * 100;
+                $order_details['estimated_delivery_driver_time'] = $distance['duration'];
             }
-            $details['final_price'] = $details['total_price'] + $details['delivery_fee'] - $details['discount'];
+            $order_details['final_price'] = $order_details['total_price'] + $order_details['delivery_fee'] - $order_details['discount'];
 
-            return dataJson('details', $details, 'Order creating details');
+            return dataJson('details', $order_details, 'Order creating details');
+
         } catch (\Exception $exception) {
-            return exceptionJson();
+            return $exception;
         }
     }
 

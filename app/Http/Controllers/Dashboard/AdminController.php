@@ -70,6 +70,7 @@ class AdminController extends Controller
             return messageJson('admin not found');
 
         $admin->delete();
+        deleteImage($admin->image, 'admins');
 
         return messageJson('admin deleted');
     }

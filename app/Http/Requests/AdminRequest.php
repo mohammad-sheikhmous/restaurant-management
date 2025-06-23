@@ -25,7 +25,7 @@ class AdminRequest extends FormRequest
         return [
             'name' => 'required|string|max:50',
             'email' => 'required|email|max:70|unique:admins,email,' . $this->admin,
-            'image' => 'nullable|image|mimes:jpeg,svg,png,jpg,gif',
+            'image' => request()->is('*/admins') ? 'required' : 'nullable' . '|image|mimes:jpeg,svg,png,jpg,gif',
             'role_id' => 'required|exists:roles,id',
             'status' => 'required|in:1,0',
             'password' => [Rule::requiredIf($this->is('api/dashboard/admins')), 'confirmed'],

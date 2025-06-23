@@ -66,7 +66,7 @@ class CartController extends Controller
                         fn($option) => $option->attributeOption->attribute->type === 'additional' && $option->id == $id
                     );
                     if (!$additional_option)
-                        return messageJson("invalid additional option id: $id", false, 400);
+                        return messageJson("invalid additional option id: $id", false, 422);
 
                     $extra_price += $additional_option->extra_price;
                     $selected_additional_ids[] = $additional_option->id;
@@ -135,7 +135,7 @@ class CartController extends Controller
         else {
             $guest_token = \request()->header('guest_token');
             if (!$guest_token)
-                return messageJson('please add the guest token', false, 400);
+                return messageJson('please add the guest token', false, 422);
 
             $cart = Cart::with(['items' => function ($query) {
                 return $query->latest();

@@ -4,6 +4,8 @@ use App\Http\Controllers\Dashboard\AdminController;
 use App\Http\Controllers\Dashboard\AttributeController;
 use App\Http\Controllers\Dashboard\Auth\ResetPasswordController;
 use App\Http\Controllers\Dashboard\Auth\LoginController;
+use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\DeliveryZoneController;
 use App\Http\Controllers\Dashboard\FaqController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\TagController;
@@ -83,5 +85,23 @@ Route::middleware('auth:admin')->group(function () {
         Route::post('/', 'store');
         Route::post('/{faq}', 'update');
         Route::delete('/{faq}', 'destroy');
+    });
+
+    Route::controller(DeliveryZoneController::class)->prefix('zones')->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{zone}', 'show');
+        Route::post('/', 'store');
+        Route::post('/{zone}', 'update');
+        Route::delete('/{zone}', 'destroy');
+        Route::patch('/{zone}', 'changeStatus');
+    });
+
+    Route::controller(CategoryController::class)->prefix('categories')->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{category}', 'show');
+        Route::post('/', 'store');
+        Route::post('/{category}', 'update');
+        Route::delete('/{category}', 'destroy');
+        Route::patch('/{category}', 'changeStatus');
     });
 });

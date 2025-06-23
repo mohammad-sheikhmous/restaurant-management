@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             AttributeSeeder::class,
             ProductSeeder::class,
             FaqSeeder::class,
+            DeliveryZoneSeeder::class,
         ]);
     }
 }

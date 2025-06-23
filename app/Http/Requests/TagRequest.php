@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\PermissionRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RoleRequest extends FormRequest
+class TagRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +22,9 @@ class RoleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name.en' => 'required|string|max:30|unique_translation:roles,name,' . $this->role,
-            'name.ar' => 'required|string|max:30|unique_translation:roles,name,' . $this->role,
-            'permissions' => 'required|array|min:1',
-            'permissions.*' => ['required', new PermissionRule()],
-            'status' => 'in:0,1',
+            'name.en' => 'required|string|max:20|unique_translation:tags,name,' . $this->tag,
+            'name.ar' => 'required|string|max:20|unique_translation:tags,name,' . $this->tag,
+            'icon' => 'required|string|max:10'
         ];
     }
 }

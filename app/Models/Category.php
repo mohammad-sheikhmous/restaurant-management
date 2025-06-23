@@ -15,6 +15,10 @@ class Category extends Model
 
     public $translatable = ['name'];
 
+    protected $hidden = [
+        'updated_at'
+    ];
+
     public function scopeActive($query)
     {
         return $query->whereStatus(1);
@@ -28,5 +32,10 @@ class Category extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function orderItems()
+    {
+        return $this->through('products')->has('orderItems');
     }
 }
