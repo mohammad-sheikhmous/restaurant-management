@@ -25,10 +25,7 @@ class UpdateProfileRequest extends FormRequest
         return [
             'first_name' => ['sometimes', 'string', 'max:255'],
             'last_name' => ['sometimes', 'string', 'max:255'],
-            'location'=>['sometimes', 'string'],
-            'email' => ['sometimes', 'email',
-                Rule::unique('users', 'email')->ignore($this->user()->id),
-            ],
+            'mobile' => ['nullable', ''],
             'image' => 'sometimes|image|mimes:jpg,jpeg,png|max:2048',
         ];
     }

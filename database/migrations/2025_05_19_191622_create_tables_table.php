@@ -15,8 +15,8 @@ return new class extends Migration {
 
             $table->integer('table_num');
             $table->unsignedInteger('seats_count');
-            $table->boolean('status')->default(1);
-            $table->string('location');
+            $table->boolean('is')->default(1);
+            $table->enum('type', ['indoor', 'outdoor', 'vip', '*']);
 
             $table->timestamps();
         });

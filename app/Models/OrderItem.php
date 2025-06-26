@@ -10,10 +10,14 @@ class OrderItem extends Model
     use HasTranslations;
 
     protected $fillable = [
-        'product_id', 'product_name', 'quantity', 'base_price', 'extra_price', 'total_price',
+        'product_id', 'product_data', 'quantity', 'base_price', 'extra_price', 'total_price',
     ];
 
     public $translatable = ['product_name'];
+
+    protected $casts = [
+        'product_data' => 'array'
+    ];
 
     public function itemOptions()
     {

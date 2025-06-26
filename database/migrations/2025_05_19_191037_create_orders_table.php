@@ -28,10 +28,10 @@ return new class extends Migration {
             $table->enum('receiving_method', ['delivery', 'pick_up', 'on_table'])->default('delivery');
             $table->enum('payment_method', ['cash', 'wallet'])->default('cash');
 
-            $table->decimal('total_price');
-            $table->decimal('delivery_fee')->default(0);
+            $table->decimal('total_price', 8, 0);
+            $table->decimal('delivery_fee', 8, 0)->default(0);
             $table->decimal('discount')->default(0);
-            $table->decimal('final_price')->storedAs("total_price + delivery_fee - discount");
+            $table->decimal('final_price', 8, 0)->storedAs("total_price + delivery_fee - discount");
 
             $table->time('estimated_receiving_time')->nullable();
             $table->time('receiving_time')->nullable();

@@ -19,10 +19,11 @@ return new class extends Migration {
             $table->string('mobile', 20)->unique()->nullable();
             $table->boolean('status')->default(1);
             $table->string('image')->nullable();
+            $table->date('birthdate')->nullable();
             $table->string('password', 100);
 
             $table->timestamp('email_verified_at')->nullable();
-            $table->rememberToken();
+
             $table->timestamps();
         });
 

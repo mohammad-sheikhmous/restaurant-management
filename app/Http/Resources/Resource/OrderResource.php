@@ -21,7 +21,8 @@ class OrderResource extends JsonResource
                     $option_name = $item->itemOptions->filter(function ($option) {
                         return $option->option_attribute_type == 'basic';
                     })->first()?->option_name;
-                    return "{$this->numbersByLang($item->quantity)} {$item->product_name}" . ($option_name ? " ($option_name)" : '');
+                    return "{$this->numbersByLang($item->quantity)} {$item->product_data['name'][config('app.locale')]}" .
+                        ($option_name ? " ($option_name)" : '');
                 })->implode(' + ');
         return [
             'id' => $this->id,

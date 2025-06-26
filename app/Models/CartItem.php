@@ -7,12 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class CartItem extends Model
 {
     protected $fillable = [
-        'product_id', 'cart_id', 'base_price', 'extra_price', 'total_price', 'quantity',
+        'product_id', 'product_data', 'cart_id', 'base_price', 'extra_price', 'total_price', 'quantity',
+    ];
+
+    protected $casts = [
+        'product_data' => 'array',
     ];
 
     public function itemOptions()
     {
-        return $this->belongsToMany(ProductAttributeOption::class, 'cart_item_options');
+        return $this->hasMany(CartItemOption::class);
     }
 
     public function product()

@@ -15,13 +15,15 @@ class User extends Authenticatable
 
     // The attributes that are mass assignable.
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'mobile', 'status', 'image', 'email_verified_at'
+        'first_name', 'last_name', 'email', 'password', 'mobile', 'status', 'image', 'birthdate', 'email_verified_at'
     ];
 
     // The attributes that should be hidden for serialization.
     protected $hidden = [
         'password',
         'remember_token',
+        'updated_at',
+        'email_verified_at'
     ];
 
     // Get the attributes that should be cast.

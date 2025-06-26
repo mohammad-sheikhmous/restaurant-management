@@ -16,11 +16,11 @@ return new class extends Migration {
             $table->foreignId('order_id')->constrained()->cascadeOnDelete();
             $table->foreignId('product_id')->nullable()->constrained()->cascadeOnDelete();
 
-            $table->string('product_name')->nullable();
+            $table->json('product_data')->nullable();
             $table->unsignedInteger('quantity');
-            $table->decimal('base_price');
-            $table->decimal('extra_price');
-            $table->decimal('total_price');
+            $table->decimal('base_price', 8, 0);
+            $table->decimal('extra_price', 8, 0);
+            $table->decimal('total_price', 8, 0);
 
             $table->timestamps();
         });

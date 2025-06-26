@@ -74,7 +74,7 @@ Route::controller(CartController::class)->prefix('carts')->group(function () {
 Route::middleware('auth:user')->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'show']);
-    Route::post('/update_profile', [ProfileController::class, 'update']);
+    Route::post('/profile', [ProfileController::class, 'update']);
 
     Route::controller(OrderController::class)->prefix('orders')->group(function () {
         Route::get('/', 'index');
@@ -83,6 +83,7 @@ Route::middleware('auth:user')->group(function () {
         Route::post('/', 'store');
         Route::patch('/{id}', 'cancel');
         Route::delete('/{id}', 'destroy');
+        Route::get('/reorder/{id}','reorder');
     });
 
     Route::controller(UserAddressController::class)->prefix('addresses')->group(function () {

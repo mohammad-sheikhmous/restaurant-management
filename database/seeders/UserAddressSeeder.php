@@ -25,6 +25,9 @@ class UserAddressSeeder extends Seeder
                 'street' => 'طريق المطار',
                 'mobile' => '0997740137',
                 'additional_details' => 'بجانب كلية الهمك',
+                'delivery_zone_id' => 1,
+                'duration' => '23 mins',
+                'distance' => 12.3
             ],
             [
                 'user_id' => 1,
@@ -37,6 +40,9 @@ class UserAddressSeeder extends Seeder
                 'street' => 'ابن العساكر',
                 'mobile' => '0997740137',
                 'additional_details' => 'مقابل كراج الست ',
+                'delivery_zone_id' => 1,
+                'duration' => '33 mins',
+                'distance' => 18.3
             ],
             [
                 'user_id' => 1,
@@ -49,6 +55,9 @@ class UserAddressSeeder extends Seeder
                 'street' => 'شارع الخزان الرئيسي',
                 'mobile' => '0997740137',
                 'additional_details' => 'بجانب مطعم الحافظ',
+                'delivery_zone_id' => 2,
+                'duration' => '18 mins',
+                'distance' => 8.3
             ],
             [
                 'user_id' => 1,
@@ -60,6 +69,8 @@ class UserAddressSeeder extends Seeder
                 'area' => 'الحجاز',
                 'street' => 'سعدالله الجابري',
                 'mobile' => '0997740137',
+                'duration' => '25 mins',
+                'distance' => 14.3
             ],
         ];
 

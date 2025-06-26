@@ -16,22 +16,46 @@ class CartItemResource extends JsonResource
     public function toArray(Request $request): array
     {
         if ($request->is('api/carts')) {
-            $basic = $this->itemOptions->first(function ($value, $key) {
-                return $value->attributeOption->attribute->type === 'basic';
-            })?->attributeOption->name;
+            $is_valid = true;
+            // If the products is not deleted
+            if ($this->product_id && $this->product->status == 1) {
+                $basic_opt = $this->itemOptions->first(function ($option) {
+                    return $option->option_data['attr_type'] === 'basic';
+                });
+                if ($basic_opt) {
+                    if ($basic_opt->product_attribute_option_id)
+                        $basic_name = $basic_opt->productAttributeOption->attributeOption->name;
+                    else {
+                        $basic_name = $basic_opt->option_data['name'][config('app.locale')] . ' - unavailable';
+                        $is_valid = false;
+                        $reason = "The custom {$basic_opt->option_data['attr_name'][config('app.locale')]} ({$basic_opt->option_data['name'][config('app.locale')]}) is no longer available.";
+                    }
+                }
+                $selected_additional_options = $this->itemOptions->filter(function ($option) {
+                    return $option->option_data['attr_type'] === 'additional';
+                });
+                $extra_price = $selected_additional_options
+                    ->sum(fn($option) => $option->productAttributeOption?->extra_price);
 
-            $selected_additional_options = $this->itemOptions->filter(function ($option) {
-                return $option->attributeOption->attribute->type == 'additional';
-            })->map(function ($option) {
-                return $option->attributeOption->name . "($option->extra_price)";
-            })->implode(' + ');
+                $selected_additional_options = $selected_additional_options->map(function ($option) {
+                    if ($option->product_attribute_option_id)
+                        return $option->productAttributeOption->attributeOption->name . "({$option->productAttributeOption->extra_price})";
+                    else
+                        return $option->option_data['name'][config('app.locale')] . "(removed)";
+
+                })->implode(' + ');
+
+            } else { // else if the product deleted
+                $is_valid = false;
+                $reason = "This item no longer available";
+            }
         }
         $data = [
             'id' => $this->id,
-            'name' => $this->product->name . ($basic ?? null ? " ($basic)" : ''),
-            'description' => $this->product->description,
-            'image' => $this->product->image,
-            'is_simple' => $this->product->is_simple,
+            'name' => ($this->product?->name ?? $this->product_data['name'][config('app.locale')]) . ($basic_name ?? null ? " ($basic_name)" : ''),
+            'description' => $this->product?->description ?? $this->product_data['description'][config('app.locale')],
+            'image' => $this->product?->image ?? $this->product_data['image'],
+            'is_simple' => $this->product?->is_simple,
             'quantity' => $this->quantity,
         ];
         // for show item details
@@ -43,10 +67,12 @@ class CartItemResource extends JsonResource
         // for show cart items
         if ($request->is('api/carts')) {
             $data = [...$data, ...[
-                'base_price' => $this->base_price,
-                'extra_price' => $this->extra_price,
-                'total_price' => $this->total_price,
-                'selected_additional_options' => $selected_additional_options != '' ? $selected_additional_options : null,
+                'is_valid' => $is_valid,
+                'unavailability_reason' => $reason ?? null,
+                'base_price' => !$is_valid ? 0 : $this->base_price,
+                'extra_price' => !$is_valid ? 0 : $extra_price,
+                'total_price' => !$is_valid ? 0 : ($this->base_price + $extra_price) * $this->quantity,
+                'selected_additional_options' => ($selected_additional_options ?? null) != '' ? $selected_additional_options : null,
             ]];
         }
         return $data;

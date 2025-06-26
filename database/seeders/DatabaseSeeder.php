@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             SettingSeeder::class,
             RoleSeeder::class,
             AdminSeeder::class,
+            DeliveryZoneSeeder::class,
             UserSeeder::class,
             UserAddressSeeder::class,
             CategorySeeder::class,
@@ -32,7 +33,6 @@ class DatabaseSeeder extends Seeder
             AttributeSeeder::class,
             ProductSeeder::class,
             FaqSeeder::class,
-            DeliveryZoneSeeder::class,
         ]);
     }
 }

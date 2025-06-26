@@ -14,10 +14,11 @@ return new class extends Migration {
             $table->id();
 
             $table->foreignId('cart_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
-            $table->decimal('base_price')->nullable();
-            $table->decimal('extra_price')->nullable();
-            $table->decimal('total_price')->nullable();
+            $table->foreignId('product_id')->nullable()->constrained()->nullOnDelete();
+            $table->json('product_data');
+            $table->decimal('base_price', 8, 0)->nullable();
+            $table->decimal('extra_price', 8, 0)->nullable();
+            $table->decimal('total_price', 8, 0)->nullable();
             $table->unsignedInteger('quantity');
 
             $table->timestamps();

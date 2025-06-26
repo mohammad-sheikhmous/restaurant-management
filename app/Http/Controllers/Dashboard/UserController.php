@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Requests\UserRequest;
 use App\Http\Resources\Resource\UserResource;
 use App\Models\User;
 
@@ -46,7 +46,7 @@ class UserController extends Controller
         return dataJson('user', UserResource::make($user), 'user returned successfully');
     }
 
-    public function store(RegisterRequest $request)
+    public function store(UserRequest $request)
     {
         $data = $request->only('last_name', 'first_name', 'status', 'password', 'email', 'mobile');
         $data['email_verified_at'] = now();

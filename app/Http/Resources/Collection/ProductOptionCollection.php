@@ -36,6 +36,7 @@ class ProductOptionCollection extends ResourceCollection
                         return $product_option->cartItems->contains('id', $request->id);
                     })->isNotEmpty();
                 return $data;
+
             })->groupBy('attribute')->map(function ($items) {
                 return $items->map(function ($item) {
                     return Arr::except($item, ['attribute']);
@@ -60,5 +61,6 @@ class ProductOptionCollection extends ResourceCollection
                 });
             }), null),
         ];
+
     }
 }

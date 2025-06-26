@@ -14,8 +14,8 @@ return new class extends Migration {
             $table->id();
 
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->decimal('latitude', 11, 9);
-            $table->decimal('longitude', 12, 9);
+            $table->decimal('latitude', 13, 11);
+            $table->decimal('longitude', 14, 11);
             $table->string('label', 30)->nullable();
             $table->string('name', 30);
             $table->string('city', 20);
@@ -24,6 +24,8 @@ return new class extends Migration {
             $table->string('mobile', 20)->nullable();
             $table->foreignId('delivery_zone_id')->nullable()->constrained()->nullOnDelete();
             $table->string('additional_details', 150)->nullable();
+            $table->string('duration');
+            $table->float('distance');
 
             $table->timestamps();
         });

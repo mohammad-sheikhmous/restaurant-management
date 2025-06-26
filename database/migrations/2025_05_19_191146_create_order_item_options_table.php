@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('option_attribute_name');
             $table->string('option_attribute_type');
             $table->string('option_name');
-            $table->decimal('option_price');
+            $table->decimal('option_price', 8, 0);
 
             $table->foreignId('order_item_id')->constrained()->cascadeOnDelete();
 

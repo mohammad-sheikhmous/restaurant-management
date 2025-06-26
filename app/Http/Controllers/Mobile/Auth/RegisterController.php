@@ -3,16 +3,13 @@
 namespace App\Http\Controllers\Mobile\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Requests\UserRequest;
 use App\Models\Cart;
 use App\Models\User;
 use App\Notifications\OtpNotification;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Validator;
 
 
 class RegisterController extends Controller implements HasMiddleware
@@ -24,7 +21,7 @@ class RegisterController extends Controller implements HasMiddleware
         ];
     }
 
-    public function register(RegisterRequest $request)
+    public function register(UserRequest $request)
     {
         $user = $this->create($request);
 
@@ -39,22 +36,15 @@ class RegisterController extends Controller implements HasMiddleware
         return dataJson('user', $user, $message, 201);
     }
 
-    protected function create(RegisterRequest $request)
+    protected function create(UserRequest $request)
     {
-        $user = User::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'mobile' => $request->mobile,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
+        $data = $request->except('status', 'birthdate', 'image');
         if ($request->hasFile('image')) {
 
-            $file_name = storeImage($request->last_name, $request->image, 'users');
-
-            $user->update(['image' => $file_name]);
+            $data['image'] = storeImage($request->last_name, $request->image, 'users');
         }
+        $user = User::create($data);
+
         return $user;
     }
 }
