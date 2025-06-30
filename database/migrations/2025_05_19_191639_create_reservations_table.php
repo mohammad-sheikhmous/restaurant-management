@@ -16,14 +16,15 @@ return new class extends Migration {
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
             $table->json('user_data');
 
-            $table->foreignId('table_id')->nullable()->constrained()->nullOnDelete();
-            $table->json('table_data');
-
-            $table->date('reservation_date');
-            $table->time('reservation_time');
+            $table->date('res_date');
+            $table->time('res_time');
+            $table->time('res_duration');
 
             $table->unsignedInteger('guests_count');
-            $table->enum('status', ['pending', 'accepted', 'rejected', 'cancelled','finished'])->default('pending');
+
+            $table->enum('status', [
+                'pending', 'accepted', 'rejected', 'active', 'no_show', 'cancelled', 'completed'
+            ])->default('pending');
 
             $table->string('note')->nullable();
 

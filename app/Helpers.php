@@ -167,3 +167,27 @@ if (!function_exists('batchUpdate')) {
     }
 }
 
+function numberToOrdinalWord(int $number): string
+{
+    $words = [
+        1 => 'first', 2 => 'second', 3 => 'third', 4 => 'fourth', 5 => 'fifth', 6 => 'sixth', 7 => 'seventh',
+        8 => 'eighth', 9 => 'ninth', 10 => 'tenth', 11 => 'eleventh', 12 => 'twelfth', 13 => 'thirteenth',
+        14 => 'fourteenth', 15 => 'fifteenth', 16 => 'sixteenth', 17 => 'seventeenth', 18 => 'eighteenth',
+        19 => 'nineteenth', 20 => 'twentieth', 30 => 'thirtieth', 40 => 'fortieth', 50 => 'fiftieth',
+        60 => 'sixtieth', 70 => 'seventieth', 80 => 'eightieth', 90 => 'ninetieth',
+    ];
+
+    if (isset($words[$number])) {
+        return $words[$number];
+    }
+
+    $tens = floor($number / 10) * 10;
+    $units = $number % 10;
+
+    if ($tens > 0 && $units > 0 && isset($words[$tens]) && isset($words[$units])) {
+        return str_replace('y', 'ieth', $words[$tens]) . '-' . $words[$units]; // like twenty-first
+    }
+
+    return $number . 'th'; // fallback
+}
+

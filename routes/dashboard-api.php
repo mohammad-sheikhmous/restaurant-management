@@ -2,35 +2,35 @@
 
 use App\Http\Controllers\Dashboard\AdminController;
 use App\Http\Controllers\Dashboard\AttributeController;
-use App\Http\Controllers\Dashboard\Auth\ResetPasswordController;
 use App\Http\Controllers\Dashboard\Auth\LoginController;
+use App\Http\Controllers\Dashboard\Auth\ResetPasswordController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DeliveryZoneController;
 use App\Http\Controllers\Dashboard\FaqController;
+use App\Http\Controllers\Dashboard\ReservationSystem\ClosedPeriodController;
+use App\Http\Controllers\Dashboard\ReservationSystem\ReservationTypeController;
+use App\Http\Controllers\Dashboard\ReservationSystem\TableController;
+use App\Http\Controllers\Dashboard\ReservationSystem\WorkingShiftController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\TagController;
 use App\Http\Controllers\Dashboard\UserController;
 use Illuminate\Support\Facades\Route;
 
-///////////////////         Authentication APIs        ///////////////////////
-
+/******************        Authentication APIs        ****************/
 Route::controller(LoginController::class)->group(function () {
     // Login API (must be guest)
     Route::post('login', 'login');
-
     // Logout API (must be authenticated)
     Route::post('logout', 'logout');
 });
-
 Route::controller(ResetPasswordController::class)->group(function () {
     // Forget Password APIs
     Route::post('passwords/email', 'sendOTP');
     Route::post('passwords/verify-otp', 'verifyOTP');
-
     // Reset Password API (must be authenticated)
     Route::post('passwords/reset', 'reset');
 });
-///////////////////        End Authentication APIs        ///////////////////////
+/******************        End Authentication APIs        ****************/
 
 
 Route::middleware('auth:admin')->group(function () {
@@ -103,5 +103,33 @@ Route::middleware('auth:admin')->group(function () {
         Route::post('/{category}', 'update');
         Route::delete('/{category}', 'destroy');
         Route::patch('/{category}', 'changeStatus');
+    });
+
+    /********************       Reservation System      *******************/
+    Route::get('reservation-types', [ReservationTypeController::class, 'index']);
+
+    Route::controller(TableController::class)->prefix('tables')->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{table}', 'show');
+        Route::post('/', 'store');
+        Route::post('/{table}', 'update');
+        Route::delete('/{table}', 'destroy');
+        Route::patch('/{table}', 'changeStatus');
+    });
+
+    Route::controller(WorkingShiftController::class)->prefix('shifts')->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{shift}', 'show');
+        Route::post('/', 'store');
+        Route::post('/{shift}', 'update');
+        Route::delete('/{shift}', 'destroy');
+    });
+
+    Route::controller(ClosedPeriodController::class)->prefix('periods')->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{period}', 'show');
+        Route::post('/', 'store');
+        Route::post('/{period}', 'update');
+        Route::delete('/{period}', 'destroy');
     });
 });

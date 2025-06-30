@@ -29,8 +29,8 @@ class UserAddressRequest extends FormRequest
             'street' => 'required|string|max:40',
             'mobile' => 'nullable|string|max:20',
             'additional_details' => 'nullable|string|max:150    ',
-            'latitude' => 'required|decimal:0,14',
-            'longitude' => 'required|decimal:0,14',
+            'latitude' => 'required|decimal:0,15',
+            'longitude' => 'required|decimal:0,15',
         ];
     }
 }

@@ -33,6 +33,9 @@ class DatabaseSeeder extends Seeder
             AttributeSeeder::class,
             ProductSeeder::class,
             FaqSeeder::class,
+            ReservationSeeder::class,
+            WorkingShiftSeeder::class,
+            ClosedPeriodSeeder::class,
         ]);
     }
 }

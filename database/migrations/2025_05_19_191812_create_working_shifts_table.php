@@ -10,16 +10,16 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('tables', function (Blueprint $table) {
+        Schema::create('working_shifts', function (Blueprint $table) {
             $table->id();
 
-            $table->string('table_num')->unique();
-            $table->unsignedInteger('seats_count');
-            $table->boolean('activation')->default(1);
-            $table->boolean('is_combinable')->default(1);
+            $table->enum('day_of_week', ['saturday', 'sunday', 'monday', 'tuesday', 'wednesday',
+                'thursday', 'friday']);
+
             $table->foreignId('type_id')->constrained('reservation_types')->cascadeOnDelete();
 
-            $table->timestamps();
+            $table->time('opening_time');
+            $table->time('closing_time');
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('tables');
+        Schema::dropIfExists('working_hours');
     }
 };

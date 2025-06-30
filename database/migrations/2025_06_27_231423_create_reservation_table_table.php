@@ -10,15 +10,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('working_hours', function (Blueprint $table) {
+        Schema::create('reservation_table', function (Blueprint $table) {
             $table->id();
 
-            $table->time('start_time');
-            $table->time('end_time');
-            $table->enum('day_of_week', ['saturday', 'sunday', 'monday', 'tuesday', 'wednesday',
-                'thursday', 'friday']);
+            $table->foreignId('table_id')->nullable()->constrained()->nullOnDelete();
+            $table->json('table_data');
 
-            $table->timestamps();
+            $table->foreignId('reservation_id')->constrained()->cascadeOnDelete();
         });
     }
 
@@ -27,6 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('working_hours');
+        Schema::dropIfExists('reservation_table');
     }
 };

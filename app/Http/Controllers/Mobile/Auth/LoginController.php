@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Mobile\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\User;
+use App\Models\Wishlist;
 use App\Notifications\OtpNotification;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
@@ -43,8 +44,13 @@ class LoginController extends Controller implements HasMiddleware
         }
 
         $guest_token = $request->header('guest_token');
-        if ($guest_token && $cart = Cart::where('guest_token', $guest_token)->first())
-            $cart->update(['user_id' => $user->id]);
+        if ($guest_token) {
+            if ($cart = Cart::where('guest_token', $guest_token)->first())
+                $cart->update(['user_id' => $user->id]);
+
+            if ($wishlist = Wishlist::where('guest_token', $guest_token)->first())
+                $wishlist->update(['user_id' => $user->id]);
+        }
 
         // generate token after verify from user credentials
         $token = $user->createToken('user-token')->plainTextToken;

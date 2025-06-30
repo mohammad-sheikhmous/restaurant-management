@@ -15,11 +15,13 @@ return new class extends Migration {
 
             $table->boolean('full_day')->default(1);
 
+            $table->date('from_date');
+            $table->date('to_date');
+
             $table->time('from_time')->nullable();
             $table->time('to_time')->nullable();
 
-            $table->date('from_date');
-            $table->date('to_date');
+            $table->foreignId('type_id')->nullable()->constrained('reservation_types')->cascadeOnDelete();
 
             $table->string('reason')->nullable();
 

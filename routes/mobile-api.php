@@ -17,7 +17,7 @@ use App\Http\Controllers\Mobile\UserAddressController;
 use App\Http\Controllers\Mobile\WishlistController;
 use Illuminate\Support\Facades\Route;
 
-///////////////////         Authentication APIs        ///////////////////////
+/*****************        Authentication APIs        ********************/
 
 Route::controller(LoginController::class)->group(function () {
     Route::post('login', 'login');
@@ -37,7 +37,7 @@ Route::controller(OtpController::class)->group(function () {
 // Reset Password API (must be authenticated)
 Route::post('passwords/reset', [ResetPasswordController::class, 'reset']);
 
-///////////////////        End Authentication APIs        ///////////////////////
+/*****************        End Authentication APIs        ********************/
 
 Route::get('images/{path}', ImageController::class)->where('path', '.*');
 Route::get('/faqs', [FaqController::class, 'index']);

@@ -23,7 +23,10 @@ class UserController extends Controller
             ->with('wallet')
             ->paginate($limit);
 
-        return dataJson('users', (UserResource::collection($users))->response()->getData(true), 'all users');
+        $page = numberToOrdinalWord(request()->page ?? 1);
+
+        return dataJson('users', (UserResource::collection($users))->response()->getData(true),
+            "All users for {$page} page.");
     }
 
     public function show($id)
