@@ -396,7 +396,7 @@ class ReservationController extends Controller
         return $results;
     }
 
-    public function confirmTempRevs($id)
+    public function confirmTempRevs(Request $request, $id)
     {
         $revs = auth('user')->user()->reservations()
             ->where('id', $id)
@@ -406,7 +406,7 @@ class ReservationController extends Controller
         if (!$revs)
             return messageJson('Reservation not found.!', false, 404);
 
-        $revs->update(['status' => 'pending']);
+        $revs->update(['status' => 'pending', 'note' => $request->note]);
 
         return messageJson('The Reservation confirmed successfully.');
     }

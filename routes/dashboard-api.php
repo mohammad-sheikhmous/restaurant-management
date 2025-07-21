@@ -110,6 +110,7 @@ Route::middleware('auth:admin')->group(function () {
     /********************       Reservation System      *******************/
     Route::controller(ReservationTypeController::class)->prefix('reservation-types')->group(function () {
         Route::get('/', 'index');
+        Route::get('/{type}', 'show');
         Route::post('/', 'store');
         Route::post('/{type}', 'update');
         Route::delete('/{type}', 'destroy');

@@ -16,6 +16,15 @@ class ReservationTypeController extends Controller
         return dataJson('types', $types, 'Reservation Types');
     }
 
+    public function show($id)
+    {
+        $type = ReservationType::find($id);
+        if (!$type)
+            return messageJson('This type not found.!', false, 404);
+
+        return dataJson('type', $type, "Type with id: $id returned.");
+    }
+
     public function store(Request $request)
     {
         $request->validate([

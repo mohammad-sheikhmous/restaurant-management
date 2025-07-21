@@ -98,7 +98,7 @@ Route::middleware('auth:user')->group(function () {
         Route::get('/available-days', 'getAvailableDays');
         Route::get('/available-time-slots', 'getAvailableTimeSlots');
         Route::post('/temp-revs', 'createTempRevs');
-        Route::patch('/confirm-temp-revs/{id}', 'confirmTempRevs');
+        Route::post('/confirm-temp-revs/{id}', 'confirmTempRevs');
         Route::patch('/{id}/cancel', 'cancel');
         Route::get('/', 'index');
         Route::get('/{id}/edit', 'edit');
