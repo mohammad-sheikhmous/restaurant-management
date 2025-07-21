@@ -10,7 +10,7 @@ class ReservationType extends Model
     use HasTranslations;
 
     protected $fillable = [
-        'name'
+        'name', 'deposit_value'
     ];
 
     public $timestamps = false;

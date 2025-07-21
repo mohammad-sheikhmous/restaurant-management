@@ -60,7 +60,7 @@ class AttributeController extends Controller
                 return messageJson('attribute not found', false, 404);
 
             $attribute->update($request->only('name', 'type'));
-            
+
             // get deselected options to delete them
             $deselected_options = $attribute->options->filter(function ($option) use ($request) {
                 return !in_array($option->getTranslations('name'), $request->options);

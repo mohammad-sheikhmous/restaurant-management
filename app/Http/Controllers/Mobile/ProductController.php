@@ -34,9 +34,9 @@ class ProductController extends Controller
             ->latest()->with(['tags', 'wishlists'])->get();
 
         if ($products->isEmpty())
-            return messageJson('no products found', false, 404);
+            return messageJson('No products found', false, 404);
 
-        return dataJson('products', ProductResource::collection($products), 'searched products');
+        return dataJson('products', ProductResource::collection($products), 'Searched products');
     }
 
     public function getProductsForHome()
@@ -69,15 +69,15 @@ class ProductController extends Controller
             'most_ordered_products' => ProductResource::collection($most_ordered_products),
             'latest_products' => ProductResource::collection($latest_products),
             'recommended_products' => ProductResource::collection($recommended_products)
-        ], 'home items');
+        ], 'Home items');
     }
 
     public function show($id)
     {
         $product = Product::absolutelyActive()->with(['options.attribute'])->find($id);
         if (!$product)
-            return messageJson('product not found', false, 404);
+            return messageJson('Product not found', false, 404);
 
-        return dataJson('product', ProductResource::make($product), 'show product details');
+        return dataJson('product', ProductResource::make($product), 'Show product details');
     }
 }

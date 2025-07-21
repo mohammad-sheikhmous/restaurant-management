@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\BookingPolicy;
 use App\Models\Reservation;
 use App\Models\ReservationType;
 use App\Models\Table;
@@ -18,12 +19,60 @@ class ReservationSeeder extends Seeder
     public function run(): void
     {
         $types = [
-            ['name' => ['en' => 'indoor', 'ar' => 'داخلي']],
-            ['name' => ['en' => 'outdoor', 'ar' => 'خارجي']],
+            ['name' => ['en' => 'indoor', 'ar' => 'داخلي'], 'deposit_value' => 500],
+            ['name' => ['en' => 'outdoor', 'ar' => 'خارجي'], 'deposit_value' => 800],
         ];
 
         foreach ($types as $type)
             ReservationType::create($type);
+
+        BookingPolicy::create([
+            'max_revs_duration_hours' => 8,
+            'max_pre_booking_days' => 45,
+            'min_pre_booking_minutes' => 240,
+            'revs_cancellability' => 1,
+            'min_revs_cancellability_minutes' => 45,
+            'revs_cancellability_ratio' => 10,
+            'revs_modifiability' => 1,
+            'min_revs_modifiability_minutes' => 60,
+            'revs_modifiability_ratio' => 10,
+            'table_combinability' => 1,
+            'manual_confirmation' => 1,
+            'min_people' => 2,
+            'max_people' => 20,
+            'interval_minutes' => 30,
+            'auto_no_show_minutes' => 20,
+            'deposit_system' => 1,
+            'deposit_value' => 500,
+            'num_of_person_per_deposit' => 2,
+            'time_per_deposit' => 60,
+            'deposit_customizability' => 1,
+            'explanatory_notes' => [
+                'en' => 'Welcome to our restaurant, dear guests.
+Restaurant Policies :
+- Children are welcome from 10:00 AM to 10:00 PM.
+- Indoor seating is 500 SY and outdoor seating is 800 SY.
+- The deposit will be refunded upon arrival.
+- You can cancel your reservation before the specified time.
+- You can change the number of people or the reservation time before the specified time.
+- Smoking is prohibited.
+- If you miss your reservation by 20 minutes or cancel your reservation before the specified time,
+    you will lose your deposit.
+- One deposit is for two people for 60 minutes. Whenever the number of people or time doubles, the deposit will double as well.
+    ',
+                'ar' => 'اهلا بكم في مطعمنا ضيوفنا الاعزاء
+سياسات المطعم:
+- الاطفال من الساعة العاشرة صباحا للساعة عاسرة مساءا
+ - قيمة العربون للداخلي ٥٠٠ وولخارجي ٨٠٠
+- قيمة العربون سيتم استردادها بعد الحضور
+- يمكنك الغاء الحجز قبل الفترة المحددة
+- يمكنك تعديل عدد الاشخاص او توقيت الحجز قبل الفترة المحددة
+- التدخين ممنوع
+- في حال تخلفك عن توقيت الحجز عشرين دقيقة او في حال الغاءك الحجز قبل الفترة المحددة فأن ذلك سيؤدي الى خسارتك للعربون
+- العربون الواحد يكون لكون لشخصان ولمدة ٦٠ دقيقة وكلما تتضاعف عدد الاشخاص أو الوقت فأن ذلك سيؤدي الي تضاعف العربون ايضا
+'
+            ],
+        ]);
 
         $tables = [
             [
@@ -88,11 +137,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2024-10-02',
-            'res_time' => '10:00',
-            'res_duration' => '02:00',
+            'revs_date' => '2024-10-02',
+            'revs_time' => '10:00',
+            'revs_duration' => '02:00',
             'guests_count' => 4,
             'status' => 'completed',
+            'deposit_value' => 500,
+            'deposit_status' => 'refunded',
             'note' => 'I want the best table.',
         ];
         $reservation_table[] = [
@@ -112,11 +163,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2024-11-02',
-            'res_time' => '17:00',
-            'res_duration' => '01:00',
+            'revs_date' => '2024-11-02',
+            'revs_time' => '17:00',
+            'revs_duration' => '01:00',
             'guests_count' => 6,
             'status' => 'completed',
+            'deposit_value' => 500,
+            'deposit_status' => 'refunded',
         ];
         $reservation_table[] = [
             'reservation_id' => 2,
@@ -144,11 +197,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2024-12-02',
-            'res_time' => '20:00',
-            'res_duration' => '01:30',
+            'revs_date' => '2024-12-02',
+            'revs_time' => '20:00',
+            'revs_duration' => '01:30',
             'guests_count' => 4,
             'status' => 'cancelled',
+            'deposit_value' => 500,
+            'deposit_status' => 'refunded',
         ];
         $reservation_table[] = [
             'reservation_id' => 3,
@@ -167,11 +222,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2024-12-02',
-            'res_time' => '11:00',
-            'res_duration' => '02:00',
+            'revs_date' => '2024-12-02',
+            'revs_time' => '11:00',
+            'revs_duration' => '02:00',
             'guests_count' => 4,
             'status' => 'completed',
+            'deposit_value' => 500,
+            'deposit_status' => 'refunded',
             'note' => 'I want the best table.',
         ];
         $reservation_table[] = [
@@ -191,11 +248,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2024-12-02',
-            'res_time' => '15:00',
-            'res_duration' => '05:00',
+            'revs_date' => '2024-12-02',
+            'revs_time' => '15:00',
+            'revs_duration' => '05:00',
             'guests_count' => 8,
             'status' => 'rejected',
+            'deposit_value' => 500,
+            'deposit_status' => 'refunded',
         ];
         $reservation_table[] = [
             'reservation_id' => 5,
@@ -214,11 +273,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2025-01-02',
-            'res_time' => '18:00',
-            'res_duration' => '02:00',
+            'revs_date' => '2025-01-02',
+            'revs_time' => '18:00',
+            'revs_duration' => '02:00',
             'guests_count' => 14,
             'status' => 'rejected',
+            'deposit_value' => 500,
+            'deposit_status' => 'refunded',
         ];
         $reservation_table[] = [
             'reservation_id' => 6,
@@ -246,11 +307,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2025-01-06',
-            'res_time' => '17:30',
-            'res_duration' => '01:00',
+            'revs_date' => '2025-01-06',
+            'revs_time' => '17:30',
+            'revs_duration' => '01:00',
             'guests_count' => 3,
             'status' => 'completed',
+            'deposit_value' => 500,
+            'deposit_status' => 'refunded',
         ];
         $reservation_table[] = [
             'reservation_id' => 7,
@@ -269,11 +332,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2025-01-20',
-            'res_time' => '12:15',
-            'res_duration' => '01:15',
+            'revs_date' => '2025-01-20',
+            'revs_time' => '12:15',
+            'revs_duration' => '01:15',
             'guests_count' => 2,
             'status' => 'no_show',
+            'deposit_value' => 500,
+            'deposit_status' => 'forfeited',
         ];
         $reservation_table[] = [
             'reservation_id' => 8,
@@ -292,11 +357,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2025-02-02',
-            'res_time' => '15:00',
-            'res_duration' => '02:00',
+            'revs_date' => '2025-02-02',
+            'revs_time' => '15:00',
+            'revs_duration' => '02:00',
             'guests_count' => 8,
             'status' => 'no_show',
+            'deposit_value' => 500,
+            'deposit_status' => 'forfeited',
         ];
         $reservation_table[] = [
             'reservation_id' => 9,
@@ -324,11 +391,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2025-02-12',
-            'res_time' => '12:00',
-            'res_duration' => '01:00',
+            'revs_date' => '2025-02-12',
+            'revs_time' => '12:00',
+            'revs_duration' => '01:00',
             'guests_count' => 5,
             'status' => 'completed',
+            'deposit_value' => 500,
+            'deposit_status' => 'refunded',
         ];
         $reservation_table[] = [
             'reservation_id' => 10,
@@ -347,11 +416,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2024-02-22',
-            'res_time' => '18:00',
-            'res_duration' => '00:30',
+            'revs_date' => '2024-02-22',
+            'revs_time' => '18:00',
+            'revs_duration' => '00:30',
             'guests_count' => 7,
             'status' => 'rejected',
+            'deposit_value' => 500,
+            'deposit_status' => 'refunded',
         ];
         $reservation_table[] = [
             'reservation_id' => 11,
@@ -370,11 +441,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2024-02-24',
-            'res_time' => '19:00',
-            'res_duration' => '01:15',
+            'revs_date' => '2024-02-24',
+            'revs_time' => '19:00',
+            'revs_duration' => '01:15',
             'guests_count' => 6,
             'status' => 'cancelled',
+            'deposit_value' => 500,
+            'deposit_status' => 'forfeited',
         ];
         $reservation_table[] = [
             'reservation_id' => 12,
@@ -402,11 +475,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2025-03-02',
-            'res_time' => '19:00',
-            'res_duration' => '01:00',
+            'revs_date' => '2025-03-02',
+            'revs_time' => '19:00',
+            'revs_duration' => '01:00',
             'guests_count' => 4,
             'status' => 'completed',
+            'deposit_value' => 500,
+            'deposit_status' => 'refunded',
         ];
         $reservation_table[] = [
             'reservation_id' => 13,
@@ -425,11 +500,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2025-02-27',
-            'res_time' => '18:00',
-            'res_duration' => '01:30',
+            'revs_date' => '2025-02-27',
+            'revs_time' => '18:00',
+            'revs_duration' => '01:30',
             'guests_count' => 6,
             'status' => 'completed',
+            'deposit_value' => 500,
+            'deposit_status' => 'refunded',
         ];
         $reservation_table[] = [
             'reservation_id' => 14,
@@ -457,11 +534,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2025-03-12',
-            'res_time' => '17:00',
-            'res_duration' => '04:00',
+            'revs_date' => '2025-03-12',
+            'revs_time' => '17:00',
+            'revs_duration' => '04:00',
             'guests_count' => 5,
             'status' => 'rejected',
+            'deposit_value' => 500,
+            'deposit_status' => 'refunded',
         ];
         $reservation_table[] = [
             'reservation_id' => 15,
@@ -480,11 +559,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2025-05-12',
-            'res_time' => '19:00',
-            'res_duration' => '03:00',
+            'revs_date' => '2025-05-12',
+            'revs_time' => '19:00',
+            'revs_duration' => '03:00',
             'guests_count' => 8,
             'status' => 'completed',
+            'deposit_value' => 500,
+            'deposit_status' => 'refunded',
         ];
         $reservation_table[] = [
             'reservation_id' => 16,
@@ -503,11 +584,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2025-05-22',
-            'res_time' => '20:00',
-            'res_duration' => '02:00',
+            'revs_date' => '2025-05-22',
+            'revs_time' => '20:00',
+            'revs_duration' => '02:00',
             'guests_count' => 2,
             'status' => 'completed',
+            'deposit_value' => 500,
+            'deposit_status' => 'refunded',
         ];
         $reservation_table[] = [
             'reservation_id' => 17,
@@ -526,11 +609,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2025-06-02',
-            'res_time' => '11:00',
-            'res_duration' => '00:30',
+            'revs_date' => '2025-06-02',
+            'revs_time' => '11:00',
+            'revs_duration' => '00:30',
             'guests_count' => 2,
             'status' => 'cancelled',
+            'deposit_value' => 500,
+            'deposit_status' => 'refunded',
         ];
         $reservation_table[] = [
             'reservation_id' => 18,
@@ -549,11 +634,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2025-06-02',
-            'res_time' => '17:00',
-            'res_duration' => '00:30',
+            'revs_date' => '2025-06-02',
+            'revs_time' => '17:00',
+            'revs_duration' => '00:30',
             'guests_count' => 2,
             'status' => 'completed',
+            'deposit_value' => 500,
+            'deposit_status' => 'refunded',
         ];
         $reservation_table[] = [
             'reservation_id' => 19,
@@ -572,11 +659,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2025-06-12',
-            'res_time' => '18:00',
-            'res_duration' => '01:30',
+            'revs_date' => '2025-06-12',
+            'revs_time' => '18:00',
+            'revs_duration' => '01:30',
             'guests_count' => 4,
             'status' => 'completed',
+            'deposit_value' => 500,
+            'deposit_status' => 'refunded',
         ];
         $reservation_table[] = [
             'reservation_id' => 20,
@@ -595,11 +684,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2025-06-17',
-            'res_time' => '18:00',
-            'res_duration' => '04:30',
+            'revs_date' => '2025-06-17',
+            'revs_time' => '18:00',
+            'revs_duration' => '04:30',
             'guests_count' => 9,
             'status' => 'completed',
+            'deposit_value' => 500,
+            'deposit_status' => 'refunded',
         ];
         $reservation_table[] = [
             'reservation_id' => 21,
@@ -618,11 +709,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2025-06-24',
-            'res_time' => '20:00',
-            'res_duration' => '01:30',
+            'revs_date' => '2025-06-24',
+            'revs_time' => '20:00',
+            'revs_duration' => '01:30',
             'guests_count' => 3,
             'status' => 'cancelled',
+            'deposit_value' => 500,
+            'deposit_status' => 'forfeited',
         ];
         $reservation_table[] = [
             'reservation_id' => 22,
@@ -641,11 +734,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2025-06-29',
-            'res_time' => '18:00',
-            'res_duration' => '01:30',
+            'revs_date' => '2025-06-29',
+            'revs_time' => '18:00',
+            'revs_duration' => '01:30',
             'guests_count' => 4,
             'status' => 'accepted',
+            'deposit_value' => 500,
+            'deposit_status' => 'pending',
         ];
         $reservation_table[] = [
             'reservation_id' => 23,
@@ -664,11 +759,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2025-06-29',
-            'res_time' => '11:00',
-            'res_duration' => '01:00',
+            'revs_date' => '2025-06-29',
+            'revs_time' => '11:00',
+            'revs_duration' => '01:00',
             'guests_count' => 6,
             'status' => 'accepted',
+            'deposit_value' => 500,
+            'deposit_status' => 'pending',
         ];
         $reservation_table[] = [
             'reservation_id' => 24,
@@ -696,11 +793,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2025-06-30',
-            'res_time' => '17:00',
-            'res_duration' => '02:30',
+            'revs_date' => '2025-06-30',
+            'revs_time' => '17:00',
+            'revs_duration' => '02:30',
             'guests_count' => 7,
             'status' => 'accepted',
+            'deposit_value' => 500,
+            'deposit_status' => 'pending',
         ];
         $reservation_table[] = [
             'reservation_id' => 25,
@@ -719,11 +818,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2025-07-2',
-            'res_time' => '16:00',
-            'res_duration' => '03:30',
+            'revs_date' => '2025-07-2',
+            'revs_time' => '16:00',
+            'revs_duration' => '03:30',
             'guests_count' => 4,
             'status' => 'cancelled',
+            'deposit_value' => 500,
+            'deposit_status' => 'refunded',
         ];
         $reservation_table[] = [
             'reservation_id' => 26,
@@ -742,11 +843,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2025-07-10',
-            'res_time' => '17:30',
-            'res_duration' => '00:30',
+            'revs_date' => '2025-07-10',
+            'revs_time' => '17:30',
+            'revs_duration' => '00:30',
             'guests_count' => 5,
             'status' => 'accepted',
+            'deposit_value' => 500,
+            'deposit_status' => 'pending',
         ];
         $reservation_table[] = [
             'reservation_id' => 27,
@@ -765,11 +868,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2025-07-13',
-            'res_time' => '17:00',
-            'res_duration' => '01:00',
+            'revs_date' => '2025-07-13',
+            'revs_time' => '17:00',
+            'revs_duration' => '01:00',
             'guests_count' => 5,
             'status' => 'accepted',
+            'deposit_value' => 500,
+            'deposit_status' => 'pending',
         ];
         $reservation_table[] = [
             'reservation_id' => 28,
@@ -797,11 +902,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2025-07-14',
-            'res_time' => '19:45',
-            'res_duration' => '02:15',
+            'revs_date' => '2025-07-14',
+            'revs_time' => '19:45',
+            'revs_duration' => '02:15',
             'guests_count' => 8,
             'status' => 'accepted',
+            'deposit_value' => 500,
+            'deposit_status' => 'pending',
         ];
         $reservation_table[] = [
             'reservation_id' => 29,
@@ -820,11 +927,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2025-07-24',
-            'res_time' => '20:00',
-            'res_duration' => '01:30',
+            'revs_date' => '2025-07-24',
+            'revs_time' => '20:00',
+            'revs_duration' => '01:30',
             'guests_count' => 8,
             'status' => 'pending',
+            'deposit_value' => 500,
+            'deposit_status' => 'pending',
         ];
         $reservation_table[] = [
             'reservation_id' => 30,
@@ -852,11 +961,13 @@ class ReservationSeeder extends Seeder
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'res_date' => '2025-07-19',
-            'res_time' => '18:00',
-            'res_duration' => '01:00',
+            'revs_date' => '2025-07-19',
+            'revs_time' => '18:00',
+            'revs_duration' => '01:00',
             'guests_count' => 4,
             'status' => 'pending',
+            'deposit_value' => 500,
+            'deposit_status' => 'pending',
         ];
         $reservation_table[] = [
             'reservation_id' => 31,

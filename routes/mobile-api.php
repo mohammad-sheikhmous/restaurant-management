@@ -12,6 +12,7 @@ use App\Http\Controllers\Mobile\CategoryController;
 use App\Http\Controllers\Mobile\DeliveryZoneController;
 use App\Http\Controllers\Mobile\OrderController;
 use App\Http\Controllers\Mobile\ProductController;
+use App\Http\Controllers\Mobile\ReservationController;
 use App\Http\Controllers\Mobile\TagController;
 use App\Http\Controllers\Mobile\UserAddressController;
 use App\Http\Controllers\Mobile\WishlistController;
@@ -83,7 +84,7 @@ Route::middleware('auth:user')->group(function () {
         Route::post('/', 'store');
         Route::patch('/{id}', 'cancel');
         Route::delete('/{id}', 'destroy');
-        Route::get('/reorder/{id}','reorder');
+        Route::get('/reorder/{id}', 'reorder');
     });
 
     Route::controller(UserAddressController::class)->prefix('addresses')->group(function () {
@@ -91,5 +92,17 @@ Route::middleware('auth:user')->group(function () {
         Route::get('/{id}', 'show');
         Route::post('/', 'store');
         Route::delete('/{id}', 'destroy');
+    });
+
+    Route::controller(ReservationController::class)->prefix('reservations')->group(function () {
+        Route::get('/available-days', 'getAvailableDays');
+        Route::get('/available-time-slots', 'getAvailableTimeSlots');
+        Route::post('/temp-revs', 'createTempRevs');
+        Route::patch('/confirm-temp-revs/{id}', 'confirmTempRevs');
+        Route::patch('/{id}/cancel', 'cancel');
+        Route::get('/', 'index');
+        Route::get('/{id}/edit', 'edit');
+        Route::post('/{id}', 'update');
+        Route::get('/{id}', 'show');
     });
 });

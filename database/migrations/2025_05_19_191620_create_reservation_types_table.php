@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create('reservation_types', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->decimal('deposit_value')->default(0);
         });
     }
 

@@ -28,27 +28,27 @@ class TableController extends Controller
             $table = Table::whereId($id)->with(['type'])
                 ->select('tables.*',
                     DB::raw("(
-                    select concat(res_date, ' ',
-                        time_format(res_time, '%H:%i'),
+                    select concat(revs_date, ' ',
+                        time_format(revs_time, '%H:%i'),
                         '-',
-                        time_format(addtime(res_time, res_duration), '%H:%i')
-                    )
+                        time_format(addtime(revs_time, revs_duration), '%H:%i')
+                        )
                     from reservations r join reservation_table rt
                     on r.id = rt.reservation_id
                     where rt.table_id = tables.id and r.status = 'accepted'
-                    order by res_date, res_time
+                    order by revs_date, revs_time
                     limit 1
                 ) next_reservation_date"),
                     DB::raw("(
-                    select concat(res_date, ' ',
-                        time_format(res_time, '%H:%i'),
+                    select concat(revs_date, ' ',
+                        time_format(revs_time, '%H:%i'),
                         '-',
-                        time_format(addtime(res_time, res_duration), '%H:%i')
+                        time_format(addtime(revs_time, revs_duration), '%H:%i')
                     )
                     from reservations r join reservation_table rt
                     on r.id = rt.reservation_id
                     where rt.table_id = tables.id and r.status = 'accepted'
-                    order by res_date desc, res_time desc
+                    order by revs_date desc, revs_time desc
                     limit 1
                 ) last_reservation_date"))
                 ->withCount(['reservations as curr_reservations_count' => function ($query) {

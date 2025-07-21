@@ -7,7 +7,9 @@ use App\Http\Controllers\Dashboard\Auth\ResetPasswordController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DeliveryZoneController;
 use App\Http\Controllers\Dashboard\FaqController;
+use App\Http\Controllers\Dashboard\ReservationSystem\BookingPolicyController;
 use App\Http\Controllers\Dashboard\ReservationSystem\ClosedPeriodController;
+use App\Http\Controllers\Dashboard\ReservationSystem\ReservationController;
 use App\Http\Controllers\Dashboard\ReservationSystem\ReservationTypeController;
 use App\Http\Controllers\Dashboard\ReservationSystem\TableController;
 use App\Http\Controllers\Dashboard\ReservationSystem\WorkingShiftController;
@@ -106,7 +108,12 @@ Route::middleware('auth:admin')->group(function () {
     });
 
     /********************       Reservation System      *******************/
-    Route::get('reservation-types', [ReservationTypeController::class, 'index']);
+    Route::controller(ReservationTypeController::class)->prefix('reservation-types')->group(function () {
+        Route::get('/', 'index');
+        Route::post('/', 'store');
+        Route::post('/{type}', 'update');
+        Route::delete('/{type}', 'destroy');
+    });
 
     Route::controller(TableController::class)->prefix('tables')->group(function () {
         Route::get('/', 'index');
@@ -131,5 +138,17 @@ Route::middleware('auth:admin')->group(function () {
         Route::post('/', 'store');
         Route::post('/{period}', 'update');
         Route::delete('/{period}', 'destroy');
+    });
+
+    Route::controller(BookingPolicyController::class)->prefix('booking-policies')->group(function () {
+        Route::get('/', 'index');
+        Route::post('/', 'update');
+    });
+
+    Route::controller(ReservationController::class)->prefix('reservations')->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{reservation}', 'show');
+        Route::patch('/{reservation}', 'changeStatus');
+        Route::delete('/{reservation}', 'destroy');
     });
 });
