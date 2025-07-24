@@ -16,8 +16,9 @@ class TableResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'table_num' => $this->table_num,
-            'type' => $request->for == 'showing' ? $this->type->name : ['id' => $this->type->id,'name' => $this->type->name],
+            'type' => $request->for == 'showing' ? $this->type->name : ['id' => $this->type->id, 'name' => $this->type->name],
             'seats_count' => $this->seats_count,
             'activation' => $this->activation,
             'occupancy_now' => $this->whenHas('active_reservation_exists',
