@@ -25,7 +25,7 @@ class UserRequest extends FormRequest
         return [
             'first_name' => [$this->is('*/register') ? 'required' : 'sometimes', 'string', 'max:50'],
             'last_name' => [$this->is('*/register') ? 'required' : 'sometimes', 'string', 'max:50'],
-            'mobile' => ['nullable', 'string', 'unique:users,mobile,' . $this->user('user')->id, 'max:20', 'regex:/^09[0-9]{8}$/'],
+            'mobile' => ['nullable', 'string', 'unique:users,mobile,' . $this->user('user')?->id, 'max:20', 'regex:/^09[0-9]{8}$/'],
             'email' => [$this->is('*/register') ? 'required' : 'sometimes', 'email', 'max:70', 'unique:users,email'],
             'image' => ['nullable', 'image', 'mimes:jpeg,gif,svg,png,jpg'],
             'birthdate' => ['nullable', 'date', 'before:now'],

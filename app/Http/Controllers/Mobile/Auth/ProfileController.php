@@ -23,9 +23,13 @@ class ProfileController extends Controller
 
         $data = $request->except('status', 'password', 'email', 'image');
 
-        if ($request->hasFile('image'))
-            $data['image'] = updateImage($request->last_name ?? $user->last_name, $user->image,
-                $request->image, 'users');
+        if ($request->hasFile('image')) {
+            if ($user->image)
+                $data['image'] = updateImage($request->last_name ?? $user->last_name, $user->image,
+                    $request->image, 'users');
+            else
+                $data['image'] = storeImage($request->last_name ?? $user->last_name, $request->image, 'users');
+        }
 
         $user->update($data);
 
