@@ -74,8 +74,11 @@ Route::controller(CartController::class)->prefix('carts')->group(function () {
 
 Route::middleware('auth:user')->group(function () {
 
-    Route::get('/profile', [ProfileController::class, 'show']);
-    Route::post('/profile', [ProfileController::class, 'update']);
+    Route::controller(ProfileController::class)->prefix('profile')->group(function () {
+        Route::get('/', 'show');
+        Route::post('/', 'update');
+        Route::post('/update-image', 'updateUserImage');
+    });
 
     Route::controller(OrderController::class)->prefix('orders')->group(function () {
         Route::get('/', 'index');

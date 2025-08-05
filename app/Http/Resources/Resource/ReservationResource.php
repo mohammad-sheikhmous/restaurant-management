@@ -53,10 +53,11 @@ class ReservationResource extends JsonResource
 
             return $data;
         } else {
-            $booking_policies = BookingPolicy::first();
+            $booking_policies = $this->booking_policies;
             $active_direction = $request->is('api/reservations/*');
             $active_status = in_array($this->status, ['not_confirmed', 'pending', 'accepted']);
             $temp_status = in_array($this->status, ['not_confirmed', 'pending']);
+//            $time = $this->created_at->addMinutes(5)->diff(now())->format('i:s');
 
             $data = [
                 'id' => $this->id,
@@ -67,6 +68,13 @@ class ReservationResource extends JsonResource
                 'revs_duration' => Carbon::parse($this->revs_duration)->format('H:i'),
                 'guests_count' => $this->guests_count,
                 'status' => $this->status,
+                'remaining_confirmation_time'=>$this->when(
+                    $this->status == 'not_confirmed',
+                    $this->created_at->copy()
+                        ->addMinutes($booking_policies->temp_revs_conf_minutes)
+                        ->diff(now())
+                        ->format('%i:%s')
+                ),
                 'deposit_value' => $this->deposit_value,
                 'deposit_status' => $this->when($active_direction, $this->deposit_status),
                 'note' => $this->when($active_direction, $this->note),

@@ -35,6 +35,7 @@ class BookingPolicyController extends Controller
                 'revs_modifiability_ratio' => $request->revs_modifiability ? $request->revs_modifiability_ratio : null,
                 'table_combinability' => $request->table_combinability,
                 'manual_confirmation' => $request->manual_confirmation,
+                'temp_revs_conf_minutes' => $request->temp_revs_conf_minutes,
                 'min_people' => $request->min_people,
                 'max_people' => $request->max_people,
                 'interval_minutes' => $request->interval_minutes,

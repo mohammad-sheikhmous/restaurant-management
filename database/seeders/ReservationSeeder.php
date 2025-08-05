@@ -38,6 +38,7 @@ class ReservationSeeder extends Seeder
             'revs_modifiability_ratio' => 10,
             'table_combinability' => 1,
             'manual_confirmation' => 1,
+            'temp_revs_conf_minutes' => 5,
             'min_people' => 2,
             'max_people' => 20,
             'interval_minutes' => 30,
@@ -137,7 +138,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2024-10-02',
+            'revs_date' => now()->subDays(185)->format('Y-m-d'),
             'revs_time' => '10:00',
             'revs_duration' => '02:00',
             'guests_count' => 4,
@@ -163,7 +164,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2024-11-02',
+            'revs_date' => now()->subDays(180)->format('Y-m-d'),
             'revs_time' => '17:00',
             'revs_duration' => '01:00',
             'guests_count' => 6,
@@ -197,7 +198,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2024-12-02',
+            'revs_date' => now()->subDays(182)->format('Y-m-d'),
             'revs_time' => '20:00',
             'revs_duration' => '01:30',
             'guests_count' => 4,
@@ -222,7 +223,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2024-12-02',
+            'revs_date' => now()->subDays(174)->format('Y-m-d'),
             'revs_time' => '11:00',
             'revs_duration' => '02:00',
             'guests_count' => 4,
@@ -248,7 +249,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2024-12-02',
+            'revs_date' => now()->subDays(168)->format('Y-m-d'),
             'revs_time' => '15:00',
             'revs_duration' => '05:00',
             'guests_count' => 8,
@@ -273,7 +274,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2025-01-02',
+            'revs_date' => now()->subDays(160)->format('Y-m-d'),
             'revs_time' => '18:00',
             'revs_duration' => '02:00',
             'guests_count' => 14,
@@ -307,7 +308,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2025-01-06',
+            'revs_date' => now()->subDays(171)->format('Y-m-d'),
             'revs_time' => '17:30',
             'revs_duration' => '01:00',
             'guests_count' => 3,
@@ -332,7 +333,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2025-01-20',
+            'revs_date' => now()->subDays(157)->format('Y-m-d'),
             'revs_time' => '12:15',
             'revs_duration' => '01:15',
             'guests_count' => 2,
@@ -357,7 +358,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2025-02-02',
+            'revs_date' => now()->subDays(145)->format('Y-m-d'),
             'revs_time' => '15:00',
             'revs_duration' => '02:00',
             'guests_count' => 8,
@@ -391,7 +392,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2025-02-12',
+            'revs_date' => now()->subDays(135)->format('Y-m-d'),
             'revs_time' => '12:00',
             'revs_duration' => '01:00',
             'guests_count' => 5,
@@ -416,7 +417,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2024-02-22',
+            'revs_date' => now()->subDays(125)->format('Y-m-d'),
             'revs_time' => '18:00',
             'revs_duration' => '00:30',
             'guests_count' => 7,
@@ -441,7 +442,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2024-02-24',
+            'revs_date' => now()->subDays(123)->format('Y-m-d'),
             'revs_time' => '19:00',
             'revs_duration' => '01:15',
             'guests_count' => 6,
@@ -475,7 +476,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2025-03-02',
+            'revs_date' => now()->subDays(145)->format('Y-m-d'),
             'revs_time' => '19:00',
             'revs_duration' => '01:00',
             'guests_count' => 4,
@@ -500,7 +501,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2025-02-27',
+            'revs_date' => now()->subDays(120)->format('Y-m-d'),
             'revs_time' => '18:00',
             'revs_duration' => '01:30',
             'guests_count' => 6,
@@ -534,7 +535,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2025-03-12',
+            'revs_date' => now()->subDays(105)->format('Y-m-d'),
             'revs_time' => '17:00',
             'revs_duration' => '04:00',
             'guests_count' => 5,
@@ -559,7 +560,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2025-05-12',
+            'revs_date' => now()->subDays(45)->format('Y-m-d'),
             'revs_time' => '19:00',
             'revs_duration' => '03:00',
             'guests_count' => 8,
@@ -584,7 +585,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2025-05-22',
+            'revs_date' => now()->subDays(35)->format('Y-m-d'),
             'revs_time' => '20:00',
             'revs_duration' => '02:00',
             'guests_count' => 2,
@@ -609,7 +610,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2025-06-02',
+            'revs_date' => now()->subDays(25)->format('Y-m-d'),
             'revs_time' => '11:00',
             'revs_duration' => '00:30',
             'guests_count' => 2,
@@ -634,7 +635,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2025-06-02',
+            'revs_date' => now()->subDays(25)->format('Y-m-d'),
             'revs_time' => '17:00',
             'revs_duration' => '00:30',
             'guests_count' => 2,
@@ -659,7 +660,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2025-06-12',
+            'revs_date' => now()->subDays(15)->format('Y-m-d'),
             'revs_time' => '18:00',
             'revs_duration' => '01:30',
             'guests_count' => 4,
@@ -684,7 +685,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2025-06-17',
+            'revs_date' => now()->subDays(10)->format('Y-m-d'),
             'revs_time' => '18:00',
             'revs_duration' => '04:30',
             'guests_count' => 9,
@@ -709,7 +710,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2025-06-24',
+            'revs_date' => now()->subDays(3)->format('Y-m-d'),
             'revs_time' => '20:00',
             'revs_duration' => '01:30',
             'guests_count' => 3,
@@ -734,7 +735,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2025-06-29',
+            'revs_date' => now()->addDays(2)->format('Y-m-d'),
             'revs_time' => '18:00',
             'revs_duration' => '01:30',
             'guests_count' => 4,
@@ -759,7 +760,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2025-06-29',
+            'revs_date' => now()->addDays(2)->format('Y-m-d'),
             'revs_time' => '11:00',
             'revs_duration' => '01:00',
             'guests_count' => 6,
@@ -793,7 +794,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2025-06-30',
+            'revs_date' => now()->addDays(3)->format('Y-m-d'),
             'revs_time' => '17:00',
             'revs_duration' => '02:30',
             'guests_count' => 7,
@@ -818,7 +819,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2025-07-2',
+            'revs_date' => now()->addDays(5)->format('Y-m-d'),
             'revs_time' => '16:00',
             'revs_duration' => '03:30',
             'guests_count' => 4,
@@ -843,7 +844,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2025-07-10',
+            'revs_date' => now()->addDays(13)->format('Y-m-d'),
             'revs_time' => '17:30',
             'revs_duration' => '00:30',
             'guests_count' => 5,
@@ -868,7 +869,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2025-07-13',
+            'revs_date' => now()->subDays(16)->format('Y-m-d'),
             'revs_time' => '17:00',
             'revs_duration' => '01:00',
             'guests_count' => 5,
@@ -902,7 +903,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2025-07-14',
+            'revs_date' => now()->addDays(17)->format('Y-m-d'),
             'revs_time' => '19:45',
             'revs_duration' => '02:15',
             'guests_count' => 8,
@@ -927,7 +928,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2025-07-24',
+            'revs_date' => now()->addDays(27)->format('Y-m-d'),
             'revs_time' => '20:00',
             'revs_duration' => '01:30',
             'guests_count' => 8,
@@ -961,7 +962,7 @@ Restaurant Policies :
                 'email' => $user->email,
                 'mobile' => $user->mobile
             ],
-            'revs_date' => '2025-07-19',
+            'revs_date' => now()->addDays(22)->format('Y-m-d'),
             'revs_time' => '18:00',
             'revs_duration' => '01:00',
             'guests_count' => 4,

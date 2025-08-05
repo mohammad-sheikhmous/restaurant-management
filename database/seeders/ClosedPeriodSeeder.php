@@ -61,7 +61,7 @@ class ClosedPeriodSeeder extends Seeder
             [
                 'full_day' => 0,
                 'type_id' => 2,
-                'from_date' => '2025-4-5',
+                'from_date' => '2025-04-05',
                 'to_date' => '2025-4-12',
                 'from_time' => '16:00',
                 'to_time' => '22:00',
@@ -69,16 +69,16 @@ class ClosedPeriodSeeder extends Seeder
             [
                 'full_day' => 1,
                 'type_id' => null,
-                'from_date' => '2025-7-10',
-                'to_date' => '2025-7-13',
+                'from_date' => now()->addDays(13)->format('Y-m-d'),
+                'to_date' => now()->addDays(16)->format('Y-m-d'),
                 'from_time' => null,
                 'to_time' => null,
             ],
             [
                 'full_day' => 0,
                 'type_id' => 1,
-                'from_date' => '2025-7-17',
-                'to_date' => '2025-7-17',
+                'from_date' => now()->addDays(20)->format('Y-m-d'),
+                'to_date' => now()->addDays(20)->format('Y-m-d'),
                 'from_time' => '12:30',
                 'to_time' => '20:00',
                 'reason' => [
@@ -89,8 +89,8 @@ class ClosedPeriodSeeder extends Seeder
             [
                 'full_day' => 1,
                 'type_id' => null,
-                'from_date' => '2025-07-25',
-                'to_date' => '2025-07-29',
+                'from_date' => now()->addDays(28)->format('Y-m-d'),
+                'to_date' => now()->addDays(32)->format('Y-m-d'),
                 'from_time' => null,
                 'to_time' => null,
                 'reason' => [
@@ -109,8 +109,8 @@ class ClosedPeriodSeeder extends Seeder
             [
                 'full_day' => 0,
                 'type_id' => 2,
-                'from_date' => '2025-08-10',
-                'to_date' => '2025-08-12',
+                'from_date' => now()->addDays(43)->format('Y-m-d'),
+                'to_date' => now()->addDays(45)->format('Y-m-d'),
                 'from_time' => '17:30',
                 'to_time' => '21:30',
                 'reason' => [

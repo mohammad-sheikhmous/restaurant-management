@@ -24,11 +24,11 @@ return new class extends Migration {
             $table->unsignedInteger('revs_modifiability_ratio')->nullable();
             $table->boolean('table_combinability');
             $table->boolean('manual_confirmation');
+            $table->unsignedTinyInteger('temp_revs_conf_minutes');
             $table->unsignedSmallInteger('min_people');
             $table->unsignedSmallInteger('max_people');
             $table->unsignedSmallInteger('interval_minutes');
             $table->unsignedSmallInteger('auto_no_show_minutes');
-
             $table->boolean('deposit_system');
             $table->decimal('deposit_value')->default(0);
             $table->unsignedTinyInteger('num_of_person_per_deposit')->nullable();

@@ -236,7 +236,7 @@ class ReservationController extends Controller
                 [
                     'revs_id' => $revs->id,
                     'deposit_value' => $deposit_value,
-                    'confirmation_time' => 5,
+                    'confirmation_time' => $booking_policies->temp_revs_conf_minutes,
                     'tables_count' => $revs->tables->count(),
                     'cancellation_inability_hours' =>
                         $booking_policies->revs_cancellability
@@ -401,6 +401,7 @@ class ReservationController extends Controller
         $revs = auth('user')->user()->reservations()
             ->where('id', $id)
             ->where('status', 'not_confirmed')
+            ->where('created_at', '>', now()->subMinutes())
             ->where('created_at', '>', now()->subMinutes(5))
             ->first();
         if (!$revs)
@@ -413,31 +414,60 @@ class ReservationController extends Controller
 
     public function index()
     {
+        $booking_policies = BookingPolicy::first();
+        $conf_minutes = $booking_policies->temp_revs_conf_minutes;
+
         $reservations = auth('user')->user()->reservations()
+            ->whereRaw("(
+                status != 'not_confirmed'
+                    or (status = 'not_confirmed' and created_at > DATE_SUB(NOW(), INTERVAL {$conf_minutes} MINUTE))
+            )")
             ->with('tables.type')
             ->orderBy('id', 'desc')
             ->get();
 
-        return dataJson('reservations', ReservationResource::collection($reservations));
+        return dataJson(
+            'reservations',
+            ReservationResource::collection($reservations->map(function ($revs) use ($booking_policies) {
+                $revs->booking_policies = $booking_policies;
+                return $revs;
+            })),
+            'All reservations'
+        );
     }
 
     public function show($id)
     {
+        $booking_policies = BookingPolicy::first();
+        $conf_minutes = $booking_policies->temp_revs_conf_minutes;
+
         $reservation = auth('user')->user()->reservations()
+            ->where('id', $id)
+            ->whereRaw("(
+                status != 'not_confirmed'
+                    or (status = 'not_confirmed' and created_at > DATE_SUB(NOW(), INTERVAL {$conf_minutes} MINUTE))
+            )")
             ->with('tables.type')
-            ->find($id);
+            ->first();
         if (!$reservation)
             return messageJson('Reservation not found.!', false, 404);
 
-        return dataJson('reservation', ReservationResource::make($reservation), 'Reservation details');
+        $reservation->booking_policies = $booking_policies;
+
+        return dataJson(
+            'reservation',
+            ReservationResource::make($reservation),
+            'Reservation details'
+        );
     }
 
     public function edit($id)
     {
         $reservation = auth('user')->user()->reservations()
+            ->whereId($id)
             ->whereIn('status', ['not_confirmed', 'pending', 'accepted'])
             ->with('tables.type')
-            ->find($id);
+            ->first();
         if (!$reservation)
             return messageJson('Reservation not found.!', false, 404);
 
@@ -481,9 +511,10 @@ class ReservationController extends Controller
     public function update(Request $request, $id)
     {
         $reservation = auth('user')->user()->reservations()
+            ->whreeId($id)
             ->whereIn('status', ['not_confirmed', 'pending', 'accepted'])
             ->with('tables.type')
-            ->find($id);
+            ->first();
         if (!$reservation)
             return messageJson('Reservation not found.!', false, 404);
 
@@ -583,8 +614,9 @@ class ReservationController extends Controller
     public function cancel($id)
     {
         $reservation = auth('user')->user()->reservations()
+            ->whereId($id)
             ->whereIn('status', ['not_confirmed', 'pending', 'accepted'])
-            ->find($id);
+            ->first();
         if (!$reservation)
             return messageJson('Reservation not found.!', false, 404);
 
