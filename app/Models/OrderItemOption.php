@@ -18,6 +18,8 @@ class OrderItemOption extends Model
         'option_price'
     ];
 
+    public $timestamps = false;
+
     public $translatable = [
         'option_attribute_name', 'option_name'
     ];

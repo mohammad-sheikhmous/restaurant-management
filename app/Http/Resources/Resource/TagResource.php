@@ -14,13 +14,10 @@ class TagResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $data = parent::toArray($request);
-        if (!$request->is('api/dashboard/*'))
-            $data = [
-                'id' => $this->id,
-                'name' => $this->name,
-            ];
-
-        return $data;
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'icon' => $this->when($request->is('*/dashboard/products/*') && $request->for,$this->icon)
+        ];
     }
 }

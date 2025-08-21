@@ -16,7 +16,6 @@ return [
             'pages' => 'Manage Pages',
             'comments' => 'Manage Comments',
             'menus' => 'Manage Menus',
-            'eee' => 'dd',
         ], 'ar' => [
             'categories' => 'ادارة الفئات',
             'products' => 'ادارة المنتجات',

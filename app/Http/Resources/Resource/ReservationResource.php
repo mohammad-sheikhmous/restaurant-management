@@ -2,11 +2,9 @@
 
 namespace App\Http\Resources\Resource;
 
-use App\Models\BookingPolicy;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Carbon;
-use function Termwind\parse;
 
 class ReservationResource extends JsonResource
 {

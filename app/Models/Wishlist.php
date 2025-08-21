@@ -8,8 +8,6 @@ class Wishlist extends Model
 {
     protected $fillable = ['guest_token', 'user_id'];
 
-    public $timestamps = false;
-
     public function product()
     {
         return $this->belongsTo(Product::class);

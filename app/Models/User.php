@@ -35,6 +35,12 @@ class User extends Authenticatable
         ];
     }
 
+    // Accessor for full name
+    public function getNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
     public function wallet()
     {
         return $this->hasOne(Wallet::class);
@@ -47,7 +53,7 @@ class User extends Authenticatable
 
     public function wishlistProducts()
     {
-        return $this->hasMany(Wishlist::class);
+        return $this->belongsToMany(Product::class, 'wishlists');
     }
 
     public function orders()

@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name', 100);
             $table->string('email', 100)->unique();
+            $table->string('mobile', 100)->unique()->nullable();
             $table->string('password', 100);
             $table->string('image')->nullable();
             $table->boolean('status')->default(1);

@@ -17,6 +17,8 @@ return new class extends Migration {
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
 
             $table->string('guest_token')->nullable();
+
+            $table->timestamps();
         });
     }
 

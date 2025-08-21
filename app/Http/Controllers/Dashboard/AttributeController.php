@@ -12,13 +12,25 @@ class AttributeController extends Controller
 {
     public function index()
     {
-        $attributes = Attribute::with('options')->get()->each(function ($attribute) {
-            return $attribute->mergeCasts(['name' => Translated::class])->options->each(function ($option) {
-                return $option->mergeCasts(['name' => Translated::class]);
-            });
-        });
+        request()->validate([
+            'sort_by_type' => 'nullable|in:basic,additional'
+        ]);
 
-        return dataJson('attributes', $attributes, 'all attributes');
+        $attributes = Attribute::with('options')
+            ->when(request()->sort_by_type, function ($query) {
+                return $query->where('type', request()->sort_by_type);
+            })
+            ->get()->each(function ($attribute) {
+                return $attribute->mergeCasts(['name' => Translated::class])->options->each(function ($option) {
+                    return $option->mergeCasts(['name' => Translated::class]);
+                });
+            });
+
+        $message = 'All attributes';
+        if (request()->sort_by_type)
+            $message = request()->sort_by_type == 'basic' ? 'All basic Attributes' : 'All additional Attributes';
+
+        return dataJson('attributes', $attributes, $message);
     }
 
     public function show($id)

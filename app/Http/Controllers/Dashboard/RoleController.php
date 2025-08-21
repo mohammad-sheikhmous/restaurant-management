@@ -72,7 +72,7 @@ class RoleController extends Controller implements HasMiddleware
 
         $role->delete();
 
-        return messageJson('The role deleted');
+        return messageJson('The role deleted.');
     }
 
     public function changeStatus($id)

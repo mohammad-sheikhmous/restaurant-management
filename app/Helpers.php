@@ -83,11 +83,17 @@ if (!function_exists('isPointInPolygon')) {
         $inside = false;
 
         for ($i = 0, $j = $n - 1; $i < $n; $j = $i++) {
-            $x1 = $polygon[$j]['lng'];// x-coordinate for the first point of edge
-            $y1 = $polygon[$j]['lat'];// y-coordinate for the first point of edge
-            $x2 = $polygon[$i]['lng'];// x-coordinate for the last point of edge
-            $y2 = $polygon[$i]['lat'];// y-coordinate for the last point of edge
-
+            if (is_array($polygon[$j])) {
+                $x1 = $polygon[$j]['lng'];// x-coordinate for the first point of edge
+                $y1 = $polygon[$j]['lat'];// y-coordinate for the first point of edge
+                $x2 = $polygon[$i]['lng'];// x-coordinate for the last point of edge
+                $y2 = $polygon[$i]['lat'];// y-coordinate for the last point of edge
+            } else {
+                $x1 = $polygon[$j]->lng;
+                $y1 = $polygon[$j]->lat;
+                $x2 = $polygon[$i]->lng;
+                $y2 = $polygon[$i]->lat;
+            }
             $intersect =
                 (($y2 >= $y) != ($y1 > $y))// check that the point's y-coordinate is within the edge's y-range
                 &&

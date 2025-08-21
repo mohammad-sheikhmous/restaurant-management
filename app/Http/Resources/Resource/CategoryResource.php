@@ -18,11 +18,11 @@ class CategoryResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'image' => $this->whenHas('image'),
-            'status' => $this->when($request->is('api/dashboard/*'), $this->status),
+            'status' => $this->when($request->is('api/dashboard/categories/*'), $this->status),
             'products_count' => $this->whenCounted('products'),
             'orders_count' => $this->whenCounted('orderItems'),
             'products' => ProductResource::collection($this->whenLoaded('products')),
-            'created_at' => $this->when($request->is('api/dashboard/*'), $this->created_at->format('Y-m-d')),
+            'created_at' => $this->when($request->is('api/dashboard/categories/*'), $this->created_at?->format('Y-m-d')),
         ];
     }
 }

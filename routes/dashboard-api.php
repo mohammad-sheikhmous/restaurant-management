@@ -7,6 +7,8 @@ use App\Http\Controllers\Dashboard\Auth\ResetPasswordController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DeliveryZoneController;
 use App\Http\Controllers\Dashboard\FaqController;
+use App\Http\Controllers\Dashboard\OrderController;
+use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\ReservationSystem\BookingPolicyController;
 use App\Http\Controllers\Dashboard\ReservationSystem\ClosedPeriodController;
 use App\Http\Controllers\Dashboard\ReservationSystem\ReservationController;
@@ -151,5 +153,23 @@ Route::middleware('auth:admin')->group(function () {
         Route::get('/{reservation}', 'show');
         Route::patch('/{reservation}', 'changeStatus');
         Route::delete('/{reservation}', 'destroy');
+    });
+
+    Route::controller(ProductController::class)->prefix('products')->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{product}', 'show');
+        Route::post('/{product}', 'update');
+        Route::post('/', 'store');
+        Route::delete('/{product}', 'destroy');
+        Route::patch('/{product}', 'change');
+    });
+
+    Route::controller(OrderController::class)->prefix('orders')->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{order}', 'show');
+//        Route::post('/', 'store');
+//        Route::post('/{order}', 'update');
+        Route::patch('/{order}', 'changeStatus');
+        Route::delete('/{order}', 'destroy');
     });
 });

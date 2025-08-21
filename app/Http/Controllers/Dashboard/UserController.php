@@ -69,7 +69,7 @@ class UserController extends Controller
             return messageJson('user not found', false, 404);
 
         if ($user->current_reservation_count > 0 || $user->current_orders_count > 0)
-            return messageJson('this user cannot be deleted', false, 400);
+            return messageJson('this user cannot be deleted', false, 403);
 
         $user->delete();
         return messageJson('user deleted');

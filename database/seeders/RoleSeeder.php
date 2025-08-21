@@ -27,5 +27,13 @@ class RoleSeeder extends Seeder
             'status' => 1,
         ]);
 
+        Role::create([
+            'name' => [
+                'en' => 'Delivery Driver',
+                'ar' => 'عامل التوصيل'
+            ],
+            'permissions' => ['orders'],
+            'status' => 1,
+        ]);
     }
 }

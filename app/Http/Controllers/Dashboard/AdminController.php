@@ -72,7 +72,7 @@ class AdminController extends Controller
         $admin->delete();
         deleteImage($admin->image, 'admins');
 
-        return messageJson('admin deleted');
+        return messageJson('Admin deleted.');
     }
 
     public function changeStatus($id)

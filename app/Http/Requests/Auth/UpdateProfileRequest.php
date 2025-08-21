@@ -25,7 +25,7 @@ class UpdateProfileRequest extends FormRequest
         return [
             'first_name' => ['sometimes', 'string', 'max:255'],
             'last_name' => ['sometimes', 'string', 'max:255'],
-            'mobile' => ['nullable', ''],
+            'mobile' => ['nullable'],
             'image' => 'sometimes|image|mimes:jpg,jpeg,png|max:2048',
         ];
     }

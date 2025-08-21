@@ -37,7 +37,7 @@ class CartController extends Controller
             else {
                 $guest_token = $request->header('guest_token');
                 if (!$guest_token)
-                    return messageJson('Please, add the guest token', false, 400);
+                    return messageJson('Please, add the guest token', false, 422);
 
                 $cart = Cart::firstOrCreate(['guest_token' => $guest_token]);
             }
@@ -54,7 +54,7 @@ class CartController extends Controller
                         $option->id == $request->basic_option_id
                 );
                 if (!$basic_option)
-                    return messageJson('Invalid basic option', false, 400);
+                    return messageJson('Invalid basic option', false, 422);
 
                 $base_price = $basic_option->extra_price;
                 $selected_basic_id = $basic_option->id;
@@ -175,7 +175,7 @@ class CartController extends Controller
         else {
             $guest_token = \request()->header('guest_token');
             if (!$guest_token)
-                return messageJson('Please add the guest token', false, 400);
+                return messageJson('Please add the guest token', false, 422);
 
             $cart = Cart::with(['items.product:id,status'])->where('guest_token', $guest_token)->first();
         }
@@ -203,7 +203,7 @@ class CartController extends Controller
         else {
             $guest_token = \request()->header('guest_token');
             if (!$guest_token)
-                return messageJson('Please add the guest token', false, 400);
+                return messageJson('Please add the guest token', false, 422);
 
             $cart = Cart::with(['items'])->where('guest_token', $guest_token)->first();
         }
@@ -253,7 +253,7 @@ class CartController extends Controller
             else {
                 $guest_token = $request->header('guest_token');
                 if (!$guest_token)
-                    return messageJson('Please add the guest token', false, 400);
+                    return messageJson('Please add the guest token', false, 422);
 
                 $cart = Cart::where('guest_token', $guest_token)->first();
             }
@@ -278,7 +278,7 @@ class CartController extends Controller
                         $option->id == $request->basic_option_id
                 );
                 if (!$basic_option)
-                    return messageJson('Invalid basic option', false, 400);
+                    return messageJson('Invalid basic option', false, 422);
 
                 $base_price = $basic_option->extra_price;
                 $selected_basic_id = $basic_option->id;
@@ -299,7 +299,7 @@ class CartController extends Controller
                         fn($option) => $option->attributeOption->attribute->type === 'additional' && $option->id == $id
                     );
                     if (!$additional_option)
-                        return messageJson("Invalid additional option id: $id", false, 400);
+                        return messageJson("Invalid additional option id: $id", false, 422);
 
                     $extra_price += $additional_option->extra_price;//////////////////////
                     $selected_additional_ids[] = $additional_option->id;
@@ -311,8 +311,8 @@ class CartController extends Controller
             // update the item details
             $cart_item = $item->update([
                 'base_price' => $base_price,
-                'extra_price' => $extra_price,///////////////////////
-                'total_price' => ($base_price + $extra_price) * $request->quantity,/////////////////////
+                'extra_price' => $extra_price,
+                'total_price' => ($base_price + $extra_price) * $request->quantity,
                 'quantity' => $request->quantity,
             ]);
             // ensure that the basic option not contained before
@@ -373,7 +373,7 @@ class CartController extends Controller
         else {
             $guest_token = \request()->header('guest_token');
             if (!$guest_token)
-                return messageJson('Please add the guest token', false, 400);
+                return messageJson('Please add the guest token', false, 422);
 
             $cart = Cart::where('guest_token', $guest_token)->with('items')->first();
         }

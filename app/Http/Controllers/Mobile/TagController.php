@@ -11,7 +11,7 @@ class TagController extends Controller
 {
     public function index()
     {
-        $tags = Tag::active()->get();
+        $tags = Tag::get();
 
         return dataJson('tags', TagResource::collection($tags), 'all tags');
     }

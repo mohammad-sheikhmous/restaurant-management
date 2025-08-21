@@ -20,8 +20,6 @@ return new class extends Migration {
             $table->decimal('option_price', 8, 0);
 
             $table->foreignId('order_item_id')->constrained()->cascadeOnDelete();
-
-            $table->timestamps();
         });
     }
 

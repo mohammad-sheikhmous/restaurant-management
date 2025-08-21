@@ -27,5 +27,50 @@ class AdminSeeder extends Seeder
             'status' => 1,
             'role_id' => Role::first()->id,
         ]);
+
+        $drivers = [
+            [
+                'name' => 'Ali Hesen',
+                'email' => 'ali@gmail.com',
+                'mobile' => fake()->regexify('09[345689][0-9]{7}'),
+                'password' => 'password',
+                'status' => 1,
+                'role_id' => Role::where('id', 2)->first()->id,
+            ],
+            [
+                'name' => 'Mohammad Ali',
+                'email' => 'alimoahhamd@gmail.com',
+                'mobile' => fake()->regexify('09[345689][0-9]{7}'),
+                'password' => 'password',
+                'status' => 1,
+                'role_id' => Role::where('id', 2)->first()->id,
+            ],
+            [
+                'name' => 'Ahmed Al-Shahada',
+                'email' => 'Ahmed@gmail.com',
+                'mobile' => fake()->regexify('09[345689][0-9]{7}'),
+                'password' => 'password',
+                'status' => 1,
+                'role_id' => Role::where('id', 2)->first()->id,
+            ],
+            [
+                'name' => 'Abdullah Al-Hussien',
+                'email' => 'Abdullah@gmail.com',
+                'mobile' => fake()->regexify('09[345689][0-9]{7}'),
+                'password' => 'password',
+                'status' => 1,
+                'role_id' => Role::where('id', 2)->first()->id,
+            ],
+            [
+                'name' => 'Ronnie Jean',
+                'email' => 'Ronnie@gmail.com',
+                'mobile' => fake()->regexify('09[345689][0-9]{7}'),
+                'password' => 'password',
+                'status' => 1,
+                'role_id' => Role::where('id', 2)->first()->id,
+            ],
+        ];
+
+        Admin::insert($drivers);
     }
 }

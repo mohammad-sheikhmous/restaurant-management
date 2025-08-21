@@ -249,7 +249,7 @@ class OrderController extends Controller
             ])->get();
         if ($orders->isEmpty())
             return messageJson('Orders not found yet.', false, 404);
-//return $orders;
+
         return dataJson('orders', OrderResource::collection($orders), 'All orders');
     }
 
@@ -290,7 +290,7 @@ class OrderController extends Controller
         return messageJson('Order deleted successfully');
     }
 
-    public function reorder($id)
+    public function rerder($id)
     {
         try {
             $user = auth('user')->user();

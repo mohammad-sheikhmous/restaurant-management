@@ -34,7 +34,6 @@ return new class extends Migration {
             $table->decimal('final_price', 8, 0)->storedAs("total_price + delivery_fee - discount");
 
             $table->time('estimated_receiving_time')->nullable();
-            $table->time('receiving_time')->nullable();
 
             $table->json('notes')->nullable();
 
