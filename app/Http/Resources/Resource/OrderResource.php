@@ -51,8 +51,8 @@ class   OrderResource extends JsonResource
                 'final_price' => $this->final_price,
                 'delivery_driver' => $this->when($indexDirection, $this->receiving_method != 'delivery' ? 'not found' :
                     (
-                    in_array($this->status, ['pending', 'cancelled', 'rejected','picked_up']) ?
-                        'not specified'. ($this->status == 'pending' ? ' yet' : '') :
+                    in_array($this->status, ['pending', 'cancelled', 'rejected', 'picked_up']) ?
+                        'not specified' . ($this->status == 'pending' ? ' yet' : '') :
                         ($this->deliveryDriver->name ?? $this->delivery_driver_data->name)
                     )
                 ),
@@ -77,6 +77,7 @@ class   OrderResource extends JsonResource
                 ),
                 'estimated_receiving_time' => $this->estimated_receiving_time?->format('h:i a') ?? 'not specified yet',
                 'created_at' => $this->created_at->format('Y-m-d h:i a'),
+                'order_items' => OrderItemResource::collection($this->whenLoaded('items')),
                 'notes' => $this->when($showDirection, $this->notes),
             ];
 

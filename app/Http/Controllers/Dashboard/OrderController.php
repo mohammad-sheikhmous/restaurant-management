@@ -30,7 +30,9 @@ class OrderController extends Controller
         $order = Order::with([
             'user:id,first_name,last_name,mobile,email',
             'deliveryDriver:id,name,mobile',
-            'statusLogs.changer:id,name'
+            'statusLogs.changer:id,name',
+            'items.itemOptions.productAttributeOption.attributeOption',
+            'items.product'
         ])
             ->where('id', $id)
             ->first();
@@ -55,7 +57,7 @@ class OrderController extends Controller
 
         $order->delete();
 
-        return messageJson('Order deleted successfully.' );
+        return messageJson('Order deleted successfully.');
     }
 
     public function changeStatus($id)

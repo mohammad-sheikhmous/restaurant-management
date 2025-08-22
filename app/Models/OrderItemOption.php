@@ -23,4 +23,9 @@ class OrderItemOption extends Model
     public $translatable = [
         'option_attribute_name', 'option_name'
     ];
+
+    public function productAttributeOption()
+    {
+        return $this->belongsTo(ProductAttributeOption::class);
+    }
 }
