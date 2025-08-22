@@ -14,7 +14,7 @@ class OrderObserver
     {
         // event for creating order number
         $order->update([
-            'order_number' => strtoupper(substr(auth('user')->user()->first_name, -2)) . '-' .
+            'order_number' => strtoupper(substr($order->user->first_name, -2)) . '-' .
                 str_pad($order->id, 8, rand(1000000, 9999999), STR_PAD_LEFT),
         ]);
     }

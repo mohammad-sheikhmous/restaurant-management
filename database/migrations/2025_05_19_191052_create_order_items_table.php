@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->json('product_data')->nullable();
             $table->unsignedInteger('quantity');
             $table->decimal('base_price', 8, 0);
-            $table->decimal('extra_price', 8, 0);
+            $table->decimal('extra_price', 8, 0)->default(0);
             $table->decimal('total_price', 8, 0);
 
             $table->timestamps();

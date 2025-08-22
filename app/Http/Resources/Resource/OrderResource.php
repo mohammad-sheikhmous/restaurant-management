@@ -51,12 +51,13 @@ class   OrderResource extends JsonResource
                 'final_price' => $this->final_price,
                 'delivery_driver' => $this->when($indexDirection, $this->receiving_method != 'delivery' ? 'not found' :
                     (
-                    in_array($this->status, ['pending', 'cancelled', 'rejected']) ? 'not specified yet' :
-                        ($this->deliveryDriver ? $this->deliveryDriver->name : $this->delivery_driver_data->name)
+                    in_array($this->status, ['pending', 'cancelled', 'rejected','picked_up']) ?
+                        'not specified'. ($this->status == 'pending' ? ' yet' : '') :
+                        ($this->deliveryDriver->name ?? $this->delivery_driver_data->name)
                     )
                 ),
                 'delivery_driver_data' => $this->when($showDirection,
-                    in_array($this->status, ['pending', 'cancelled', 'rejected']) ? 'not specified yet' : [
+                    in_array($this->status, ['pending', 'cancelled', 'rejected', 'picked_up']) ? 'not specified yet' : [
                         'id' => $this->whenNotNull(
                             ($driver = ($this->deliveryDriver ?? $this->delivery_driver_data))['id'] ?? null
                         ),

@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
             ReservationSeeder::class,
             WorkingShiftSeeder::class,
             ClosedPeriodSeeder::class,
+            OrderSeeder::class,
         ]);
     }
 }

@@ -28,7 +28,7 @@ class ProductSeeder extends Seeder
                 'description' => ['en' => 'Classic pizza with tomato and cheese', 'ar' => 'بيتزا كلاسيكية مع الطماطم والجبن'],
                 'image' => 'margherita.jpg',
                 'is_simple' => false,
-                'price' => 1000,
+                'price' => 10000,
                 'category_id' => 1,
             ],
             [
@@ -36,7 +36,7 @@ class ProductSeeder extends Seeder
                 'description' => ['en' => 'Spicy pepperoni slices on melted cheese', 'ar' => 'شرائح البيبروني الحار على جبن ذائب'],
                 'image' => 'pepperoni.jpg',
                 'is_simple' => false,
-                'price' => 2000,
+                'price' => 20000,
                 'category_id' => 1,
             ],
             [
@@ -44,7 +44,7 @@ class ProductSeeder extends Seeder
                 'description' => ['en' => 'Loaded with fresh vegetables', 'ar' => 'محشوة بالخضروات الطازجة'],
                 'image' => 'vegetarian_pizza.jpg',
                 'is_simple' => false,
-                'price' => 3000,
+                'price' => 30000,
                 'category_id' => 1,
             ],
             // meshawi
@@ -54,7 +54,7 @@ class ProductSeeder extends Seeder
                 'image' => 'mixed_grill.jpg',
                 'is_simple' => false,
                 'is_recommended' => true,
-                'price' => 500,
+                'price' => 50000,
                 'category_id' => 2,
             ],
             [
@@ -63,7 +63,7 @@ class ProductSeeder extends Seeder
                 'image' => 'grilled_chicken.jpg',
                 'is_simple' => false,
                 'is_recommended' => true,
-                'price' => 1500,
+                'price' => 75000,
                 'category_id' => 2,
             ],
             [
@@ -72,7 +72,7 @@ class ProductSeeder extends Seeder
                 'image' => 'kebab_skewers.jpg',
                 'is_simple' => false,
                 'is_recommended' => true,
-                'price' => 2200,
+                'price' => 50000,
                 'category_id' => 2,
             ],
             // seafood
@@ -81,7 +81,7 @@ class ProductSeeder extends Seeder
                 'description' => ['en' => 'Fresh salmon grilled with herbs', 'ar' => 'سلمون طازج مشوي بالأعشاب'],
                 'image' => 'grilled_salmon.jpg',
                 'is_simple' => true,
-                'price' => 4000,
+                'price' => 80000,
                 'category_id' => 3,
             ],
             [
@@ -89,7 +89,7 @@ class ProductSeeder extends Seeder
                 'description' => ['en' => 'Golden fried shrimp with sauce', 'ar' => 'جمبري مقلي ذهبي مع صوص'],
                 'image' => 'fried_shrimp.jpg',
                 'is_simple' => true,
-                'price' => 3400,
+                'price' => 34000,
                 'category_id' => 3,
             ],
             [
@@ -98,7 +98,7 @@ class ProductSeeder extends Seeder
                 'image' => 'seafood_platter.jpg',
                 'is_simple' => true,
                 'is_recommended' => true,
-                'price' => 2900,
+                'price' => 29000,
                 'category_id' => 3,
             ],
             // appetizers
@@ -107,7 +107,7 @@ class ProductSeeder extends Seeder
                 'description' => ['en' => 'Creamy chickpea dip', 'ar' => 'حمص مهروس كريمي'],
                 'image' => 'hummus.jpg',
                 'is_simple' => true,
-                'price' => 500,
+                'price' => 5000,
                 'category_id' => 4,
             ],
             [
@@ -115,7 +115,7 @@ class ProductSeeder extends Seeder
                 'description' => ['en' => 'Rice-filled grape leaves', 'ar' => 'أوراق عنب محشوة بالأرز'],
                 'image' => 'stuffed_grape_leaves.jpg',
                 'is_simple' => true,
-                'price' => 750,
+                'price' => 7500,
                 'category_id' => 4,
             ],
             [
@@ -124,7 +124,7 @@ class ProductSeeder extends Seeder
                 'image' => 'falafel.jpg',
                 'is_simple' => true,
                 'is_recommended' => true,
-                'price' => 600,
+                'price' => 6000,
                 'category_id' => 4,
             ],
             // drinks
@@ -133,7 +133,7 @@ class ProductSeeder extends Seeder
                 'description' => ['en' => 'Freshly squeezed orange juice', 'ar' => 'عصير برتقال طازج ومعصور'],
                 'image' => 'orange_juice.jpg',
                 'is_simple' => true,
-                'price' => 850,
+                'price' => 8500,
                 'category_id' => 5,
             ],
             [
@@ -141,7 +141,7 @@ class ProductSeeder extends Seeder
                 'description' => ['en' => 'Chilled cola drink', 'ar' => 'مشروب كولا بارد'],
                 'image' => 'cola.jpg',
                 'is_simple' => true,
-                'price' => 1000,
+                'price' => 10000,
                 'category_id' => 5,
             ],
             [
@@ -149,7 +149,7 @@ class ProductSeeder extends Seeder
                 'description' => ['en' => 'Refreshing mint and lemon drink', 'ar' => 'مشروب منعش من الليمون والنعناع'],
                 'image' => 'mint_lemonade.jpg',
                 'is_simple' => true,
-                'price' => 800,
+                'price' => 8000,
                 'category_id' => 5,
             ],
             // shawrma
@@ -158,7 +158,7 @@ class ProductSeeder extends Seeder
                 'description' => ['en' => 'Sliced grilled chicken with garlic sauce', 'ar' => 'شرائح دجاج مشوي مع صلصة الثوم'],
                 'image' => 'chicken_shawarma.jpg',
                 'is_simple' => false,
-                'price' => 2000,
+                'price' => 20000,
                 'category_id' => 6,
             ],
             [
@@ -166,7 +166,7 @@ class ProductSeeder extends Seeder
                 'description' => ['en' => 'Tender beef shawarma wrap', 'ar' => 'شاورما لحم ملفوفة طرية'],
                 'image' => 'beef_shawarma.jpg',
                 'is_simple' => false,
-                'price' => 2300,
+                'price' => 35000,
                 'category_id' => 6,
             ],
             [
@@ -174,16 +174,16 @@ class ProductSeeder extends Seeder
                 'description' => ['en' => 'Shawarma served with fries and salad', 'ar' => 'شاورما مع بطاطس وسلطة'],
                 'image' => 'shawarma_plate.jpg',
                 'is_simple' => false,
-                'price' => 2500,
+                'price' => 40000,
                 'category_id' => 6,
             ],
         ];
         $product_attribute_options = [
             // Margherita
-            ['product_id' => 1, 'attribute_option_id' => 5, 'extra_price' => 800],
-            ['product_id' => 1, 'attribute_option_id' => 6, 'extra_price' => 1000, 'is_default' => true],
-            ['product_id' => 1, 'attribute_option_id' => 7, 'extra_price' => 1200],
-            ['product_id' => 1, 'attribute_option_id' => 8, 'extra_price' => 100],
+            ['product_id' => 1, 'attribute_option_id' => 5, 'extra_price' => 8000],
+            ['product_id' => 1, 'attribute_option_id' => 6, 'extra_price' => 10000, 'is_default' => true],
+            ['product_id' => 1, 'attribute_option_id' => 7, 'extra_price' => 12000],
+            ['product_id' => 1, 'attribute_option_id' => 8, 'extra_price' => 1000],
             ['product_id' => 1, 'attribute_option_id' => 9, 'extra_price' => 75, 'is_default' => true],
             ['product_id' => 1, 'attribute_option_id' => 10, 'extra_price' => 50, 'is_default' => true],
             ['product_id' => 1, 'attribute_option_id' => 11, 'extra_price' => 50],
@@ -192,9 +192,9 @@ class ProductSeeder extends Seeder
             ['product_id' => 1, 'attribute_option_id' => 14, 'extra_price' => 75],
 
             // Pepperoni
-            ['product_id' => 2, 'attribute_option_id' => 5, 'extra_price' => 1800],
-            ['product_id' => 2, 'attribute_option_id' => 6, 'extra_price' => 2000, 'is_default' => true],
-            ['product_id' => 2, 'attribute_option_id' => 7, 'extra_price' => 2350],
+            ['product_id' => 2, 'attribute_option_id' => 5, 'extra_price' => 18000],
+            ['product_id' => 2, 'attribute_option_id' => 6, 'extra_price' => 20000, 'is_default' => true],
+            ['product_id' => 2, 'attribute_option_id' => 7, 'extra_price' => 23500],
             ['product_id' => 2, 'attribute_option_id' => 8, 'extra_price' => 50],
             ['product_id' => 2, 'attribute_option_id' => 9, 'extra_price' => 50],
             ['product_id' => 2, 'attribute_option_id' => 10, 'extra_price' => 75, 'is_default' => true],
@@ -203,9 +203,9 @@ class ProductSeeder extends Seeder
             ['product_id' => 2, 'attribute_option_id' => 14, 'extra_price' => 80],
 
             // Vegetarian
-            ['product_id' => 3, 'attribute_option_id' => 5, 'extra_price' => 3000, 'is_default' => true],
-            ['product_id' => 3, 'attribute_option_id' => 6, 'extra_price' => 3240],
-            ['product_id' => 3, 'attribute_option_id' => 7, 'extra_price' => 3450],
+            ['product_id' => 3, 'attribute_option_id' => 5, 'extra_price' => 30000, 'is_default' => true],
+            ['product_id' => 3, 'attribute_option_id' => 6, 'extra_price' => 32400],
+            ['product_id' => 3, 'attribute_option_id' => 7, 'extra_price' => 34500],
             ['product_id' => 3, 'attribute_option_id' => 8, 'extra_price' => 50],
             ['product_id' => 3, 'attribute_option_id' => 9, 'extra_price' => 60],
             ['product_id' => 3, 'attribute_option_id' => 10, 'extra_price' => 70, 'is_default' => true],
@@ -213,45 +213,45 @@ class ProductSeeder extends Seeder
             ['product_id' => 3, 'attribute_option_id' => 12, 'extra_price' => 100],
 
             // Mixed Grill
-            ['product_id' => 4, 'attribute_option_id' => 1, 'extra_price' => 500],
-            ['product_id' => 4, 'attribute_option_id' => 2, 'extra_price' => 650],
-            ['product_id' => 4, 'attribute_option_id' => 3, 'extra_price' => 700, 'is_default' => true],
-            ['product_id' => 4, 'attribute_option_id' => 4, 'extra_price' => 800],
+            ['product_id' => 4, 'attribute_option_id' => 1, 'extra_price' => 5000],
+            ['product_id' => 4, 'attribute_option_id' => 2, 'extra_price' => 6500],
+            ['product_id' => 4, 'attribute_option_id' => 3, 'extra_price' => 7000, 'is_default' => true],
+            ['product_id' => 4, 'attribute_option_id' => 4, 'extra_price' => 8000],
             ['product_id' => 4, 'attribute_option_id' => 8, 'extra_price' => 50],
             ['product_id' => 4, 'attribute_option_id' => 9, 'extra_price' => 40],
             ['product_id' => 4, 'attribute_option_id' => 10, 'extra_price' => 75, 'is_default' => true],
 
             // Grilled Chicken
-            ['product_id' => 5, 'attribute_option_id' => 2, 'extra_price' => 1350],
-            ['product_id' => 5, 'attribute_option_id' => 3, 'extra_price' => 1500, 'is_default' => true],
-            ['product_id' => 5, 'attribute_option_id' => 4, 'extra_price' => 1800],
+            ['product_id' => 5, 'attribute_option_id' => 2, 'extra_price' => 13500],
+            ['product_id' => 5, 'attribute_option_id' => 3, 'extra_price' => 15000, 'is_default' => true],
+            ['product_id' => 5, 'attribute_option_id' => 4, 'extra_price' => 18000],
             ['product_id' => 5, 'attribute_option_id' => 8, 'extra_price' => 90],
             ['product_id' => 5, 'attribute_option_id' => 9, 'extra_price' => 85],
             ['product_id' => 5, 'attribute_option_id' => 10, 'extra_price' => 80],
 
             // Kebab Skewers
-            ['product_id' => 6, 'attribute_option_id' => 1, 'extra_price' => 2200, 'is_default' => true],
-            ['product_id' => 6, 'attribute_option_id' => 2, 'extra_price' => 2500],
+            ['product_id' => 6, 'attribute_option_id' => 1, 'extra_price' => 22000, 'is_default' => true],
+            ['product_id' => 6, 'attribute_option_id' => 2, 'extra_price' => 25000],
             ['product_id' => 6, 'attribute_option_id' => 8, 'extra_price' => 50],
             ['product_id' => 6, 'attribute_option_id' => 9, 'extra_price' => 80],
             ['product_id' => 6, 'attribute_option_id' => 10, 'extra_price' => 90, 'is_default' => true],
 
             // Chicken Shawarma
-            ['product_id' => 16, 'attribute_option_id' => 5, 'extra_price' => 2000],
-            ['product_id' => 16, 'attribute_option_id' => 6, 'extra_price' => 2200],
-            ['product_id' => 16, 'attribute_option_id' => 7, 'extra_price' => 2400, 'is_default' => true],
+            ['product_id' => 16, 'attribute_option_id' => 5, 'extra_price' => 20000],
+            ['product_id' => 16, 'attribute_option_id' => 6, 'extra_price' => 22000],
+            ['product_id' => 16, 'attribute_option_id' => 7, 'extra_price' => 24000, 'is_default' => true],
             ['product_id' => 16, 'attribute_option_id' => 13, 'extra_price' => 80, 'is_default' => true],
             ['product_id' => 16, 'attribute_option_id' => 14, 'extra_price' => 100],
 
             // Beef Shawarma
-            ['product_id' => 17, 'attribute_option_id' => 3, 'extra_price' => 2300],
-            ['product_id' => 17, 'attribute_option_id' => 4, 'extra_price' => 2600, 'is_default' => true],
+            ['product_id' => 17, 'attribute_option_id' => 3, 'extra_price' => 23000],
+            ['product_id' => 17, 'attribute_option_id' => 4, 'extra_price' => 26000, 'is_default' => true],
             ['product_id' => 17, 'attribute_option_id' => 13, 'extra_price' => 60],
             ['product_id' => 17, 'attribute_option_id' => 14, 'extra_price' => 90],
 
             // Shawarma Plate
-            ['product_id' => 18, 'attribute_option_id' => 5, 'extra_price' => 2500, 'is_default' => true],
-            ['product_id' => 18, 'attribute_option_id' => 7, 'extra_price' => 2800],
+            ['product_id' => 18, 'attribute_option_id' => 5, 'extra_price' => 25000, 'is_default' => true],
+            ['product_id' => 18, 'attribute_option_id' => 7, 'extra_price' => 28000],
             ['product_id' => 18, 'attribute_option_id' => 11, 'extra_price' => 50],
             ['product_id' => 18, 'attribute_option_id' => 12, 'extra_price' => 40, 'is_default' => true],
             ['product_id' => 18, 'attribute_option_id' => 13, 'extra_price' => 70],

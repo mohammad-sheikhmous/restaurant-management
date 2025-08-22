@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $fillable = [
-        'order_number', 'status', 'user_id', 'user_address_id', 'user_data', 'delivery_driver_id', 'receiving_method',
-        'payment_method', 'total_price', 'delivery_fee', 'discount_price', 'final_price',
-        'estimated_receiving_time', 'receiving_time', 'notes'
+        'order_number', 'status', 'user_id', 'user_address_id', 'user_data', 'delivery_driver_data', 'delivery_driver_id',
+        'receiving_method', 'payment_method', 'total_price', 'delivery_fee', 'discount_price', 'final_price',
+        'estimated_receiving_time', 'receiving_time', 'notes', 'created_at',
     ];
 
     protected $casts = [

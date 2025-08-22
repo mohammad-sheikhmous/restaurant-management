@@ -72,6 +72,98 @@ class UserAddressSeeder extends Seeder
                 'duration' => '25 mins',
                 'distance' => 14.3
             ],
+
+            [
+                'user_id' => 2,
+                'latitude' => 33.512871,
+                'longitude' => 36.295026,
+                'label' => 'مكان عمل',
+                'name' => 'شيخ العقل حكت الهجري',
+                'city' => 'دمشق',
+                'area' => 'أشرفية صحنايا',
+                'street' => 'شارع حكمت الهجري',
+                'mobile' => '0937121137',
+                'duration' => '12 mins',
+                'distance' => 9.4
+            ],
+            [
+                'user_id' => 2,
+                'latitude' => 33.512871,
+                'longitude' => 36.295026,
+                'label' => 'منزل',
+                'name' => 'وليد جنبلاط',
+                'city' => 'دمشق',
+                'area' => 'جرمانا',
+                'street' => 'شارع وليد الجنبلاط',
+                'mobile' => '0993920137',
+                'duration' => '10 mins',
+                'distance' => 7.8
+            ],
+            [
+                'user_id' => 3,
+                'latitude' => 33.512871,
+                'longitude' => 36.295026,
+                'label' => 'مكان جديد',
+                'name' => 'شارع منير الحبيب',
+                'city' => 'دمشق',
+                'area' => 'ساحة الامويين',
+                'street' => 'منير الحبيب',
+                'mobile' => '0997742345',
+                'duration' => '18 mins',
+                'distance' => 14
+            ],
+            [
+                'user_id' => 3,
+                'latitude' => 33.512871,
+                'longitude' => 36.295026,
+                'label' => 'مكان عمل',
+                'name' => 'سعد الله الجابري',
+                'city' => 'دمشق',
+                'area' => 'الحجاز',
+                'street' => 'سعدالله الجابري',
+                'mobile' => '0957743131',
+                'duration' => '30 mins',
+                'distance' => 17.2
+            ],
+            [
+                'user_id' => 4,
+                'latitude' => 33.512871,
+                'longitude' => 36.295026,
+                'label' => 'مكان عمل',
+                'name' => 'منطقة الاقليات',
+                'city' => 'دمشق',
+                'area' => 'مزة 86',
+                'street' => 'ساحة العروس',
+                'mobile' => '0997440187',
+                'duration' => '14 mins',
+                'distance' => 9.5
+            ],
+            [
+                'user_id' => 5,
+                'latitude' => 33.512871,
+                'longitude' => 36.295026,
+                'label' => 'مكان عمل',
+                'name' => 'منطقة الاكثرية',
+                'city' => 'دمشق',
+                'area' => 'ميدان',
+                'street' => 'شارع مستشفى المهايني',
+                'mobile' => '0943740137',
+                'duration' => '19 mins',
+                'distance' => 11.6
+            ],
+            [
+                'user_id' => 5,
+                'latitude' => 33.512871,
+                'longitude' => 36.295026,
+                'label' => 'منزل',
+                'name' => 'بيتي الجديد',
+                'city' => 'دمشق',
+                'area' => 'الطبالة',
+                'street' => 'طريق المطار',
+                'mobile' => '0997743137',
+                'duration' => '17 mins',
+                'distance' => 10.3
+            ],
         ];
 
         foreach ($addresses as $address)
