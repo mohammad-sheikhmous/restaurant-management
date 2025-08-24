@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -15,7 +16,16 @@ class User extends Authenticatable
 
     // The attributes that are mass assignable.
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'mobile', 'status', 'image', 'birthdate', 'email_verified_at'
+        'first_name',
+        'last_name',
+        'email',
+        'password',
+        'mobile',
+        'status',
+        'image',
+        'birthdate',
+        'email_verified_at',
+        'created_at'
     ];
 
     // The attributes that should be hidden for serialization.
@@ -46,6 +56,16 @@ class User extends Authenticatable
         return $this->hasOne(Wallet::class);
     }
 
+    public function walletTransactions()
+    {
+        return $this->hasMany(WalletTransaction::class);
+    }
+
+    public function walletRechargeRequests()
+    {
+        return $this->hasMany(WalletRechargeRequest::class);
+    }
+
     public function cart()
     {
         return $this->hasOne(Cart::class);
@@ -64,6 +84,14 @@ class User extends Authenticatable
     public function reservations()
     {
         return $this->hasMany(Reservation::class);
+    }
+
+    public function scopeWithCurrentWalletRechargeRequestsCount(Builder $query)
+    {
+        return $query->withCount([
+            'wallet as current_wallet_recharge_requests_count' => function ($query) {
+                return $query->where('status', 'pending');
+            }]);
     }
 
     public function scopeWithCurrentOrdersCount(Builder $query)
@@ -117,5 +145,25 @@ class User extends Authenticatable
     public function addresses()
     {
         return $this->hasMany(UserAddress::class);
+    }
+
+    protected static function booted()
+    {
+        static::created(function ($user) {
+            $user->wallet()->create([
+                'balance' => 30000
+            ]);
+            $user->walletTransactions()->create([
+                'user_data' => [
+                    'name' => $user->name,
+                    'mobile' => $user->mobile,
+                    'email' => $user->email
+                ],
+                'type' => 'administrative_deposit',
+                'amount' => 30000,
+                'description' => 'مكافئة شحن المحفظة ب30000 عند أول عملية تسجيل دخول.',
+                'created_at' => $user->created_at,
+            ]);
+        });
     }
 }

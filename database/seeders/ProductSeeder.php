@@ -81,7 +81,7 @@ class ProductSeeder extends Seeder
                 'description' => ['en' => 'Fresh salmon grilled with herbs', 'ar' => 'سلمون طازج مشوي بالأعشاب'],
                 'image' => 'grilled_salmon.jpg',
                 'is_simple' => true,
-                'price' => 80000,
+                'price' => 60000,
                 'category_id' => 3,
             ],
             [

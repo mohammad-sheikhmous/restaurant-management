@@ -18,6 +18,13 @@ class ReservationSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::statement('set foreign_key_checks = 0;');
+        BookingPolicy::truncate();
+        Table::truncate();
+        ReservationType::truncate();
+        Reservation::truncate();
+        DB::statement('set foreign_key_checks = 1;');
+
         $types = [
             ['name' => ['en' => 'indoor', 'ar' => 'داخلي'], 'deposit_value' => 500],
             ['name' => ['en' => 'outdoor', 'ar' => 'خارجي'], 'deposit_value' => 800],

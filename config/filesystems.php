@@ -65,6 +65,12 @@ return [
             'url' => env('APP_URL') . '/public/uploads/admins',
             'visibility' => 'public',
         ],
+        'wallet-requests' => [
+            'driver' => 'local',
+            'root' => public_path('uploads/wallet-requests'),
+            'url' => env('APP_URL') . '/public/uploads/wallet-requests',
+            'visibility' => 'public',
+        ],
 
         's3' => [
             'driver' => 's3',

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\ClosedPeriod;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ClosedPeriodSeeder extends Seeder
 {
@@ -13,6 +14,10 @@ class ClosedPeriodSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::statement('set foreign_key_checks = 0;');
+        ClosedPeriod::truncate();
+        DB::statement('set foreign_key_checks = 1;');
+
         $periods = [
             [
                 'full_day' => 1,

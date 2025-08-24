@@ -24,7 +24,7 @@ class ProductController extends Controller
         $max_revenue = $products->max('revenue');
         $max_unique_users = $products->max('unique_users');
 
-        $products = $products->map(function ($product) use ($max_orders, $max_revenue, $max_unique_users) {
+        $products = $products->through(function ($product) use ($max_orders, $max_revenue, $max_unique_users) {
             return $this->getStatsFactors($product, $max_orders, $max_revenue, $max_unique_users);
         });
 

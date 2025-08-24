@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
             $table->json('user_data');
 
-            $table->decimal('amount');
+            $table->decimal('amount')->nullable();
             $table->enum('transfer_method', ['bank', 'cash']);
             $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
             $table->string('proof_image');

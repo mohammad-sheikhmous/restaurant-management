@@ -18,6 +18,7 @@ use App\Http\Controllers\Dashboard\ReservationSystem\WorkingShiftController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\TagController;
 use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Dashboard\WalletsRechargeController;
 use Illuminate\Support\Facades\Route;
 
 /******************        Authentication APIs        ****************/
@@ -167,9 +168,16 @@ Route::middleware('auth:admin')->group(function () {
     Route::controller(OrderController::class)->prefix('orders')->group(function () {
         Route::get('/', 'index');
         Route::get('/{order}', 'show');
-//        Route::post('/', 'store');
-//        Route::post('/{order}', 'update');
         Route::patch('/{order}', 'changeStatus');
         Route::delete('/{order}', 'destroy');
     });
+
+    Route::controller(WalletsRechargeController::class)->prefix('wallets')->group(function () {
+        Route::get('/recharge-requests', 'index');
+        Route::patch('/recharge-requests/{request}', 'acceptOrReject');
+        Route::post('/charge-manually', 'chargeManually');
+        Route::delete('/{request}', 'destroy');
+    });
+
+
 });

@@ -23,8 +23,13 @@ class ImageController extends Controller
         } elseif (Storage::disk('users')->exists($name)) {
             $file = Storage::disk('users')->get($name);
             $type = Storage::disk('users')->mimeType($name);
+
+        } elseif (Storage::disk('wallet-requests')->exists($name)) {
+            $file = Storage::disk('wallet-requests')->get($name);
+            $type = Storage::disk('wallet-requests')->mimeType($name);
+
         } else
-            return messageJson('image not found', false, 404);
+            return messageJson('Image not found.!', false, 404);
 
         return response($file, 200)->header('Content-Type', $type);
     }

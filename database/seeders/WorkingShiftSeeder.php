@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\WorkingShift;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class WorkingShiftSeeder extends Seeder
 {
@@ -13,6 +14,10 @@ class WorkingShiftSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::statement('set foreign_key_checks = 0;');
+        WorkingShift::truncate();
+        DB::statement('set foreign_key_checks = 1;');
+
         $shifts = [
             ['day_of_week' => 'monday', 'type_id' => 1, 'opening_time' => '09:00', 'closing_time' => '13:00'],
             ['day_of_week' => 'monday', 'type_id' => 1, 'opening_time' => '16:00', 'closing_time' => '22:00'],

@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class OrderSeeder extends Seeder
 {
@@ -621,7 +622,6 @@ class OrderSeeder extends Seeder
             'payment_method' => 'cash',
             'discount' => 0,
             'delivery_fee' => 10000,
-            'estimated_receiving_time' => '03:00',
             'created_at' => now()->subDays(18)->setTime(12, 39)
         ];
         $items[] = [
@@ -767,6 +767,73 @@ class OrderSeeder extends Seeder
             ],
         ];
 
+        /**********  Order 8  **********/
+
+        $orders[] = [
+            'status' => 'picked_up',
+            'user_id' => $user1->id,
+            'user_data' => $user_data1,
+            'receiving_method' => 'pick_up',
+            'payment_method' => 'wallet',
+            'discount' => 0,
+            'delivery_fee' => 10000,
+            'estimated_receiving_time' => '03:00',
+            'created_at' => now()->subDays(12)->setTime(12, 39)
+        ];
+        $items[] = [
+            'order_id' => 8,
+            'product_id' => $product7->id,
+            'product_data' => [
+                'name' => $product7->getTranslations('name'),
+                'description' => $product7->getTranslations('description'),
+                'image' => $product7->image,
+            ],
+            'quantity' => 1,
+            'base_price' => $product7->price,
+            'extra_price' => 0,
+            'total_price' => $total_price = ($product7->price + 0) * 1
+        ];
+        $orders[7]['total_price'] = $total_price;
+
+        $status_logs8 = [
+            [
+                'order_id' => 2,
+                'status' => 'accepted',
+                'changed_at' => now()->subDays(12)->setTime(1, 3),
+                'changed_by' => 1
+            ],
+            [
+                'order_id' => 8,
+                'status' => 'preparing',
+                'changed_at' => now()->subDays(12)->setTime(1, 40),
+                'changed_by' => 1
+            ],
+            [
+                'order_id' => 8,
+                'status' => 'prepared',
+                'changed_at' => now()->subDays(12)->setTime(2, 45),
+                'changed_by' => 1
+            ],
+            [
+                'order_id' => 8,
+                'status' => 'picked_up',
+                'changed_at' => now()->subDays(12)->setTime(3, 12),
+                'changed_by' => 1
+            ],
+        ];
+        DB::statement('set foreign_key_checks = 0;');
+        $user1->walletTransactions()->create([
+            'user_data' => [
+                'name' => $user1->name,
+                'mobile' => $user1->mobile,
+                'email' => $user1->email
+            ],
+            'type' => 'debit',
+            'order_id' => 8,
+            'amount' => $orders[7]['total_price'] + $orders[7]['delivery_fee'],
+        ]);
+        DB::statement('set foreign_key_checks = 1;');
+
         foreach ($orders as $order)
             Order::create($order);
 
@@ -784,6 +851,7 @@ class OrderSeeder extends Seeder
             ...$status_logs5,
             ...$status_logs6,
             ...$status_logs7,
+            ...$status_logs8,
         ];
 
         foreach ($status_logs as $log)

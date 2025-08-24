@@ -15,6 +15,7 @@ use App\Http\Controllers\Mobile\ProductController;
 use App\Http\Controllers\Mobile\ReservationController;
 use App\Http\Controllers\Mobile\TagController;
 use App\Http\Controllers\Mobile\UserAddressController;
+use App\Http\Controllers\Mobile\WalletController;
 use App\Http\Controllers\Mobile\WishlistController;
 use Illuminate\Support\Facades\Route;
 
@@ -107,5 +108,10 @@ Route::middleware('auth:user')->group(function () {
         Route::get('/{id}/edit', 'edit');
         Route::post('/{id}', 'update');
         Route::get('/{id}', 'show');
+    });
+
+    Route::controller(WalletController::class)->prefix('wallet')->group(function () {
+        Route::get('/', 'getWallet');
+        Route::post('/charge', 'charge');
     });
 });

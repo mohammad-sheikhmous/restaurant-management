@@ -13,20 +13,40 @@ class UserController extends Controller
     {
         $limit = \request()->limit ?? '10';
         $searched_text = strip_tags(\request()->validate([
-            'searched_text' => 'nullable|min:3'
+            'searched_text' => 'nullable|min:3',
+            'for' => 'nullable|in:indexing,selecting',
         ])['searched_text']);
 
-        $users = User::when($searched_text, function ($query) use ($searched_text) {
+        $query = User::query()->when($searched_text, function ($query) use ($searched_text) {
             $query->where('first_name', 'LIKE', '%' . $searched_text . '%')
                 ->orwhere('last_name', 'LIKE', '%' . $searched_text . '%');
-        })->withCount(['orders', 'reservations'])
-            ->with('wallet')
-            ->paginate($limit);
+        });
 
-        $page = numberToOrdinalWord(request()->page ?? 1);
+        if (request()->for != 'selecting') {
+            $users = $query->clone()->withCount(['orders', 'reservations'])
+                ->with('wallet')
+                ->paginate($limit);
 
-        return dataJson('users', (UserResource::collection($users))->response()->getData(true),
-            "All users for {$page} page.");
+            $page = numberToOrdinalWord(request()->page ?? 1);
+
+            return dataJson(
+                'users',
+                (UserResource::collection($users))->response()->getData(true),
+                "All users for {$page} page."
+            );
+        } else {
+            $users = $query->clone()
+                ->select('id', 'first_name', 'last_name')
+                ->get()
+                ->map(function ($user) {
+                    return [
+                        'id' => $user->id,
+                        'name' => $user->name
+                    ];
+                });
+
+            return dataJson('users', $users, 'ALl Users for selecting.');
+        }
     }
 
     public function show($id)
@@ -64,12 +84,19 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        $user = User::withCurrentOrdersCount()->withCurrentReservationsCount()->find($id);
+        $user = User::withCurrentWalletRechargeRequestsCount()
+            ->withCurrentReservationsCount()
+            ->withCurrentOrdersCount()
+            ->find($id);
         if (!$user)
-            return messageJson('user not found', false, 404);
+            return messageJson('User not found', false, 404);
 
-        if ($user->current_reservation_count > 0 || $user->current_orders_count > 0)
-            return messageJson('this user cannot be deleted', false, 403);
+        if (
+            $user->current_wallet_recharge_requests_count > 0 ||
+            $user->current_reservation_count > 0 ||
+            $user->current_orders_count > 0
+        )
+            return messageJson('This user cannot be deleted.!', false, 403);
 
         $user->delete();
         return messageJson('user deleted');
