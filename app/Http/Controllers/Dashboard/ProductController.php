@@ -72,9 +72,9 @@ class ProductController extends Controller
         $max_unique_users = $product->max_unique_users ?? $max_unique_users;
 
         // Relative Factors
-        $product->orders_factor = $max_orders > 0 ? $product->orders_count / $max_orders * 100 : 0;
-        $product->revenue_factor = $max_revenue > 0 ? $product->revenue / $max_revenue * 100 : 0;
-        $product->unique_users_factor = $max_unique_users > 0 ? $product->unique_users / $max_unique_users * 100 : 0;
+        $product->orders_factor = $max_orders > 0 ? ceil($product->orders_count / $max_orders * 100) : 0;
+        $product->revenue_factor = $max_revenue > 0 ? ceil($product->revenue / $max_revenue * 100) : 0;
+        $product->unique_users_factor = $max_unique_users > 0 ? ceil($product->unique_users / $max_unique_users * 100) : 0;
 
         // Calculate repeat rate
         $product_users = DB::table('order_items')
@@ -88,7 +88,7 @@ class ProductController extends Controller
 
         $total_users = $product_users->count();
         $repeat_users = $product_users->where('orders_count', '>', 1)->count();
-        $product->repeat_rate = $total_users > 0 ? $repeat_users / $total_users * 100 : 0;
+        $product->repeat_rate = $total_users > 0 ? ceil($repeat_users / $total_users * 100) : 0;
 
         $product->popularity_score =
             ceil((
@@ -162,8 +162,7 @@ class ProductController extends Controller
 
             $data = $request->except('image');
             if ($request->hasFile('image'))
-                $data['image'] = updateImage($request->name['en'], $product->getTranslation('name', 'en'),
-                    $request->image, 'products');
+                $data['image'] = updateImage($request->name['en'], $product->image, $request->image, 'products');
 
             $data['price'] = $data['is_simple'] == 0 ?
                 $data['basic_opts_prices'][array_search($data['default_basic_opt'], $data['basic_options_ids'])] :

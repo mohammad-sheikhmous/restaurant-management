@@ -511,7 +511,7 @@ class ReservationController extends Controller
     public function update(Request $request, $id)
     {
         $reservation = auth('user')->user()->reservations()
-            ->whreeId($id)
+            ->whereId($id)
             ->whereIn('status', ['not_confirmed', 'pending', 'accepted'])
             ->with('tables.type')
             ->first();

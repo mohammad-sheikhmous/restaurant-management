@@ -37,7 +37,7 @@ class ProductResource extends JsonResource
                 'description' => $this->when(!$request->is('*/dashboard/products'), $this->description),
                 'image' => $this->whenHas('image'),
                 'price' => $this->whenHas('price'),
-                'status' => $this->when($request->is('*/dashboard/*'), $this->status = 1 ? 'active' : 'inactive'),
+                'status' => $this->when($request->is('*/dashboard/*'), $this->status == 1 ? 'active' : 'inactive'),
                 'is_favorite' => $this->whenNotNull($this->isFavorite()),
                 'is_simple' => boolval($this->is_simple),
                 'is_recommended' => boolval($this->is_recommended),

@@ -52,9 +52,10 @@ class OtpController extends Controller implements HasMiddleware
 
         $message = 'The code verified successfully., You are ready to reset password';
 
+        $user->update(['email_verified_at' => now()]);
+
         if ($request->is('api/confirmation/*')) {
             $message = 'The Email Confirmed Successfully.';
-            $user->update(['email_verified_at' => now()]);
         }
 
         $token = $user->createToken('user-token')->plainTextToken;

@@ -32,7 +32,7 @@ class ProductRequest extends FormRequest
             'is_simple' => 'required|in:0,1',
             'price' => 'nullable|required_if:is_simple,1|decimal:0,2',
             'is_recommended' => 'required|in:0,1',
-            'image' => 'required|image|mimes:png,svg,jpg,jpeg,gif',
+            'image' => request()->is('*/products') ? 'required' : 'nullable' . '|image|mimes:jpeg,svg,png,jpg,gif,ico',
             'category_id' => 'required|exists:categories,id',
             'tags_ids' => 'required|array|min:1',
             'tags_ids.*' => 'required|exists:tags,id',

@@ -122,8 +122,8 @@ class CartController extends Controller
                     'image' => $product->image,
                 ],
                 'base_price' => $base_price,
-//                'extra_price' => $extra_price,
-//                'total_price' => ($base_price + $extra_price) * $request->quantity,
+                'extra_price' => $extra_price,
+                'total_price' => ($base_price + $extra_price) * $request->quantity,
                 'quantity' => $request->quantity,
             ]);
             // attach basic option to item
