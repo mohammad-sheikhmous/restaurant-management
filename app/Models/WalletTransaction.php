@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class WalletTransaction extends Model
 {
     protected $fillable = [
-        'user_data', 'user_id', 'type', 'amount', 'description', 'created_at'
+        'user_data', 'user_id', 'type', 'amount', 'description', 'created_at', 'order_id', 'reservation_id'
     ];
 
     protected $casts = [
@@ -17,5 +17,10 @@ class WalletTransaction extends Model
     public function order()
     {
         return $this->belongsTo(Order::class);
+    }
+
+    public function reservation()
+    {
+        return $this->belongsTo(Reservation::class);
     }
 }

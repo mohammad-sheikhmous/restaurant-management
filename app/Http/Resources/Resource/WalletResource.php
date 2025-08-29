@@ -20,7 +20,8 @@ class WalletResource extends JsonResource
                 return [
                     'type' => $transaction->type,
                     'amount' => $transaction->amount,
-                    'order_num' => $transaction->order?->order_number,
+                    'order_number' => $this->whenNotNull($transaction->order?->order_number),
+                    'revs_number' => $this->whenNotNull($transaction->reservation?->reservation_number),
                     'description'=> $transaction->description,
                     'created_at' => $transaction->created_at->format('Y-m-d h:i a')
                 ];

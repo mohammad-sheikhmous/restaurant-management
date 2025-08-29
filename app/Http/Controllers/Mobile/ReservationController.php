@@ -13,10 +13,9 @@ use App\Models\WorkingShift;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use function Termwind\parse;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ReservationController extends Controller
 {
@@ -188,16 +187,27 @@ class ReservationController extends Controller
                 $request->revs_duration, $request->guests_count, $request->selected_slot, $request->type);
 
             if ($check_from_selected_slot['status'] == false)
-                return messageJson($check_from_selected_slot['message'],
-                    $check_from_selected_slot['status'], $check_from_selected_slot['status_code']);
+                return messageJson(
+                    $check_from_selected_slot['message'],
+                    $check_from_selected_slot['status'],
+                    $check_from_selected_slot['status_code']
+                );
 
             $table = $check_from_selected_slot['table'];
             $tables_combination = $check_from_selected_slot['tables_combination'];
             $deposit_value = $check_from_selected_slot['deposit_value'];
 
+            $user = auth('user')->user()->load('wallet');
+
+            if ($deposit_value > ($user->wallet->balance ?? 0)) {
+                return messageJson(
+                    'Sorry, your wallet balance not enough for creating this reservation.',
+                    false,
+                    402);
+            }
+
             DB::beginTransaction();
 
-            $user = auth('user')->user();
             $revs = Reservation::create([
                 'user_id' => $user->id,
                 'user_data' => [
@@ -215,6 +225,21 @@ class ReservationController extends Controller
             ]);
 
             $this->createIntermediates($table, $tables_combination, $revs);
+
+            $user->wallet()->update(['balance' => $user->wallet->balance - $deposit_value]);
+
+            $user->walletTransactions()->create([
+                'user_data' => [
+                    'name' => $user->name,
+                    'mobile' => $user->mobile,
+                    'email' => $user->email,
+                ],
+                'amount' => $deposit_value,
+                'type' => 'debit',
+                'description' => 'The deposit value paid.',
+                'reservation_id' => $revs->id
+            ]);
+
             DB::commit();
 
             // Number of hours of inability to cancel the revs
@@ -452,6 +477,8 @@ class ReservationController extends Controller
         if (!$reservation)
             return messageJson('Reservation not found.!', false, 404);
 
+        $reservation->qr_code = $this->generateQRCode($reservation->revs_number);
+
         $reservation->booking_policies = $booking_policies;
 
         return dataJson(
@@ -459,6 +486,13 @@ class ReservationController extends Controller
             ReservationResource::make($reservation),
             'Reservation details'
         );
+    }
+
+    public function generateQRCode($revs_number): string
+    {
+        $qr = QrCode::generate($revs_number);
+
+        return base64_encode($qr);
     }
 
     public function edit($id)

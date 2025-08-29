@@ -174,7 +174,10 @@ class OrderController extends Controller
             $final_price = $total_price + ($delivery_fee ?? 0);
 
             if ($request->payment_method == 'wallet' && $final_price > ($user->wallet->balance ?? 0)) {
-                return messageJson('Sorry, your wallet balance not enough for creating this order.');
+                return messageJson(
+                    'Sorry, your wallet balance not enough for creating this order.',
+                    false,
+                    402);
             }
 
             $user_data = [
@@ -229,6 +232,24 @@ class OrderController extends Controller
                     ]);
             });
             $user->cart->items()->delete();
+
+            // Update wallet balance and create debit transaction from wallet
+            if ($request->payment_method == 'wallet') {
+
+                $user->wallet()->update(['balance' => $user->wallet->balance - $final_price]);
+
+                $user->walletTransactions()->create([
+                    'user_data' => [
+                        'name' => $user->name,
+                        'mobile' => $user->mobile,
+                        'email' => $user->email,
+                    ],
+                    'amount' => $final_price,
+                    'type' => 'debit',
+                    'description' => 'The order value paid.',
+                    'order_id' => $order->id
+                ]);
+            }
             DB::commit();
 
             return messageJson('Your order created successfully.', true, 201);
@@ -239,7 +260,8 @@ class OrderController extends Controller
         }
     }
 
-    public function index()
+    public
+    function index()
     {
         $orders = auth('user')->user()->orders()
             ->select('id', 'user_id', 'status', 'order_number', 'receiving_method', 'final_price', 'created_at')
@@ -253,7 +275,8 @@ class OrderController extends Controller
         return dataJson('orders', OrderResource::collection($orders), 'All orders');
     }
 
-    public function show($id)
+    public
+    function show($id)
     {
         $order = auth('user')->user()->orders()->whereId($id)->first();
         if (!$order)
@@ -262,7 +285,8 @@ class OrderController extends Controller
         return dataJson('order', OrderResource::make($order), 'Order returned successfully');
     }
 
-    public function cancel($id)
+    public
+    function cancel($id)
     {
         $order = auth('user')->user()->orders()->whereId($id)->first();
         if (!$order)
@@ -276,7 +300,8 @@ class OrderController extends Controller
         return messageJson('Order cancelled successfully');
     }
 
-    public function destroy($id)
+    public
+    function destroy($id)
     {
         $order = auth('user')->user()->orders()->whereId($id)->first();
         if (!$order)
@@ -290,7 +315,8 @@ class OrderController extends Controller
         return messageJson('Order deleted successfully');
     }
 
-    public function rerder($id)
+    public
+    function reorder($id)
     {
         try {
             $user = auth('user')->user();

@@ -37,37 +37,45 @@ class UserAddressController extends Controller
 
     public function store(UserAddressRequest $request)
     {
-        $zones = Cache::has('zones') ? Cache::get('zones') : DeliveryZone::whereStatus(1)->get();
+        try {
+            $zones = Cache::has('zones') ? Cache::get('zones') : DeliveryZone::whereStatus(1)->get();
 
-        $lat = $request->latitude;
-        $lng = $request->longitude;
-        foreach ($zones as $zone) {
-            $polygon = json_decode($zone->coordinates);
-            $box = getBoundingBox($polygon);
-            if (($box['max_lat'] >= $lat) != ($box['min_lat'] > $lat)
-                &&
-                ($box['max_lng'] >= $lng) != ($box['min_lng'] > $lng)
-            ) {
-                if (isPointInPolygon(['lat' => $lat, 'lng' => $lng], $polygon)) {
+            $lat = $request->latitude;
+            $lng = $request->longitude;
+            foreach ($zones as $zone) {
+                $polygon = json_decode($zone->coordinates);
+                $box = getBoundingBox($polygon);
+                if (($box['max_lat'] >= $lat) != ($box['min_lat'] > $lat)
+                    &&
+                    ($box['max_lng'] >= $lng) != ($box['min_lng'] > $lng)
+                ) {
+                    if (isPointInPolygon(['lat' => $lat, 'lng' => $lng], $polygon)) {
 
-                    // to store distance array from calculateDistance function
-                    $setting = Setting::first();
-                    $distance = $this->calculateDistance(
-                        $setting->latitude, $setting->longitude,
-                        $lat, $lng
-                    );
+                        // to store distance array from calculateDistance function
+                        $setting = Setting::first();
+                        $distance = $this->calculateDistance(
+                            $setting->latitude, $setting->longitude,
+                            $lat, $lng
+                        );
 
-                    $address = auth('user')->user()->addresses()->create([
-                        ...$request->all(),
-                        'duration' => $distance['duration'],
-                        'distance' => $distance['distance'],
-                        'delivery_zone_id' => $zone->id
-                    ]);
-                    return messageJson('New address created', true, 201);
+                        $address = auth('user')->user()->addresses()->create([
+                            ...$request->all(),
+                            'duration' => $distance['duration'],
+                            'distance' => $distance['distance'],
+                            'delivery_zone_id' => $zone->id
+                        ]);
+                        return messageJson('New address created', true, 201);
+                    }
                 }
             }
+            return messageJson(
+                'Sorry, This address is located in unsupported delivery area',
+                true,
+                422);
+
+        } catch (\Exception $exception) {
+            return exceptionJson();
         }
-        return messageJson('Sorry, This address is located in unsupported delivery area', true, 422);
     }
 
     private function calculateDistance($lat_from, $lon_from, $lat_to, $lon_to)

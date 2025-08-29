@@ -12,6 +12,7 @@
         "laravel/sanctum": "^4.1",
         "laravel/tinker": "^2.9",
         "predis/predis": "^3.0",
+        "simplesoftwareio/simple-qrcode": "^4.2",
         "spatie/laravel-translatable": "^6.11"
     },
     "require-dev": {

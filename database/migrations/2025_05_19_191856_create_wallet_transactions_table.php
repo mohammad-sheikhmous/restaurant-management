@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->json('user_data');
 
             $table->foreignId('order_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('reservation_id')->nullable()->constrained()->cascadeOnDelete();
 
             $table->enum('type', ['debit', 'deposit', 'administrative_deposit']);
             $table->decimal('amount');

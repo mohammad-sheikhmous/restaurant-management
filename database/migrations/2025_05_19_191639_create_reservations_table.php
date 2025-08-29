@@ -13,6 +13,8 @@ return new class extends Migration {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
 
+            $table->string('revs_number');
+
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
             $table->json('user_data');
 

@@ -153,6 +153,7 @@ Restaurant Policies :
             'deposit_value' => 500,
             'deposit_status' => 'refunded',
             'note' => 'I want the best table.',
+            'created_at' => now()->subDays(189),
         ];
         $reservation_table[] = [
             'reservation_id' => 1,
@@ -178,6 +179,7 @@ Restaurant Policies :
             'status' => 'completed',
             'deposit_value' => 500,
             'deposit_status' => 'refunded',
+            'created_at' => now()->subDays(183),
         ];
         $reservation_table[] = [
             'reservation_id' => 2,
@@ -212,6 +214,7 @@ Restaurant Policies :
             'status' => 'cancelled',
             'deposit_value' => 500,
             'deposit_status' => 'refunded',
+            'created_at' => now()->subDays(184)
         ];
         $reservation_table[] = [
             'reservation_id' => 3,
@@ -238,6 +241,7 @@ Restaurant Policies :
             'deposit_value' => 500,
             'deposit_status' => 'refunded',
             'note' => 'I want the best table.',
+            'created_at' => now()->subDays(175),
         ];
         $reservation_table[] = [
             'reservation_id' => 4,
@@ -263,6 +267,7 @@ Restaurant Policies :
             'status' => 'rejected',
             'deposit_value' => 500,
             'deposit_status' => 'refunded',
+            'created_at' => now()->subDays(171),
         ];
         $reservation_table[] = [
             'reservation_id' => 5,
@@ -288,6 +293,7 @@ Restaurant Policies :
             'status' => 'rejected',
             'deposit_value' => 500,
             'deposit_status' => 'refunded',
+            'created_at' => now()->subDays(164)
         ];
         $reservation_table[] = [
             'reservation_id' => 6,
@@ -322,6 +328,7 @@ Restaurant Policies :
             'status' => 'completed',
             'deposit_value' => 500,
             'deposit_status' => 'refunded',
+            'created_at' => now()->subDays(172)
         ];
         $reservation_table[] = [
             'reservation_id' => 7,
@@ -347,6 +354,7 @@ Restaurant Policies :
             'status' => 'no_show',
             'deposit_value' => 500,
             'deposit_status' => 'forfeited',
+            'created_at' => now()->subDays(158),
         ];
         $reservation_table[] = [
             'reservation_id' => 8,
@@ -372,6 +380,7 @@ Restaurant Policies :
             'status' => 'no_show',
             'deposit_value' => 500,
             'deposit_status' => 'forfeited',
+            'created_at' => now()->subDays(150),
         ];
         $reservation_table[] = [
             'reservation_id' => 9,
@@ -406,6 +415,7 @@ Restaurant Policies :
             'status' => 'completed',
             'deposit_value' => 500,
             'deposit_status' => 'refunded',
+            'created_at' => now()->subDays(139),
         ];
         $reservation_table[] = [
             'reservation_id' => 10,
@@ -431,6 +441,7 @@ Restaurant Policies :
             'status' => 'rejected',
             'deposit_value' => 500,
             'deposit_status' => 'refunded',
+            'created_at' => now()->subDays(131),
         ];
         $reservation_table[] = [
             'reservation_id' => 11,
@@ -456,6 +467,7 @@ Restaurant Policies :
             'status' => 'cancelled',
             'deposit_value' => 500,
             'deposit_status' => 'forfeited',
+            'created_at' => now()->subDays(125),
         ];
         $reservation_table[] = [
             'reservation_id' => 12,
@@ -490,6 +502,7 @@ Restaurant Policies :
             'status' => 'completed',
             'deposit_value' => 500,
             'deposit_status' => 'refunded',
+            'created_at' => now()->subDays(155),
         ];
         $reservation_table[] = [
             'reservation_id' => 13,
@@ -515,6 +528,7 @@ Restaurant Policies :
             'status' => 'completed',
             'deposit_value' => 500,
             'deposit_status' => 'refunded',
+            'created_at' => now()->subDays(121),
         ];
         $reservation_table[] = [
             'reservation_id' => 14,
@@ -549,6 +563,7 @@ Restaurant Policies :
             'status' => 'rejected',
             'deposit_value' => 500,
             'deposit_status' => 'refunded',
+            'created_at' => now()->subDays(108),
         ];
         $reservation_table[] = [
             'reservation_id' => 15,
@@ -574,6 +589,7 @@ Restaurant Policies :
             'status' => 'completed',
             'deposit_value' => 500,
             'deposit_status' => 'refunded',
+            'created_at' => now()->subDays(47),
         ];
         $reservation_table[] = [
             'reservation_id' => 16,
@@ -599,6 +615,7 @@ Restaurant Policies :
             'status' => 'completed',
             'deposit_value' => 500,
             'deposit_status' => 'refunded',
+            'created_at' => now()->subDays(39),
         ];
         $reservation_table[] = [
             'reservation_id' => 17,
@@ -624,6 +641,7 @@ Restaurant Policies :
             'status' => 'cancelled',
             'deposit_value' => 500,
             'deposit_status' => 'refunded',
+            'created_at' => now()->subDays(26),
         ];
         $reservation_table[] = [
             'reservation_id' => 18,
@@ -649,6 +667,7 @@ Restaurant Policies :
             'status' => 'completed',
             'deposit_value' => 500,
             'deposit_status' => 'refunded',
+            'created_at' => now()->subDays(27),
         ];
         $reservation_table[] = [
             'reservation_id' => 19,
@@ -674,6 +693,7 @@ Restaurant Policies :
             'status' => 'completed',
             'deposit_value' => 500,
             'deposit_status' => 'refunded',
+            'created_at' => now()->subDays(17),
         ];
         $reservation_table[] = [
             'reservation_id' => 20,
@@ -699,6 +719,7 @@ Restaurant Policies :
             'status' => 'completed',
             'deposit_value' => 500,
             'deposit_status' => 'refunded',
+            'created_at' => now()->subDays(12),
         ];
         $reservation_table[] = [
             'reservation_id' => 21,
@@ -724,6 +745,7 @@ Restaurant Policies :
             'status' => 'cancelled',
             'deposit_value' => 500,
             'deposit_status' => 'forfeited',
+            'created_at' => now()->subDays(6),
         ];
         $reservation_table[] = [
             'reservation_id' => 22,
@@ -749,6 +771,7 @@ Restaurant Policies :
             'status' => 'accepted',
             'deposit_value' => 500,
             'deposit_status' => 'pending',
+            'created_at' => now()->subDays(3),
         ];
         $reservation_table[] = [
             'reservation_id' => 23,
@@ -774,6 +797,7 @@ Restaurant Policies :
             'status' => 'accepted',
             'deposit_value' => 500,
             'deposit_status' => 'pending',
+            'created_at' => now()->subDays(5),
         ];
         $reservation_table[] = [
             'reservation_id' => 24,
@@ -808,6 +832,7 @@ Restaurant Policies :
             'status' => 'accepted',
             'deposit_value' => 500,
             'deposit_status' => 'pending',
+            'created_at' => now()->subDays(5),
         ];
         $reservation_table[] = [
             'reservation_id' => 25,
@@ -833,6 +858,7 @@ Restaurant Policies :
             'status' => 'cancelled',
             'deposit_value' => 500,
             'deposit_status' => 'refunded',
+            'created_at' => now()->subDays(8),
         ];
         $reservation_table[] = [
             'reservation_id' => 26,
@@ -858,6 +884,7 @@ Restaurant Policies :
             'status' => 'accepted',
             'deposit_value' => 500,
             'deposit_status' => 'pending',
+            'created_at' => now()->subDays(17),
         ];
         $reservation_table[] = [
             'reservation_id' => 27,
@@ -883,6 +910,7 @@ Restaurant Policies :
             'status' => 'accepted',
             'deposit_value' => 500,
             'deposit_status' => 'pending',
+            'created_at' => now()->subDays(28),
         ];
         $reservation_table[] = [
             'reservation_id' => 28,
@@ -917,6 +945,7 @@ Restaurant Policies :
             'status' => 'accepted',
             'deposit_value' => 500,
             'deposit_status' => 'pending',
+            'created_at' => now()->subDays(19),
         ];
         $reservation_table[] = [
             'reservation_id' => 29,
@@ -942,6 +971,7 @@ Restaurant Policies :
             'status' => 'pending',
             'deposit_value' => 500,
             'deposit_status' => 'pending',
+            'created_at' => now()->subDays(28),
         ];
         $reservation_table[] = [
             'reservation_id' => 30,
@@ -976,6 +1006,7 @@ Restaurant Policies :
             'status' => 'pending',
             'deposit_value' => 500,
             'deposit_status' => 'pending',
+            'created_at' => now()->subDays(24),
         ];
         $reservation_table[] = [
             'reservation_id' => 31,

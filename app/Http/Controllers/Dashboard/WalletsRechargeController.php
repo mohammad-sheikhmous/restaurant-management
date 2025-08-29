@@ -56,13 +56,13 @@ class WalletsRechargeController extends Controller
                 $request->status = 'accepted';
                 $request->save();
 
-                $request->user->walletTransaction()->create([
+                $request->user->walletTransactions()->create([
                     'user_data' => [
                         'name' => $request->user->name,
                         'mobile' => $request->user->mobile,
                         'email' => $request->user->email,
                     ],
-                    'amount' => request()['recharge_value'],
+                    'amount' => request()['charge_value'],
                     'type' => 'deposit',
                 ]);
             });

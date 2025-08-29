@@ -18,6 +18,7 @@ class ReservationResource extends JsonResource
         if ($request->is('*/dashboard/*')) {
             $data = [
                 'id' => $this->id,
+                'revs_number' => $this->revs_number,
                 'user_data' => $this->when($request->is('*/dashboard/reservations/*'), [
                     'id' => $this->user_id,
                     // must be first that verify from the user present or not
@@ -55,10 +56,11 @@ class ReservationResource extends JsonResource
             $active_direction = $request->is('api/reservations/*');
             $active_status = in_array($this->status, ['not_confirmed', 'pending', 'accepted']);
             $temp_status = in_array($this->status, ['not_confirmed', 'pending']);
-//            $time = $this->created_at->addMinutes(5)->diff(now())->format('i:s');
 
             $data = [
                 'id' => $this->id,
+                'revs_number' => $this->revs_number,
+                'qr_code' => $this->whenHas('qr_code'),
                 'type' => $this->tables->first()->type->name,
                 'tables_count' => $this->tables->count(),
                 'revs_date' => $this->revs_date,
@@ -66,7 +68,7 @@ class ReservationResource extends JsonResource
                 'revs_duration' => Carbon::parse($this->revs_duration)->format('H:i'),
                 'guests_count' => $this->guests_count,
                 'status' => $this->status,
-                'remaining_confirmation_time'=>$this->when(
+                'remaining_confirmation_time' => $this->when(
                     $this->status == 'not_confirmed',
                     $this->created_at->copy()
                         ->addMinutes($booking_policies->temp_revs_conf_minutes)

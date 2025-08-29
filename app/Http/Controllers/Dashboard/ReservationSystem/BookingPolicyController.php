@@ -71,7 +71,7 @@ class BookingPolicyController extends Controller
 
         } catch (\Exception $exception) {
             DB::rollBack();
-            return $exception;
+            return exceptionJson();
         }
     }
 }
