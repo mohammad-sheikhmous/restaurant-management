@@ -22,6 +22,8 @@ return new class extends Migration {
             $table->unsignedBigInteger('role_id');
             $table->foreign('role_id')->references('id')->on('roles')->cascadeOnDelete();
 
+            $table->enum('language', ['en', 'ar'])->default('en');
+
             $table->timestamps();
         });
     }

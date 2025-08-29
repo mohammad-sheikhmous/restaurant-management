@@ -490,7 +490,7 @@ class ReservationController extends Controller
 
     public function generateQRCode($revs_number): string
     {
-        $qr = QrCode::generate($revs_number);
+        $qr = QrCode::size(200)->generate($revs_number);
 
         return base64_encode($qr);
     }

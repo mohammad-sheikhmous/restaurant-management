@@ -25,7 +25,8 @@ class User extends Authenticatable
         'image',
         'birthdate',
         'email_verified_at',
-        'created_at'
+        'created_at',
+        'language'
     ];
 
     // The attributes that should be hidden for serialization.

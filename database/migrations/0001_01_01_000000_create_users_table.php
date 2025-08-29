@@ -24,6 +24,8 @@ return new class extends Migration {
 
             $table->timestamp('email_verified_at')->nullable();
 
+            $table->enum('language', ['en', 'ar'])->default('en');
+
             $table->timestamps();
         });
 

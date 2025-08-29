@@ -12,7 +12,7 @@ class Admin extends Authenticatable
     use HasFactory, HasApiTokens, Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'mobile', 'password', 'image', 'status', 'role_id'
+        'name', 'email', 'mobile', 'password', 'image', 'status', 'role_id', 'language'
     ];
 
     // The attributes that should be hidden for serialization.
