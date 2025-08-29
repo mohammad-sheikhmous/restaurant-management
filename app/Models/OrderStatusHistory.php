@@ -20,13 +20,4 @@ class OrderStatusHistory extends Model
     {
         return $this->belongsTo(Admin::class, 'changed_by');
     }
-
-//    public function getChangedByAttribute($val)
-//    {
-//        return $this->changer->name ?? 'By the same user';
-//    }
-//
-//    protected $visible = [
-//        'status', 'changed_by', 'changed_at'
-//    ];
 }

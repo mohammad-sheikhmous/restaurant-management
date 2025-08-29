@@ -10,7 +10,7 @@ class CartItemOption extends Model
     use HasTranslations;
 
     protected $fillable = [
-        'product_attribute_option_id', 'option_data'
+        'product_attribute_option_id', 'option_data','cart_item_id'
     ];
 
     public $timestamps = false;

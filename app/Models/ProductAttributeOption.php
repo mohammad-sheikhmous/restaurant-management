@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProductAttributeOption extends Model
 {
     protected $fillable = [
-        'product_id', 'attribute_option_id', 'extra_price',
+        'product_id', 'attribute_option_id', 'extra_price', 'is_default'
     ];
 
     public $timestamps = false;

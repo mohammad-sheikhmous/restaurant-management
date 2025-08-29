@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Slider extends Model
 {
-    //
+    protected $fillable = [
+        'file_path', 'type', 'product_id'
+    ];
+
+    public $timestamps = false;
 }

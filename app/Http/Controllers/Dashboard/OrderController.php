@@ -68,7 +68,7 @@ class OrderController extends Controller
                 'string',
                 'in:cancelled,accepted,rejected,preparing,prepared,delivering,delivered,picked_up'
             ],
-            'estimated_delivery_time' => ['nullable', 'required_if:status,accepted', 'bail', 'date_format:H:i',
+            'estimated_receiving_time' => ['nullable', 'required_if:status,accepted', 'bail', 'date_format:H:i',
                 function ($attribute, $value, $fail) {
                     $time = Carbon::createFromFormat('H:i', $value);
                     if ($time->lessThanOrEqualTo(now()))
@@ -82,6 +82,7 @@ class OrderController extends Controller
 
         $new_status = request()->status;
         $current_status = $order->status;
+        $estimated_receiving_time = $new_status == 'accepted' ? request()->estimated_receiving_time : null;
 
         // Logical sequence of statuses
         $validTransitions = [
@@ -100,7 +101,7 @@ class OrderController extends Controller
             return messageJson("We can't move from $current_status to $new_status.!", false, 422);
         }
 
-        $order->update(['status' => $new_status]);
+        $order->update(['status' => $new_status, 'estimated_receiving_time' => $estimated_receiving_time]);
 
         return messageJson("The order is $new_status.");
     }

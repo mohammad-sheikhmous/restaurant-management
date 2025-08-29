@@ -47,15 +47,4 @@ class Order extends Model
     {
         return $this->hasMany(OrderStatusHistory::class);
     }
-
-    // event for creating order number
-//    protected static function booted()
-//    {
-//        static::created(function ($order) {
-//            $order->update([
-//                'order_number' => strtoupper(substr(auth('user')->user()->first_name, -2)) . '-' .
-//                    str_pad($order->id, 8, rand(1000000, 9999999), STR_PAD_LEFT),
-//            ]);
-//        });
-//    }
 }

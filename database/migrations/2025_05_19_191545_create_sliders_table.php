@@ -16,8 +16,6 @@ return new class extends Migration {
             $table->string('file_path');
             $table->enum('type', ['home_page'])->default('home_page');
             $table->foreignId('product_id')->nullable()->constrained()->cascadeOnDelete();
-
-            $table->timestamps();
         });
     }
 

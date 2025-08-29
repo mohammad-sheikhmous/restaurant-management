@@ -36,7 +36,7 @@ class WalletsRechargeController extends Controller
     {
         $status = request()->validate([
             'status' => 'required|in:accept,reject',
-            'charge_value' => 'nullable|required_if:status,accept|decimal|max:1000000'
+            'charge_value' => 'nullable|required_if:status,accept|decimal:0,1|max:1000000'
         ])['status'];
 
         $request = WalletRechargeRequest::whereStatus('pending')
