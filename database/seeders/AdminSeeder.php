@@ -71,6 +71,7 @@ class AdminSeeder extends Seeder
             ],
         ];
 
-        Admin::insert($drivers);
+        foreach ($drivers as $driver)
+            Admin::create($driver);
     }
 }

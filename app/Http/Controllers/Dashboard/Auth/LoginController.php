@@ -24,7 +24,8 @@ class LoginController extends Controller implements HasMiddleware
     {
         $fields = $request->validate([
             'email' => 'required',
-            'password' => 'required'
+            'password' => 'required',
+            'role' => 'required|string|in:manager,delivery_driver,admin,chief'
         ]);
 
         $admin = Admin::where('email', $fields['email'])->first();
@@ -34,15 +35,25 @@ class LoginController extends Controller implements HasMiddleware
             return messageJson('البريد أو كلمة المرور غير صحيحة', false, 401);
         }
 
-        // generate token after verify from admin credentials
-        $token = $admin->createToken('admin-token')->plainTextToken;
+        // Check the role by role parameters
+        if (
+            $request->role
+            !==
+            str_replace(' ', '_', trim(strtolower($admin->role->getTranslation('name', 'en'))))
+        ) {
+            $role = str_replace('_', ' ',ucfirst($request->role));
+            return messageJson("Unauthorized for $role App", false, 403);
+        }
 
-        return dataJson('token', $token,'logged in');
+        // generate token after verify from admin credentials
+        $token = $admin->createToken("$request->role-token")->plainTextToken;
+
+        return dataJson('token', $token, 'Logged in');
     }
 
     public function logout()
     {
         auth('admin')->user()->tokens()->delete();
-        return messageJson('logged out successfully...');
+        return messageJson('Logged out successfully...');
     }
 }

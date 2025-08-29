@@ -39,12 +39,23 @@ class ResetPasswordController extends Controller
     {
         $request->validate([
             'email' => 'required|email',
-            'OTP' => 'required'
+            'OTP' => 'required',
+            'role' => 'required|string|in:manger,delivery_driver,admin,chief'
         ]);
 
         $admin = Admin::where('email', $request->email)->first();
         if (!$admin)
             return messageJson('The email is invalid.!', false, 422);
+
+        // Check the role by role parameters
+        if (
+            $request->role
+            !==
+            str_replace(' ', '_', trim(strtolower($admin->role->getTranslation('name', 'en'))))
+        ) {
+            $role = str_replace('_', ' ', ucfirst($request->role));
+            return messageJson("Unauthorized for $role App", false, 403);
+        }
 
         // verify that the otp is valid
         $OTP = (new Otp())->validate($admin->email, $request->OTP);
@@ -68,9 +79,21 @@ class ResetPasswordController extends Controller
                 ->letters()
                 ->numbers()
                 ->symbols()],
+            'role' => 'required|string|in:manger,delivery_driver,admin,chief'
         ]);
 
         $admin = auth('admin')->user();
+
+        // Check the role by role parameters
+        if (
+            $request->role
+            !==
+            str_replace(' ', '_', trim(strtolower($admin->role->getTranslation('name', 'en'))))
+        ) {
+            $role = str_replace('_', ' ', ucfirst($request->role));
+            return messageJson("Unauthorized for $role App", false, 403);
+        }
+
         $admin->update(['password' => $request->password]);
 
         if ($request->boolean('logout_oth_dev'))
