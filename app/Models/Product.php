@@ -12,7 +12,7 @@ class Product extends Model
     use HasTranslations;
 
     protected $fillable = [
-        'name', 'description', 'status', 'price', 'is_simple', 'image', 'category_id'
+        'name', 'description', 'status', 'price', 'is_simple', 'image', 'category_id', 'created_at'
     ];
 
     public $translatable = ['name', 'description'];

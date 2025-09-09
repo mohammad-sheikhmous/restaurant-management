@@ -30,6 +30,7 @@ class ProductSeeder extends Seeder
                 'is_simple' => false,
                 'price' => 10000,
                 'category_id' => 1,
+                'created_at' => now()->subDays(60)
             ],
             [
                 'name' => ['en' => 'Pepperoni', 'ar' => 'بيبروني'],
@@ -38,6 +39,7 @@ class ProductSeeder extends Seeder
                 'is_simple' => false,
                 'price' => 20000,
                 'category_id' => 1,
+                'created_at' => now()->subDays(58)
             ],
             [
                 'name' => ['en' => 'Vegetarian', 'ar' => 'نباتية'],
@@ -46,6 +48,7 @@ class ProductSeeder extends Seeder
                 'is_simple' => false,
                 'price' => 30000,
                 'category_id' => 1,
+                'created_at' => now()->subDays(57)
             ],
             // meshawi
             [
@@ -56,6 +59,7 @@ class ProductSeeder extends Seeder
                 'is_recommended' => true,
                 'price' => 50000,
                 'category_id' => 2,
+                'created_at' => now()->subDays(54)
             ],
             [
                 'name' => ['en' => 'Grilled Chicken', 'ar' => 'دجاج مشوي'],
@@ -65,6 +69,7 @@ class ProductSeeder extends Seeder
                 'is_recommended' => true,
                 'price' => 75000,
                 'category_id' => 2,
+                'created_at' => now()->subDays(52)
             ],
             [
                 'name' => ['en' => 'Kebab Skewers', 'ar' => 'أسياخ كباب'],
@@ -74,6 +79,7 @@ class ProductSeeder extends Seeder
                 'is_recommended' => true,
                 'price' => 50000,
                 'category_id' => 2,
+                'created_at' => now()->subDays(44)
             ],
             // seafood
             [
@@ -83,6 +89,7 @@ class ProductSeeder extends Seeder
                 'is_simple' => true,
                 'price' => 60000,
                 'category_id' => 3,
+                'created_at' => now()->subDays(41)
             ],
             [
                 'name' => ['en' => 'Fried Shrimp', 'ar' => 'جمبري مقلي'],
@@ -91,6 +98,7 @@ class ProductSeeder extends Seeder
                 'is_simple' => true,
                 'price' => 34000,
                 'category_id' => 3,
+                'created_at' => now()->subDays(39)
             ],
             [
                 'name' => ['en' => 'Seafood Platter', 'ar' => 'طبق بحري مشكل'],
@@ -100,6 +108,7 @@ class ProductSeeder extends Seeder
                 'is_recommended' => true,
                 'price' => 29000,
                 'category_id' => 3,
+                'created_at' => now()->subDays(38)
             ],
             // appetizers
             [
@@ -109,6 +118,7 @@ class ProductSeeder extends Seeder
                 'is_simple' => true,
                 'price' => 5000,
                 'category_id' => 4,
+                'created_at' => now()->subDays(37)
             ],
             [
                 'name' => ['en' => 'Stuffed Grape Leaves', 'ar' => 'ورق عنب'],
@@ -117,6 +127,7 @@ class ProductSeeder extends Seeder
                 'is_simple' => true,
                 'price' => 7500,
                 'category_id' => 4,
+                'created_at' => now()->subDays(36)
             ],
             [
                 'name' => ['en' => 'Falafel', 'ar' => 'فلافل'],
@@ -126,6 +137,7 @@ class ProductSeeder extends Seeder
                 'is_recommended' => true,
                 'price' => 6000,
                 'category_id' => 4,
+                'created_at' => now()->subDays(33)
             ],
             // drinks
             [
@@ -135,6 +147,7 @@ class ProductSeeder extends Seeder
                 'is_simple' => true,
                 'price' => 8500,
                 'category_id' => 5,
+                'created_at' => now()->subDays(31)
             ],
             [
                 'name' => ['en' => 'Cola', 'ar' => 'كولا'],
@@ -143,6 +156,7 @@ class ProductSeeder extends Seeder
                 'is_simple' => true,
                 'price' => 10000,
                 'category_id' => 5,
+                'created_at' => now()->subDays(27)
             ],
             [
                 'name' => ['en' => 'Mint Lemonade', 'ar' => 'ليمون بالنعناع'],
@@ -151,6 +165,7 @@ class ProductSeeder extends Seeder
                 'is_simple' => true,
                 'price' => 8000,
                 'category_id' => 5,
+                'created_at' => now()->subDays(25)
             ],
             // shawrma
             [
@@ -160,6 +175,7 @@ class ProductSeeder extends Seeder
                 'is_simple' => false,
                 'price' => 20000,
                 'category_id' => 6,
+                'created_at' => now()->subDays(23)
             ],
             [
                 'name' => ['en' => 'Beef Shawarma', 'ar' => 'شاورما لحم'],
@@ -168,6 +184,7 @@ class ProductSeeder extends Seeder
                 'is_simple' => false,
                 'price' => 35000,
                 'category_id' => 6,
+                'created_at' => now()->subDays(21)
             ],
             [
                 'name' => ['en' => 'Shawarma Plate', 'ar' => 'طبق شاورما'],
@@ -176,6 +193,7 @@ class ProductSeeder extends Seeder
                 'is_simple' => false,
                 'price' => 40000,
                 'category_id' => 6,
+                'created_at' => now()->subDays(18)
             ],
         ];
         $product_attribute_options = [

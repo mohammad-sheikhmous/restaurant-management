@@ -130,7 +130,7 @@ class ProductController extends Controller
                 );
             }
             // Attach additional options
-            foreach ($data['additional_options_ids'] as $key1 => $value1) {
+            foreach ($data['additional_options_ids'] ?? [] as $key1 => $value1) {
                 $product->options()->attach(
                     collect($value1)->mapWithKeys(function ($value2, $key2) use ($data, $key1) {
                         return [

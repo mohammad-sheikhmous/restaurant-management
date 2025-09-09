@@ -60,14 +60,14 @@ class ProductRequest extends FormRequest
             'integer',
             Rule::exists('attributes', 'id')->where('type', 'additional')
         ];
-        $data['additional_options_ids'] = 'nullable|array|size:' . count($this->additional_attributes_ids);
+        $data['additional_options_ids'] = 'nullable|array|size:' . count($this->additional_attributes_ids ?? []);
         $data['additional_options_ids.*.*'] = [
             'required',
             'integer',
             Rule::exists('attribute_options', 'id')
                 ->whereIn('attribute_id', $this->additional_attributes_ids)
         ];
-        $data['extra_prices'] = 'nullable|array|size:' . count($this->additional_attributes_ids);
+        $data['extra_prices'] = 'nullable|array|size:' . count($this->additional_attributes_ids ?? []);
         $data['extra_prices.*'] = ['required', 'array', function ($attribute, $value, $fail) {
             $index = explode('.', $attribute)[1];
             $expectedCount = count($this->additional_options_ids[$index] ?? []);

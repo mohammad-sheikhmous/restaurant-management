@@ -50,7 +50,7 @@ class WalletsRechargeController extends Controller
             DB::transaction(function () use ($request) {
                 // Update wallet balance.
                 $wallet = $request->user->wallet;
-                $wallet->balance += request()['recharge_value'];
+                $wallet->balance += request()['charge_value'];
                 $wallet->save();
                 // Convert request status to accepted.
                 $request->status = 'accepted';

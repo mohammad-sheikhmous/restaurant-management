@@ -178,6 +178,4 @@ Route::middleware('auth:admin')->group(function () {
         Route::post('/charge-manually', 'chargeManually');
         Route::delete('/{request}', 'destroy');
     });
-
-
 });
